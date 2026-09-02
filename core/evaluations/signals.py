@@ -1,0 +1,1 @@
+"""Senales del modulo."""

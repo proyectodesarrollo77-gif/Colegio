@@ -1,0 +1,17 @@
+{% extends "pae/resource.html" %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:menu_days' %}">{% icon "list" 15 %} Dias del ciclo</a>
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:menu_preparations' %}">{% icon "utensils" 15 %} Preparaciones</a>
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:menu_ingredients' %}">{% icon "layers" 15 %} Ingredientes</a>
+{% endblock %}
+
+{% block pae_before %}
+  <div class="alert alert--info mb-4">
+    {% icon "info" 18 %}
+    <div>
+      Los ciclos se versionan: al crear una nueva version se clonan dias, preparaciones e ingredientes,
+      la version anterior queda archivada y las programaciones historicas conservan el menu con el que operaron.
+    </div>
+  </div>
+{% endblock %}

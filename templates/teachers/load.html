@@ -1,0 +1,146 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Carga Academica{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'teachers:subjects' %}">
+    {% icon "book" 15 %} Asignar asignaturas
+  </a>
+  <button class="btn btn--secondary btn--sm" type="button" data-export-load>
+    {% icon "download" 15 %} Exportar
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4 mb-6" data-load-cards>
+  {% for i in "1234" %}
+    <div class="stat-card">
+      <div class="skeleton" style="width:110px;margin-bottom:12px"></div>
+      <div class="skeleton" style="width:70px;height:26px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <div class="table-toolbar">
+    <div class="input-group">
+      <span class="input-group__icon">{% icon "search" 16 %}</span>
+      <input class="input" type="search" placeholder="Filtrar docente..." data-filter-teacher>
+    </div>
+    <div class="spacer"></div>
+    <span class="badge badge--neutral" data-load-count></span>
+  </div>
+  <div class="table-wrap" style="max-height:66vh">
+    <table class="table table--stack">
+      <thead>
+        <tr>
+          <th>Docente</th>
+          <th style="width:110px;text-align:center">Grupos</th>
+          <th style="width:120px;text-align:center">Contratadas</th>
+          <th style="width:120px;text-align:center">Asignadas</th>
+          <th style="width:220px">Ocupacion</th>
+          <th style="width:120px">Estado</th>
+        </tr>
+      </thead>
+      <tbody data-load-body>
+        <tr><td colspan="6" class="text-center" style="padding:44px"><span class="spinner spinner--lg"></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, api, escapeHtml, formatNumber, icon, initials, toast } from "{% static 'js/app.js' %}";
+
+  let rows = [];
+
+  function render(filter = "") {
+    const term = filter.trim().toLowerCase();
+    const visible = rows.filter((row) => {
+      const name = `${row.last_name} ${row.first_name}`.toLowerCase();
+      return !term || name.includes(term);
+    });
+
+    $("[data-load-count]").textContent = `${visible.length} docentes`;
+    $("[data-load-body]").innerHTML = visible.length
+      ? visible.map((row) => {
+          const assigned = row.assigned || 0;
+          const contracted = row.weekly_hours || 0;
+          const percentage = contracted ? Math.round((assigned / contracted) * 100) : 0;
+          const tone = percentage > 100 ? "danger" : percentage >= 80 ? "success" : percentage >= 40 ? "warning" : "danger";
+          const label = percentage > 100 ? "Sobrecarga" : percentage >= 80 ? "Optima" : percentage > 0 ? "Parcial" : "Sin carga";
+          return `
+            <tr>
+              <td class="cell-primary">
+                <div class="row" style="gap:10px">
+                  <span class="avatar avatar--sm">${escapeHtml(initials(`${row.first_name} ${row.last_name}`))}</span>
+                  <span>${escapeHtml(row.last_name)} ${escapeHtml(row.first_name)}</span>
+                </div>
+              </td>
+              <td style="text-align:center">${row.groups || 0}</td>
+              <td style="text-align:center">${contracted}</td>
+              <td style="text-align:center"><strong>${assigned}</strong></td>
+              <td>
+                <div class="row" style="gap:10px">
+                  <div class="progress progress--sm" style="flex:1">
+                    <div class="progress__bar progress__bar--${tone}" style="width:${Math.min(percentage, 100)}%"></div>
+                  </div>
+                  <span class="text-xs" style="width:44px;text-align:right">${percentage}%</span>
+                </div>
+              </td>
+              <td><span class="badge badge--${tone}">${label}</span></td>
+            </tr>`;
+        }).join("")
+      : '<tr><td colspan="6" class="text-muted text-center" style="padding:36px">Sin docentes registrados.</td></tr>';
+  }
+
+  async function load() {
+    try {
+      const data = await api.get("/api/teachers/load-summary/");
+      rows = data.results || [];
+
+      const totalAssigned = rows.reduce((acc, row) => acc + (row.assigned || 0), 0);
+      const totalContracted = rows.reduce((acc, row) => acc + (row.weekly_hours || 0), 0);
+      const overloaded = rows.filter((row) => (row.assigned || 0) > (row.weekly_hours || 0)).length;
+      const idle = rows.filter((row) => !row.assigned).length;
+
+      $("[data-load-cards]").innerHTML = [
+        { label: "Docentes activos", value: formatNumber(rows.length), icon: "presentation" },
+        { label: "Horas asignadas", value: formatNumber(totalAssigned), icon: "clock" },
+        { label: "Ocupacion global", value: `${totalContracted ? Math.round((totalAssigned / totalContracted) * 100) : 0}%`, icon: "activity" },
+        { label: "Con sobrecarga", value: formatNumber(overloaded), icon: "alert-triangle" },
+      ].map((card) => `
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">${escapeHtml(card.label)}</span>
+            <span class="stat-card__icon">${icon(card.icon, 18)}</span>
+          </div>
+          <div class="stat-card__value">${card.value}</div>
+          <div class="stat-card__meta">${card.label === "Docentes activos" ? `${idle} sin carga asignada` : ""}</div>
+        </div>`).join("");
+
+      render($("[data-filter-teacher]").value);
+    } catch (error) {
+      toast.error(error.message);
+      $("[data-load-body]").innerHTML = `<tr><td colspan="6" class="text-danger text-center" style="padding:36px">${escapeHtml(error.message)}</td></tr>`;
+    }
+  }
+
+  $("[data-filter-teacher]")?.addEventListener("input", (event) => render(event.target.value));
+  $("[data-export-load]")?.addEventListener("click", async () => {
+    try {
+      await api.download("/api/teachers/export/", { format: "xlsx" }, "carga_academica");
+      toast.success("Archivo generado.");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+
+  load();
+</script>
+{% endblock %}

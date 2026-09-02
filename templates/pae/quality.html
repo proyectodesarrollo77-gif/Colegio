@@ -1,0 +1,20 @@
+{% extends "pae/resource.html" %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:checklists' %}">{% icon "list" 15 %} Listas</a>
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:checklist_items' %}">{% icon "check" 15 %} Criterios</a>
+  <a class="btn btn--primary btn--sm" href="{% url 'pae:verification_sheet' %}">
+    {% icon "clipboard-check" 15 %} Aplicar lista
+  </a>
+{% endblock %}
+
+{% block pae_before %}
+  <div class="alert alert--info mb-4">
+    {% icon "info" 18 %}
+    <div>
+      El resultado se calcula con el peso de cada criterio. Un criterio critico marcado como
+      <span class="text-bold">No cumple</span> fuerza el resultado global a
+      <span class="text-bold">No cumple</span>, sin importar el puntaje obtenido.
+    </div>
+  </div>
+{% endblock %}

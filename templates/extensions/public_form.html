@@ -1,0 +1,140 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}{{ form.title }}{% endblock %}
+
+{% block body %}
+<div style="min-height:100vh;background:var(--bg-app);padding:32px 16px">
+  <div style="max-width:720px;margin:0 auto">
+
+    <div class="row mb-6" style="gap:12px;align-items:center">
+      <span class="sidebar__logo" style="width:38px;height:38px">
+        {% if institution.logo %}<img src="{{ institution.logo.url }}" alt="">{% else %}PL{% endif %}
+      </span>
+      <div>
+        <div style="font-weight:600">{{ institution.name|default:APP.NAME }}</div>
+        <div class="text-xs text-muted">{{ APP.LONG_NAME }}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <span class="page-header__icon" style="width:38px;height:38px">{% icon "puzzle" 18 %}</span>
+        <div style="flex:1">
+          <div class="card__title" style="font-size:var(--text-lg)">{{ form.title }}</div>
+          {% if form.description %}<div class="card__subtitle">{{ form.description }}</div>{% endif %}
+        </div>
+      </div>
+
+      {% if closed %}
+        <div class="card__body">
+          <div class="alert alert--warning">
+            {% icon "clock" 18 %}
+            <div>
+              <div class="alert__title">Formulario no disponible</div>
+              Este formulario esta cerrado o aun no ha sido publicado.
+            </div>
+          </div>
+        </div>
+      {% elif submitted %}
+        <div class="card__body">
+          <div class="empty-state">
+            <div class="empty-state__icon" style="background:var(--success-50);color:var(--success-600)">
+              {% icon "check" 26 %}
+            </div>
+            <div class="empty-state__title">Respuesta registrada</div>
+            <div class="empty-state__message">{{ form.success_message }}</div>
+            {% if form.allow_multiple %}
+              <a class="btn btn--secondary" href="{% url 'extensions:public_form' form.slug %}">Enviar otra respuesta</a>
+            {% endif %}
+          </div>
+        </div>
+      {% else %}
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          <div class="card__body">
+            <div class="form-grid">
+              {% for field in fields %}
+                {% if field.field_type == "section" %}
+                  <div class="col-12" style="border-top:1px solid var(--border-subtle);padding-top:16px;margin-top:6px">
+                    <div class="text-bold">{{ field.label }}</div>
+                    {% if field.help_text %}<div class="field__hint">{{ field.help_text }}</div>{% endif %}
+                  </div>
+                {% else %}
+                  <div class="field {% if field.width == 'half' %}col-6{% elif field.width == 'third' %}col-4{% else %}col-12{% endif %}">
+                    <label class="field__label" for="f_{{ field.key }}">
+                      {{ field.label }}{% if field.required %} <span class="required">*</span>{% endif %}
+                    </label>
+
+                    {% if field.field_type == "textarea" %}
+                      <textarea class="textarea" id="f_{{ field.key }}" name="{{ field.key }}" rows="4"
+                                placeholder="{{ field.placeholder }}" {% if field.required %}required{% endif %}></textarea>
+
+                    {% elif field.field_type == "select" %}
+                      <select class="select" id="f_{{ field.key }}" name="{{ field.key }}" {% if field.required %}required{% endif %}>
+                        <option value="">Seleccione...</option>
+                        {% for option in field.options %}
+                          <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
+                      </select>
+
+                    {% elif field.field_type == "radio" %}
+                      <div class="stack" style="gap:6px">
+                        {% for option in field.options %}
+                          <label class="radio">
+                            <input type="radio" name="{{ field.key }}" value="{{ option }}" {% if field.required %}required{% endif %}>
+                            <span>{{ option }}</span>
+                          </label>
+                        {% endfor %}
+                      </div>
+
+                    {% elif field.field_type == "checkbox" %}
+                      <div class="stack" style="gap:6px">
+                        {% for option in field.options %}
+                          <label class="checkbox">
+                            <input type="checkbox" name="{{ field.key }}" value="{{ option }}">
+                            <span>{{ option }}</span>
+                          </label>
+                        {% endfor %}
+                      </div>
+
+                    {% elif field.field_type == "rating" %}
+                      <div class="btn-group">
+                        {% for value in "12345" %}
+                          <label style="padding:6px 14px;cursor:pointer">
+                            <input type="radio" name="{{ field.key }}" value="{{ forloop.counter }}" style="margin-right:4px">
+                            {{ forloop.counter }}
+                          </label>
+                        {% endfor %}
+                      </div>
+
+                    {% elif field.field_type == "file" %}
+                      <input class="input" type="file" id="f_{{ field.key }}" name="{{ field.key }}"
+                             style="padding-top:7px" {% if field.required %}required{% endif %}>
+
+                    {% else %}
+                      <input class="input" type="{{ field.field_type }}" id="f_{{ field.key }}" name="{{ field.key }}"
+                             placeholder="{{ field.placeholder }}" {% if field.required %}required{% endif %}>
+                    {% endif %}
+
+                    {% if field.help_text %}<div class="field__hint">{{ field.help_text }}</div>{% endif %}
+                  </div>
+                {% endif %}
+              {% empty %}
+                <div class="col-12 text-sm text-muted">Este formulario aun no tiene campos configurados.</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card__footer" style="justify-content:flex-end">
+            <button class="btn btn--primary" type="submit">{% icon "check" 16 %} Enviar respuesta</button>
+          </div>
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="text-xs text-muted text-center mt-6">
+      {{ institution.name|default:APP.LONG_NAME }} &middot; Formulario generado con {{ APP.NAME }}
+    </div>
+  </div>
+</div>
+{% endblock %}

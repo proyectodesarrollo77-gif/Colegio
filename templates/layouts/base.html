@@ -1,0 +1,55 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es" data-theme="{% if user.is_authenticated %}{{ user.theme|default:'light' }}{% else %}light{% endif %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="{{ APP.LONG_NAME }} - {{ institution.name|default:'Gestion academica integral' }}">
+  <meta name="theme-color" content="#4F46E5">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}{{ page_title|default:"Inicio" }}{% endblock %} | {{ APP.NAME }}</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234F46E5'/><text x='50' y='68' font-size='52' font-family='system-ui,sans-serif' font-weight='700' fill='white' text-anchor='middle'>P</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  {% block extra_css %}{% endblock %}
+
+  <script>
+    (function () {
+      var stored = localStorage.getItem("plsge:theme");
+      if (stored) document.documentElement.setAttribute("data-theme", stored);
+    })();
+    window.PLSGE_CONFIG = {
+      csrfCookieName: "plsge_csrftoken",
+      apiBase: "/api/",
+      version: "{{ APP.VERSION }}",
+      user: {% if user.is_authenticated %}{
+        id: {{ user.id }},
+        name: "{{ user.get_full_name|escapejs }}",
+        role: "{{ user.role_code|escapejs }}",
+        isSuperAdmin: {{ user.is_super_admin|yesno:"true,false" }}
+      }{% else %}null{% endif %}
+    };
+    window.PLSGE_ICONS = {% icons_json %};
+  </script>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% csrf_token %}
+
+  {% for message in messages %}
+    <span data-server-message="{{ message|escape }}" data-server-level="{{ message.tags|default:'info' }}" hidden></span>
+  {% endfor %}
+
+  {% block body %}{% endblock %}
+
+  <div class="toast-stack" aria-live="polite"></div>
+
+  <script type="module" src="{% static 'js/app.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

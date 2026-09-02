@@ -1,0 +1,58 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Votacion Digital{% endblock %}
+
+{% block content %}
+
+{% if not elections %}
+  <div class="card">
+    <div class="empty-state">
+      <div class="empty-state__icon">{% icon "vote" 26 %}</div>
+      <div class="empty-state__title">No hay procesos electorales disponibles</div>
+      <div class="empty-state__message">
+        Cuando la institucion abra la votacion del gobierno escolar, el tarjeton aparecera en esta pagina.
+      </div>
+    </div>
+  </div>
+{% else %}
+
+  <div class="card mb-6">
+    <div class="card__body">
+      <div class="field">
+        <label class="field__label" for="election">Proceso electoral</label>
+        <select class="select" id="election" data-election>
+          {% for election in elections %}
+            <option value="{{ election.id }}" data-status="{{ election.status }}">
+              {{ election.name }} - {{ election.get_status_display }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert--info mb-6">
+    {% icon "shield-check" 18 %}
+    <div>
+      <div class="alert__title">Voto secreto y verificable</div>
+      Su seleccion se almacena con una huella criptografica que garantiza un unico voto por cargo sin
+      vincular su identidad con la opcion elegida.
+    </div>
+  </div>
+
+  <div data-ballot></div>
+
+  <div class="row" style="justify-content:flex-end;margin-top:24px">
+    <button class="btn btn--primary btn--lg" type="button" data-cast-vote disabled>
+      {% icon "vote" 18 %} Depositar mi voto
+    </button>
+  </div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/elections.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Importar informacion del PAE{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:beneficiaries' %}">
+    {% icon "users" 15 %} Ver beneficiarios
+  </a>
+{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="grid grid-sidebar">
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Archivo a importar</div>
+        <div class="card__subtitle">Formatos aceptados: CSV y XLSX &middot; maximo 5 MB y 5.000 filas</div>
+      </div>
+    </div>
+    <div class="card__body">
+      <div class="form-grid">
+        <div class="field col-6">
+          <label class="field__label" for="import-kind">Que desea importar</label>
+          <select class="select" id="import-kind">
+            {% for item in import_kinds %}
+              <option value="{{ item.kind }}">{{ item.label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field col-6">
+          <label class="field__label" for="import-file">Archivo</label>
+          <input class="input" type="file" id="import-file" accept=".csv,.xlsx">
+          <div class="field__hint">La primera fila debe contener los encabezados.</div>
+        </div>
+      </div>
+
+      <div class="row-wrap mt-4" style="gap:8px">
+        <button class="btn btn--secondary btn--sm" type="button" data-import-template>
+          {% icon "download" 15 %} Descargar plantilla
+        </button>
+        <button class="btn btn--secondary btn--sm" type="button" data-import-validate>
+          {% icon "check" 15 %} Solo validar
+        </button>
+        <button class="btn btn--primary btn--sm" type="button" data-import-run>
+          {% icon "upload" 15 %} Importar
+        </button>
+      </div>
+
+      <div data-import-result class="mt-4"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Columnas esperadas</div>
+        <div class="card__subtitle">Las marcadas como obligatorias deben venir en el encabezado</div>
+      </div>
+    </div>
+    <div class="card__body card__body--flush">
+      <div data-import-columns></div>
+    </div>
+  </div>
+
+</div>
+
+{{ import_kinds|json_script:"import-kinds" }}
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, api, escapeHtml, icon, toast } from "{% static 'js/app.js' %}";
+
+  const KINDS = JSON.parse(document.getElementById("import-kinds").textContent);
+  const kindSelect = $("#import-kind");
+  const fileInput = $("#import-file");
+  const resultSlot = $("[data-import-result]");
+  const columnsSlot = $("[data-import-columns]");
+
+  function currentKind() {
+    return KINDS.find((item) => item.kind === kindSelect.value) || KINDS[0];
+  }
+
+  function renderColumns() {
+    const kind = currentKind();
+    columnsSlot.innerHTML = `<div class="table-wrap"><table class="table table--compact">
+      <thead><tr><th>Columna</th><th>Contenido</th></tr></thead>
+      <tbody>${kind.headers
+        .map(
+          (header, index) => `<tr>
+            <td class="cell-primary">
+              <span class="text-mono">${escapeHtml(header)}</span>
+              ${kind.required.includes(header) ? '<span class="badge badge--brand">Obligatoria</span>' : ""}
+            </td>
+            <td class="text-xs text-muted">${escapeHtml(kind.descriptions[index] || "")}</td>
+          </tr>`
+        )
+        .join("")}</tbody></table></div>`;
+  }
+
+  function renderResult(payload, dryRun) {
+    const errors = payload.errors || [];
+    if (errors.length) {
+      resultSlot.innerHTML = `<div class="alert alert--danger">
+          ${icon("alert-triangle", 18)}
+          <div>
+            <div class="alert__title">
+              El archivo tiene ${payload.error_count} error(es): no se guardo ningun registro
+            </div>
+            Corrija las filas indicadas y vuelva a cargarlo.
+          </div>
+        </div>
+        <div class="table-wrap mt-3"><table class="table table--compact">
+          <thead><tr><th style="width:80px">Fila</th><th style="width:180px">Columna</th><th>Detalle</th></tr></thead>
+          <tbody>${errors
+            .map(
+              (error) => `<tr>
+                <td class="text-mono">${error.fila}</td>
+                <td class="text-mono">${escapeHtml(error.columna)}</td>
+                <td>${escapeHtml(error.mensaje)}</td>
+              </tr>`
+            )
+            .join("")}</tbody></table></div>
+        ${
+          payload.error_count > errors.length
+            ? `<div class="text-xs text-muted mt-2">Se muestran los primeros ${errors.length} de ${payload.error_count} errores.</div>`
+            : ""
+        }`;
+      return;
+    }
+
+    resultSlot.innerHTML = `<div class="alert alert--success">
+      ${icon("check", 18)}
+      <div>
+        <div class="alert__title">
+          ${dryRun ? "El archivo es valido" : "Importacion completada"}
+        </div>
+        ${payload.total_rows} fila(s) procesada(s) &middot;
+        ${payload.created} creado(s) &middot; ${payload.updated} actualizado(s) &middot;
+        ${payload.skipped} omitido(s)
+        ${dryRun ? " &middot; no se guardo nada porque se pidio solo validar." : ""}
+      </div>
+    </div>`;
+  }
+
+  async function send(dryRun) {
+    const file = fileInput.files[0];
+    if (!file) {
+      toast.error("Seleccione el archivo a importar.");
+      return;
+    }
+    const body = new FormData();
+    body.append("kind", kindSelect.value);
+    body.append("file", file);
+    if (dryRun) body.append("dry_run", "1");
+
+    resultSlot.innerHTML = '<div class="skeleton" style="width:100%;height:48px"></div>';
+    try {
+      const payload = await api.request("/api/pae/importar/", { method: "POST", data: body });
+      renderResult(payload, dryRun);
+      if (!dryRun) toast.success("Importacion completada.");
+    } catch (error) {
+      if (error.payload && error.payload.errors) renderResult(error.payload, dryRun);
+      else {
+        resultSlot.innerHTML = "";
+        toast.error(error.message);
+      }
+    }
+  }
+
+  kindSelect.addEventListener("change", () => {
+    renderColumns();
+    resultSlot.innerHTML = "";
+  });
+  document.querySelector("[data-import-template]")?.addEventListener("click", () => {
+    api.download(
+      "/api/pae/importar/",
+      { kind: kindSelect.value, download: "1" },
+      `plantilla_pae_${kindSelect.value}.csv`
+    );
+  });
+  document.querySelector("[data-import-validate]").addEventListener("click", () => send(true));
+  document.querySelector("[data-import-run]").addEventListener("click", () => send(false));
+
+  renderColumns();
+</script>
+{% endblock %}

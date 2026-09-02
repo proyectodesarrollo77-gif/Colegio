@@ -1,0 +1,130 @@
+[
+{
+  "model": "users.role",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.731Z",
+    "updated_at": "2026-08-23T07:12:29.731Z",
+    "code": "SUPER_ADMIN",
+    "name": "Super Administrador",
+    "description": "Control total de la plataforma",
+    "color": "#4F46E5",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 1
+  }
+},
+{
+  "model": "users.role",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "RECTOR",
+    "name": "Rector",
+    "description": "Direccion general de la institucion",
+    "color": "#0EA5E9",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 2
+  }
+},
+{
+  "model": "users.role",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "COORDINADOR",
+    "name": "Coordinador",
+    "description": "Coordinacion academica y de convivencia",
+    "color": "#10B981",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 3
+  }
+},
+{
+  "model": "users.role",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "SECRETARIA",
+    "name": "Secretaria",
+    "description": "Gestion administrativa y documental",
+    "color": "#F59E0B",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 4
+  }
+},
+{
+  "model": "users.role",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "DOCENTE",
+    "name": "Docente",
+    "description": "Digitacion de notas y seguimiento academico",
+    "color": "#A855F7",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 5
+  }
+},
+{
+  "model": "users.role",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "TUTOR",
+    "name": "Tutor",
+    "description": "Acompanamiento y convivencia del grupo",
+    "color": "#EC4899",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 6
+  }
+},
+{
+  "model": "users.role",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "ESTUDIANTE",
+    "name": "Estudiante",
+    "description": "Consulta de notas, agenda y aula virtual",
+    "color": "#14B8A6",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 7
+  }
+},
+{
+  "model": "users.role",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "ACUDIENTE",
+    "name": "Acudiente",
+    "description": "Seguimiento del proceso academico del estudiante",
+    "color": "#6366F1",
+    "is_system": true,
+    "is_active": true,
+    "landing_url": "dashboard:index",
+    "order": 8
+  }
+}
+]

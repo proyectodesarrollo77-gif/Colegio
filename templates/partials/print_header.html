@@ -1,0 +1,10 @@
+<div class="print-header">
+  {% if institution.logo %}<img src="{{ institution.logo.url }}" alt="">{% endif %}
+  <div class="print-header__text">
+    <strong>{{ header.line_1|default:institution.name }}</strong>
+    {% if header.line_2 %}<span>{{ header.line_2 }}</span>{% else %}<span>{{ institution.resolution }}</span>{% endif %}
+    {% if header.line_3 %}<span>{{ header.line_3 }}</span>{% else %}<span>DANE {{ institution.code }} - NIT {{ institution.nit }}</span>{% endif %}
+    {% if header.line_4 %}<span>{{ header.line_4 }}</span>{% else %}<span>{{ institution.address }} - {{ institution.city }} - Tel. {{ institution.phone }}</span>{% endif %}
+  </div>
+  {% if header.show_seal and institution.seal %}<img src="{{ institution.seal.url }}" alt="">{% endif %}
+</div>

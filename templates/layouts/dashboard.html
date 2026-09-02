@@ -1,0 +1,220 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+<div class="app-shell">
+
+  <!-- ============ Sidebar ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="{% url 'dashboard:index' %}" class="sidebar__logo" aria-label="Inicio">
+        {% if institution.logo %}<img src="{{ institution.logo.url }}" alt="">{% else %}PL{% endif %}
+      </a>
+      <div class="sidebar__brand">
+        {% if solo_plataforma %}
+          <strong>{{ APP.NAME }}</strong>
+          <span>Administracion de la plataforma</span>
+        {% else %}
+          <strong>{{ institution.short_name|default:institution.name|default:APP.NAME }}</strong>
+          <span>{{ active_school_year.name|default:"Sin ano lectivo" }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="sidebar__search">
+      <div class="input-group">
+        <span class="input-group__icon">{% icon "search" 15 %}</span>
+        <input class="input" type="search" placeholder="Buscar modulo (Ctrl + K)" data-nav-search autocomplete="off">
+      </div>
+    </div>
+
+    <nav class="sidebar__nav" aria-label="Navegacion principal">
+      {% for group in nav_groups %}
+        <div class="nav-group">
+          <div class="nav-group__label">{{ group.name }}</div>
+          {% for item in group.items %}
+            <div class="nav-item {% if item.is_open %}is-open{% endif %}">
+              {% if item.children %}
+                <button type="button" class="nav-link {% if item.is_active %}is-active{% endif %}" data-nav-parent>
+                  {% icon item.icon 18 %}
+                  <span class="nav-link__text">{{ item.name }}</span>
+                  <span class="nav-link__chevron">{% icon "chevron-right" 14 %}</span>
+                </button>
+                <div class="nav-sub">
+                  {% for child in item.children %}
+                    <a class="nav-sub__link {% if child.is_active %}is-active{% endif %}"
+                       href="{{ child.url|default:'#' }}">{{ child.name }}</a>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <a class="nav-link {% if item.is_active %}is-active{% endif %}" href="{{ item.url|default:'#' }}">
+                  {% icon item.icon 18 %}
+                  <span class="nav-link__text">{{ item.name }}</span>
+                </a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="dropdown" style="width:100%">
+        <button class="user-chip" type="button" data-dropdown-toggle>
+          <span class="avatar">
+            {% if user.photo %}<img src="{{ user.photo.url }}" alt="">{% else %}{{ user.initials }}{% endif %}
+          </span>
+          <span class="user-chip__meta">
+            <span class="user-chip__name">{{ user.get_full_name }}</span>
+            <span class="user-chip__role">{{ user.role_name }}</span>
+          </span>
+        </button>
+        <div class="dropdown__menu dropdown__menu--left dropdown__menu--up" style="width:100%">
+          <div class="dropdown__label">{{ user.email }}</div>
+          <a class="dropdown__item" href="{% url 'users:profile' %}">{% icon "user" 16 %} Mi perfil</a>
+          <a class="dropdown__item" href="{% url 'users:profile' %}#security">{% icon "lock" 16 %} Seguridad y 2FA</a>
+          <button class="dropdown__item" type="button" data-theme-toggle>{% icon "moon" 16 %} Cambiar tema</button>
+          <div class="dropdown__divider"></div>
+          <a class="dropdown__item dropdown__item--danger" href="{% url 'authentication:logout' %}">
+            {% icon "log-out" 16 %} Cerrar sesion
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ Main ============ -->
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-label="Menu">{% icon "menu" 20 %}</button>
+      <button class="icon-btn" type="button" data-sidebar-toggle aria-label="Contraer menu">{% icon "chevron-left" 18 %}</button>
+
+      <div class="topbar__title">
+        <strong>{{ page_title|default:"Dashboard" }}</strong>
+        <span data-clock></span>
+      </div>
+
+      <div class="topbar__spacer"></div>
+
+      <div class="topbar__actions">
+        {% if user.is_super_admin and available_institutions %}
+          {# Conmutador de institucion: solo lo ve el Super Administrador. #}
+          <div class="dropdown">
+            <button class="btn btn--ghost btn--sm" type="button" data-dropdown-toggle
+                    data-tooltip="Cambiar de institucion">
+              {% icon "building" 15 %}
+              <span class="truncate" style="max-width:150px">
+                {% if solo_plataforma %}Plataforma
+                {% else %}{{ institution.short_name|default:institution.name|default:"Institucion" }}{% endif %}
+              </span>
+              {% icon "chevron-down" 13 %}
+            </button>
+            <div class="dropdown__menu" style="width:280px">
+              <div class="dropdown__label">
+                {% if solo_plataforma %}Entrar a una institucion{% else %}Trabajar en otra institucion{% endif %}
+              </div>
+              <div class="dropdown__divider"></div>
+              {% for item in available_institutions %}
+                <a class="dropdown__item" href="{% url 'institutions:switch' item.pk %}">
+                  {% if not solo_plataforma and institution and item.pk == institution.pk %}
+                    {% icon "check" 16 %}
+                  {% else %}
+                    {% icon "building" 16 %}
+                  {% endif %}
+                  <span style="flex:1;min-width:0">
+                    <span class="truncate" style="display:block;color:var(--text-primary)">{{ item.short_name|default:item.name }}</span>
+                    <span class="text-xs text-muted">{{ item.city|default:item.code }}</span>
+                  </span>
+                </a>
+              {% endfor %}
+              <div class="dropdown__divider"></div>
+              {% if not solo_plataforma %}
+                <a class="dropdown__item" href="{% url 'institutions:exit' %}">
+                  {% icon "grid" 16 %} Volver a administrar la plataforma
+                </a>
+              {% endif %}
+              <a class="dropdown__item" href="{% url 'institutions:panel' %}">
+                {% icon "settings" 16 %} Panel de instituciones
+              </a>
+            </div>
+          </div>
+        {% endif %}
+
+        {# En modo plataforma no hay un periodo vigente: pertenece a una institucion. #}
+        {% if active_period and not solo_plataforma %}
+          <span class="badge badge--brand" data-tooltip="Periodo academico en curso">
+            {% icon "calendar-check" 13 %} {{ active_period.name }}
+          </span>
+        {% endif %}
+
+        <button class="icon-btn" type="button" data-theme-toggle data-tooltip="Cambiar tema">{% icon "sun" 18 %}</button>
+
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-dropdown-toggle aria-label="Notificaciones">
+            {% icon "bell" 18 %}
+            {% if unread_notifications %}
+              <span class="icon-btn__dot" data-notifications-count>{{ unread_notifications }}</span>
+            {% endif %}
+          </button>
+          <div class="dropdown__menu" style="width:340px">
+            <div class="row-between" style="padding:6px 10px">
+              <span class="dropdown__label" style="padding:0">Notificaciones</span>
+              <button class="btn btn--ghost btn--sm" type="button" data-notifications-read-all>Marcar leidas</button>
+            </div>
+            <div class="dropdown__divider"></div>
+            <div data-notifications-list>
+              {% for notification in recent_notifications %}
+                <a class="dropdown__item" data-notification-item href="{{ notification.url|default:'#' }}">
+                  {% icon notification.icon 16 %}
+                  <span style="flex:1;min-width:0">
+                    <span class="truncate" style="display:block;color:var(--text-primary);font-weight:500">{{ notification.title }}</span>
+                    <span class="text-xs text-muted">{{ notification.created_at|timesince }}</span>
+                  </span>
+                </a>
+              {% empty %}
+                <div class="text-sm text-muted" style="padding:18px;text-align:center">Sin notificaciones nuevas</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <a class="icon-btn" href="{% url 'users:profile' %}" data-tooltip="Mi perfil">
+          <span class="avatar avatar--sm">
+            {% if user.photo %}<img src="{{ user.photo.url }}" alt="">{% else %}{{ user.initials }}{% endif %}
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content">
+      {% block page_header %}
+        <div class="page-header">
+          <div class="page-header__icon">{% icon page_icon|default:"grid" 22 %}</div>
+          <div class="page-header__body">
+            {% if breadcrumbs %}
+              <nav class="breadcrumbs">
+                <a href="{% url 'dashboard:index' %}">Inicio</a>
+                {% for crumb in breadcrumbs %}
+                  {% icon "chevron-right" 12 %}
+                  {% if crumb.url %}<a href="{{ crumb.url }}">{{ crumb.label }}</a>{% else %}<span>{{ crumb.label }}</span>{% endif %}
+                {% endfor %}
+              </nav>
+            {% endif %}
+            <h1 class="page-header__title">{{ page_title }}</h1>
+            {% if page_subtitle %}<p class="page-header__subtitle">{{ page_subtitle }}</p>{% endif %}
+          </div>
+          <div class="page-header__actions">{% block page_actions %}{% endblock %}</div>
+        </div>
+
+        {% if help_text %}
+          <div class="alert alert--info mb-4">
+            {% icon "info" 18 %}
+            <div>{{ help_text }}</div>
+          </div>
+        {% endif %}
+      {% endblock %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+{% endblock %}

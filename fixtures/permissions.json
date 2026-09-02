@@ -1,0 +1,8811 @@
+[
+{
+  "model": "users.module",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "dashboard",
+    "name": "Dashboard",
+    "parent": null,
+    "icon": "layout-dashboard",
+    "url_name": "dashboard:index",
+    "group": "Principal",
+    "order": 10,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "institutions",
+    "name": "Institucion",
+    "parent": null,
+    "icon": "building",
+    "url_name": null,
+    "group": "Principal",
+    "order": 20,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.734Z",
+    "updated_at": "2026-08-23T07:12:29.734Z",
+    "code": "institutions.profile",
+    "name": "Datos Institucionales",
+    "parent": 2,
+    "icon": "dot",
+    "url_name": "institutions:profile",
+    "group": "Principal",
+    "order": 21,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.745Z",
+    "updated_at": "2026-08-23T07:12:29.745Z",
+    "code": "institutions.campuses",
+    "name": "Sedes y Jornadas",
+    "parent": 2,
+    "icon": "dot",
+    "url_name": "institutions:campuses",
+    "group": "Principal",
+    "order": 22,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.745Z",
+    "updated_at": "2026-08-23T07:12:29.745Z",
+    "code": "configuration",
+    "name": "Configuracion",
+    "parent": null,
+    "icon": "settings",
+    "url_name": null,
+    "group": "Administracion",
+    "order": 30,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.745Z",
+    "updated_at": "2026-08-23T07:12:29.745Z",
+    "code": "configuration.profiles",
+    "name": "Acceso de Perfiles",
+    "parent": 5,
+    "icon": "dot",
+    "url_name": "configuration:profiles",
+    "group": "Administracion",
+    "order": 31,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.745Z",
+    "updated_at": "2026-08-23T07:12:29.745Z",
+    "code": "configuration.report_header",
+    "name": "Encabezado de Reportes",
+    "parent": 5,
+    "icon": "dot",
+    "url_name": "configuration:report_header",
+    "group": "Administracion",
+    "order": 32,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.750Z",
+    "updated_at": "2026-08-23T07:12:29.750Z",
+    "code": "configuration.grade_decimals",
+    "name": "Decimas de Notas",
+    "parent": 5,
+    "icon": "dot",
+    "url_name": "configuration:grade_decimals",
+    "group": "Administracion",
+    "order": 33,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.750Z",
+    "updated_at": "2026-08-23T07:12:29.750Z",
+    "code": "configuration.parameters",
+    "name": "Parametros del Sistema",
+    "parent": 5,
+    "icon": "dot",
+    "url_name": "configuration:parameters",
+    "group": "Administracion",
+    "order": 34,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.750Z",
+    "updated_at": "2026-08-23T07:12:29.750Z",
+    "code": "users",
+    "name": "Usuarios",
+    "parent": null,
+    "icon": "users",
+    "url_name": null,
+    "group": "Administracion",
+    "order": 40,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.750Z",
+    "updated_at": "2026-08-23T07:12:29.750Z",
+    "code": "users.management",
+    "name": "Gestion de Usuarios",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:management",
+    "group": "Administracion",
+    "order": 41,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.750Z",
+    "updated_at": "2026-08-23T07:12:29.756Z",
+    "code": "users.students",
+    "name": "Usuarios de Estudiantes",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:students",
+    "group": "Administracion",
+    "order": 42,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.756Z",
+    "updated_at": "2026-08-23T07:12:29.756Z",
+    "code": "users.coordinators",
+    "name": "Usuarios Coordinadores",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:coordinators",
+    "group": "Administracion",
+    "order": 43,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.756Z",
+    "updated_at": "2026-08-23T07:12:29.756Z",
+    "code": "users.credentials",
+    "name": "Certificados Usuario y Contrasena",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:credentials",
+    "group": "Administracion",
+    "order": 44,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.756Z",
+    "updated_at": "2026-08-23T07:12:29.756Z",
+    "code": "users.access_report",
+    "name": "Reporte de Accesos",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:access_report",
+    "group": "Administracion",
+    "order": 45,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.760Z",
+    "updated_at": "2026-08-23T07:12:29.760Z",
+    "code": "users.authenticator",
+    "name": "Google Authenticator",
+    "parent": 10,
+    "icon": "dot",
+    "url_name": "users:authenticator",
+    "group": "Administracion",
+    "order": 46,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.761Z",
+    "updated_at": "2026-08-23T07:12:29.761Z",
+    "code": "academic",
+    "name": "Directiva",
+    "parent": null,
+    "icon": "compass",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 50,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.761Z",
+    "updated_at": "2026-08-23T07:12:29.761Z",
+    "code": "academic.years",
+    "name": "Ano Lectivo",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:years",
+    "group": "Gestion Academica",
+    "order": 51,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.761Z",
+    "updated_at": "2026-08-23T07:12:29.761Z",
+    "code": "academic.periods",
+    "name": "Periodo Academico",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:periods",
+    "group": "Gestion Academica",
+    "order": 52,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.761Z",
+    "updated_at": "2026-08-23T07:12:29.761Z",
+    "code": "academic.scales",
+    "name": "Escala Valorativa",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:scales",
+    "group": "Gestion Academica",
+    "order": 53,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.761Z",
+    "updated_at": "2026-08-23T07:12:29.761Z",
+    "code": "academic.dimensions",
+    "name": "Dimensiones Valorativas",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:dimensions",
+    "group": "Gestion Academica",
+    "order": 54,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.767Z",
+    "updated_at": "2026-08-23T07:12:29.767Z",
+    "code": "academic.areas",
+    "name": "Areas",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:areas",
+    "group": "Gestion Academica",
+    "order": 55,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.769Z",
+    "updated_at": "2026-08-23T07:12:29.769Z",
+    "code": "academic.subjects",
+    "name": "Asignaturas",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:subjects",
+    "group": "Gestion Academica",
+    "order": 56,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.770Z",
+    "updated_at": "2026-08-23T07:12:29.770Z",
+    "code": "academic.levels",
+    "name": "Niveles Educativos",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:levels",
+    "group": "Gestion Academica",
+    "order": 57,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.770Z",
+    "updated_at": "2026-08-23T07:12:29.770Z",
+    "code": "academic.grades",
+    "name": "Grados",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:grades",
+    "group": "Gestion Academica",
+    "order": 58,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.770Z",
+    "updated_at": "2026-08-23T07:12:29.770Z",
+    "code": "academic.groups",
+    "name": "Grupos",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:groups",
+    "group": "Gestion Academica",
+    "order": 59,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.773Z",
+    "updated_at": "2026-08-23T07:12:29.773Z",
+    "code": "academic.processes",
+    "name": "Procesos Academicos",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:processes",
+    "group": "Gestion Academica",
+    "order": 60,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "academic.judgments",
+    "name": "Juicios Valorativos",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:judgments",
+    "group": "Gestion Academica",
+    "order": 61,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "academic.coexistence",
+    "name": "Convivencia",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:coexistence",
+    "group": "Gestion Academica",
+    "order": 62,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "academic.purposes",
+    "name": "Propositos",
+    "parent": 17,
+    "icon": "dot",
+    "url_name": "academic:purposes",
+    "group": "Gestion Academica",
+    "order": 63,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students",
+    "name": "Estudiantes",
+    "parent": null,
+    "icon": "graduation-cap",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 60,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.registry",
+    "name": "Registro de Estudiantes",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:registry",
+    "group": "Gestion Academica",
+    "order": 61,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.enrollment",
+    "name": "Matricula",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:enrollment",
+    "group": "Gestion Academica",
+    "order": 62,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.query",
+    "name": "Consulta",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:query",
+    "group": "Gestion Academica",
+    "order": 63,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.promotion",
+    "name": "Promocion",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:promotion",
+    "group": "Gestion Academica",
+    "order": 64,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.certificates",
+    "name": "Certificados",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:certificates",
+    "group": "Gestion Academica",
+    "order": 65,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.resume",
+    "name": "Hoja de Vida",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:resume",
+    "group": "Gestion Academica",
+    "order": 66,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.lists",
+    "name": "Listados",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:lists",
+    "group": "Gestion Academica",
+    "order": 67,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.775Z",
+    "updated_at": "2026-08-23T07:12:29.775Z",
+    "code": "students.admissions",
+    "name": "Admisiones",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:admissions",
+    "group": "Gestion Academica",
+    "order": 68,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "students.inscriptions",
+    "name": "Inscripciones",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:inscriptions",
+    "group": "Gestion Academica",
+    "order": 69,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "students.guardians",
+    "name": "Acudientes",
+    "parent": 31,
+    "icon": "dot",
+    "url_name": "students:guardians",
+    "group": "Gestion Academica",
+    "order": 70,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers",
+    "name": "Docentes",
+    "parent": null,
+    "icon": "presentation",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 70,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers.registry",
+    "name": "Registro Docente",
+    "parent": 42,
+    "icon": "dot",
+    "url_name": "teachers:registry",
+    "group": "Gestion Academica",
+    "order": 71,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers.subjects",
+    "name": "Asignaturas",
+    "parent": 42,
+    "icon": "dot",
+    "url_name": "teachers:subjects",
+    "group": "Gestion Academica",
+    "order": 72,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers.schedules",
+    "name": "Horarios",
+    "parent": 42,
+    "icon": "dot",
+    "url_name": "teachers:schedules",
+    "group": "Gestion Academica",
+    "order": 73,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers.load",
+    "name": "Carga Academica",
+    "parent": 42,
+    "icon": "dot",
+    "url_name": "teachers:load",
+    "group": "Gestion Academica",
+    "order": 74,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "teachers.processes",
+    "name": "Procesos Academicos",
+    "parent": 42,
+    "icon": "dot",
+    "url_name": "teachers:processes",
+    "group": "Gestion Academica",
+    "order": 75,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations",
+    "name": "Evaluaciones",
+    "parent": null,
+    "icon": "clipboard-check",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 80,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations.grades",
+    "name": "Asignacion de Notas",
+    "parent": 48,
+    "icon": "dot",
+    "url_name": "evaluations:grades",
+    "group": "Gestion Academica",
+    "order": 81,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations.judgments",
+    "name": "Juicios Valorativos",
+    "parent": 48,
+    "icon": "dot",
+    "url_name": "evaluations:judgments",
+    "group": "Gestion Academica",
+    "order": 82,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 51,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations.qualitative",
+    "name": "Evaluacion Cualitativa",
+    "parent": 48,
+    "icon": "dot",
+    "url_name": "evaluations:qualitative",
+    "group": "Gestion Academica",
+    "order": 83,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 52,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations.preschool",
+    "name": "Propositos Preescolar",
+    "parent": 48,
+    "icon": "dot",
+    "url_name": "evaluations:preschool",
+    "group": "Gestion Academica",
+    "order": 84,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 53,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "evaluations.bilingual",
+    "name": "Modulo Bilingue",
+    "parent": 48,
+    "icon": "dot",
+    "url_name": "evaluations:bilingual",
+    "group": "Gestion Academica",
+    "order": 85,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 54,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "attendance",
+    "name": "Asistencia",
+    "parent": null,
+    "icon": "calendar-check",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 85,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 55,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.784Z",
+    "updated_at": "2026-08-23T07:12:29.784Z",
+    "code": "attendance.register",
+    "name": "Registro de Asistencia",
+    "parent": 54,
+    "icon": "dot",
+    "url_name": "attendance:register",
+    "group": "Gestion Academica",
+    "order": 86,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 56,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "attendance.report",
+    "name": "Reporte de Inasistencias",
+    "parent": 54,
+    "icon": "dot",
+    "url_name": "attendance:report",
+    "group": "Gestion Academica",
+    "order": 87,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 57,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "recoveries",
+    "name": "Recuperaciones",
+    "parent": null,
+    "icon": "refresh",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 90,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 58,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "recoveries.plans",
+    "name": "Planes de Recuperacion",
+    "parent": 57,
+    "icon": "dot",
+    "url_name": "recoveries:plans",
+    "group": "Gestion Academica",
+    "order": 91,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 59,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "recoveries.activities",
+    "name": "Actividades Complementarias",
+    "parent": 57,
+    "icon": "dot",
+    "url_name": "recoveries:activities",
+    "group": "Gestion Academica",
+    "order": 92,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 60,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "recoveries.bilingual",
+    "name": "Recuperacion Bilingue",
+    "parent": 57,
+    "icon": "dot",
+    "url_name": "recoveries:bilingual",
+    "group": "Gestion Academica",
+    "order": 93,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 61,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "recoveries.results",
+    "name": "Resultados",
+    "parent": 57,
+    "icon": "dot",
+    "url_name": "recoveries:results",
+    "group": "Gestion Academica",
+    "order": 94,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 62,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "promotion",
+    "name": "Promocion y Boletin Final",
+    "parent": null,
+    "icon": "award",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 100,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 63,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "promotion.closing",
+    "name": "Cierre Academico",
+    "parent": 62,
+    "icon": "dot",
+    "url_name": "promotion:closing",
+    "group": "Gestion Academica",
+    "order": 101,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 64,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "promotion.results",
+    "name": "Promocion Estudiantil",
+    "parent": 62,
+    "icon": "dot",
+    "url_name": "promotion:results",
+    "group": "Gestion Academica",
+    "order": 102,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 65,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "promotion.final_reports",
+    "name": "Boletines Finales",
+    "parent": 62,
+    "icon": "dot",
+    "url_name": "promotion:final_reports",
+    "group": "Gestion Academica",
+    "order": 103,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 66,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "emphases",
+    "name": "Enfasis y Disciplinas",
+    "parent": null,
+    "icon": "target",
+    "url_name": null,
+    "group": "Gestion Academica",
+    "order": 110,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 67,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "emphases.catalog",
+    "name": "Enfasis",
+    "parent": 66,
+    "icon": "dot",
+    "url_name": "emphases:catalog",
+    "group": "Gestion Academica",
+    "order": 111,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 68,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "emphases.groups",
+    "name": "Apertura de Grupos",
+    "parent": 66,
+    "icon": "dot",
+    "url_name": "emphases:groups",
+    "group": "Gestion Academica",
+    "order": 112,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 69,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "emphases.enrollment",
+    "name": "Matriculas de Enfasis",
+    "parent": 66,
+    "icon": "dot",
+    "url_name": "emphases:enrollment",
+    "group": "Gestion Academica",
+    "order": 113,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 70,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.795Z",
+    "updated_at": "2026-08-23T07:12:29.795Z",
+    "code": "tutoring",
+    "name": "Tutoria",
+    "parent": null,
+    "icon": "heart-handshake",
+    "url_name": null,
+    "group": "Convivencia",
+    "order": 120,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 71,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "tutoring.tutors",
+    "name": "Tutores",
+    "parent": 70,
+    "icon": "dot",
+    "url_name": "tutoring:tutors",
+    "group": "Convivencia",
+    "order": 121,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 72,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "tutoring.judgments",
+    "name": "Juicios de Tutoria",
+    "parent": 70,
+    "icon": "dot",
+    "url_name": "tutoring:judgments",
+    "group": "Convivencia",
+    "order": 122,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 73,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "tutoring.coexistence",
+    "name": "Convivencia",
+    "parent": 70,
+    "icon": "dot",
+    "url_name": "tutoring:coexistence",
+    "group": "Convivencia",
+    "order": 123,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 74,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "tutoring.reports",
+    "name": "Reportes de Tutoria",
+    "parent": 70,
+    "icon": "dot",
+    "url_name": "tutoring:reports",
+    "group": "Convivencia",
+    "order": 124,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 75,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "tutoring.block",
+    "name": "Bloqueo de Boletin",
+    "parent": 70,
+    "icon": "dot",
+    "url_name": "tutoring:block",
+    "group": "Convivencia",
+    "order": 125,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 76,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "observer",
+    "name": "Observador",
+    "parent": null,
+    "icon": "eye",
+    "url_name": null,
+    "group": "Convivencia",
+    "order": 130,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 77,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "observer.categories",
+    "name": "Tipos de Observacion",
+    "parent": 76,
+    "icon": "dot",
+    "url_name": "observer:categories",
+    "group": "Convivencia",
+    "order": 131,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 78,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "observer.records",
+    "name": "Registro de Observaciones",
+    "parent": 76,
+    "icon": "dot",
+    "url_name": "observer:records",
+    "group": "Convivencia",
+    "order": 132,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 79,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "observer.history",
+    "name": "Historial Estudiantil",
+    "parent": 76,
+    "icon": "dot",
+    "url_name": "observer:history",
+    "group": "Convivencia",
+    "order": 133,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 80,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "agenda",
+    "name": "Agenda Virtual",
+    "parent": null,
+    "icon": "calendar",
+    "url_name": null,
+    "group": "Comunicacion",
+    "order": 140,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 81,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.806Z",
+    "updated_at": "2026-08-23T07:12:29.806Z",
+    "code": "agenda.calendar",
+    "name": "Calendario Institucional",
+    "parent": 80,
+    "icon": "dot",
+    "url_name": "agenda:calendar",
+    "group": "Comunicacion",
+    "order": 141,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 82,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.813Z",
+    "updated_at": "2026-08-23T07:12:29.813Z",
+    "code": "agenda.activities",
+    "name": "Actividades",
+    "parent": 80,
+    "icon": "dot",
+    "url_name": "agenda:activities",
+    "group": "Comunicacion",
+    "order": 142,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 83,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.814Z",
+    "updated_at": "2026-08-23T07:12:29.814Z",
+    "code": "agenda.mail",
+    "name": "Correos y Circulares",
+    "parent": 80,
+    "icon": "dot",
+    "url_name": "agenda:mail",
+    "group": "Comunicacion",
+    "order": 143,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 84,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.814Z",
+    "updated_at": "2026-08-23T07:12:29.814Z",
+    "code": "classroom",
+    "name": "Aula Virtual",
+    "parent": null,
+    "icon": "monitor-play",
+    "url_name": null,
+    "group": "Comunicacion",
+    "order": 150,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 85,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.814Z",
+    "updated_at": "2026-08-23T07:12:29.814Z",
+    "code": "classroom.courses",
+    "name": "Cursos",
+    "parent": 84,
+    "icon": "dot",
+    "url_name": "classroom:courses",
+    "group": "Comunicacion",
+    "order": 151,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 86,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "classroom.materials",
+    "name": "Material Academico",
+    "parent": 84,
+    "icon": "dot",
+    "url_name": "classroom:materials",
+    "group": "Comunicacion",
+    "order": 152,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 87,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "classroom.activities",
+    "name": "Actividades",
+    "parent": 84,
+    "icon": "dot",
+    "url_name": "classroom:activities",
+    "group": "Comunicacion",
+    "order": 153,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 88,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "classroom.tracking",
+    "name": "Seguimiento",
+    "parent": 84,
+    "icon": "dot",
+    "url_name": "classroom:tracking",
+    "group": "Comunicacion",
+    "order": 154,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 89,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "elections",
+    "name": "Elecciones",
+    "parent": null,
+    "icon": "vote",
+    "url_name": null,
+    "group": "Comunicacion",
+    "order": 160,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 90,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "elections.setup",
+    "name": "Configuracion Electoral",
+    "parent": 89,
+    "icon": "dot",
+    "url_name": "elections:setup",
+    "group": "Comunicacion",
+    "order": 161,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 91,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "elections.voting",
+    "name": "Votacion Digital",
+    "parent": 89,
+    "icon": "dot",
+    "url_name": "elections:voting",
+    "group": "Comunicacion",
+    "order": 162,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 92,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "elections.results",
+    "name": "Resultados",
+    "parent": 89,
+    "icon": "dot",
+    "url_name": "elections:results",
+    "group": "Comunicacion",
+    "order": 163,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 93,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "documents",
+    "name": "Documentos Institucionales",
+    "parent": null,
+    "icon": "file-text",
+    "url_name": null,
+    "group": "Documentacion",
+    "order": 170,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 94,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.816Z",
+    "updated_at": "2026-08-23T07:12:29.816Z",
+    "code": "documents.configuration",
+    "name": "Configuracion Documental",
+    "parent": 93,
+    "icon": "dot",
+    "url_name": "documents:configuration",
+    "group": "Documentacion",
+    "order": 171,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 95,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.823Z",
+    "updated_at": "2026-08-23T07:12:29.823Z",
+    "code": "documents.printing",
+    "name": "Impresion de Documentos",
+    "parent": 93,
+    "icon": "dot",
+    "url_name": "documents:printing",
+    "group": "Documentacion",
+    "order": 172,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 96,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.823Z",
+    "updated_at": "2026-08-23T07:12:29.823Z",
+    "code": "reports",
+    "name": "Reportes",
+    "parent": null,
+    "icon": "bar-chart",
+    "url_name": null,
+    "group": "Documentacion",
+    "order": 180,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 97,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.823Z",
+    "updated_at": "2026-08-23T07:12:29.823Z",
+    "code": "reports.academic",
+    "name": "Reportes Academicos",
+    "parent": 96,
+    "icon": "dot",
+    "url_name": "reports:academic",
+    "group": "Documentacion",
+    "order": 181,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 98,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.825Z",
+    "updated_at": "2026-08-23T07:12:29.825Z",
+    "code": "reports.statistics",
+    "name": "Reportes Estadisticos",
+    "parent": 96,
+    "icon": "dot",
+    "url_name": "reports:statistics",
+    "group": "Documentacion",
+    "order": 182,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 99,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.825Z",
+    "updated_at": "2026-08-23T07:12:29.825Z",
+    "code": "reports.administrative",
+    "name": "Reportes Administrativos",
+    "parent": 96,
+    "icon": "dot",
+    "url_name": "reports:administrative",
+    "group": "Documentacion",
+    "order": 183,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 100,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.825Z",
+    "updated_at": "2026-08-23T07:12:29.825Z",
+    "code": "extensions",
+    "name": "Extensiones",
+    "parent": null,
+    "icon": "puzzle",
+    "url_name": null,
+    "group": "Documentacion",
+    "order": 190,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 101,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.825Z",
+    "updated_at": "2026-08-23T07:12:29.825Z",
+    "code": "extensions.forms",
+    "name": "Formularios",
+    "parent": 100,
+    "icon": "dot",
+    "url_name": "extensions:forms",
+    "group": "Documentacion",
+    "order": 191,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 102,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.825Z",
+    "updated_at": "2026-08-23T07:12:29.825Z",
+    "code": "extensions.spaces",
+    "name": "Espacios Virtuales",
+    "parent": 100,
+    "icon": "dot",
+    "url_name": "extensions:spaces",
+    "group": "Documentacion",
+    "order": 192,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 103,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.828Z",
+    "updated_at": "2026-08-23T07:12:29.828Z",
+    "code": "audit",
+    "name": "Auditoria",
+    "parent": null,
+    "icon": "shield-check",
+    "url_name": null,
+    "group": "Seguridad",
+    "order": 200,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 104,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.828Z",
+    "updated_at": "2026-08-23T07:12:29.828Z",
+    "code": "audit.log",
+    "name": "Bitacora de Acciones",
+    "parent": 103,
+    "icon": "dot",
+    "url_name": "audit:log",
+    "group": "Seguridad",
+    "order": 201,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.module",
+  "pk": 105,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.828Z",
+    "updated_at": "2026-08-23T07:12:29.828Z",
+    "code": "audit.sessions",
+    "name": "Sesiones Activas",
+    "parent": 103,
+    "icon": "dot",
+    "url_name": "audit:sessions",
+    "group": "Seguridad",
+    "order": 202,
+    "is_active": true,
+    "show_in_menu": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.839Z",
+    "updated_at": "2026-08-23T07:12:29.839Z",
+    "role": 1,
+    "module": 1,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.839Z",
+    "updated_at": "2026-08-23T07:12:29.839Z",
+    "role": 1,
+    "module": 2,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.839Z",
+    "updated_at": "2026-08-23T07:12:29.839Z",
+    "role": 1,
+    "module": 3,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.839Z",
+    "updated_at": "2026-08-23T07:12:29.839Z",
+    "role": 1,
+    "module": 4,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.839Z",
+    "updated_at": "2026-08-23T07:12:29.839Z",
+    "role": 1,
+    "module": 5,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.844Z",
+    "updated_at": "2026-08-23T07:12:29.844Z",
+    "role": 1,
+    "module": 6,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.844Z",
+    "updated_at": "2026-08-23T07:12:29.844Z",
+    "role": 1,
+    "module": 7,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 8,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 9,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 10,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 11,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 12,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 13,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 14,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 15,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 16,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 17,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 18,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 19,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 20,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 21,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 22,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 23,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 24,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 25,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.845Z",
+    "updated_at": "2026-08-23T07:12:29.845Z",
+    "role": 1,
+    "module": 26,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 31,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 27,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 28,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 32,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 29,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 33,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 34,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.861Z",
+    "updated_at": "2026-08-23T07:12:29.861Z",
+    "role": 1,
+    "module": 30,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.867Z",
+    "updated_at": "2026-08-23T07:12:29.867Z",
+    "role": 1,
+    "module": 35,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.869Z",
+    "updated_at": "2026-08-23T07:12:29.869Z",
+    "role": 1,
+    "module": 36,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.870Z",
+    "updated_at": "2026-08-23T07:12:29.870Z",
+    "role": 1,
+    "module": 37,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.870Z",
+    "updated_at": "2026-08-23T07:12:29.870Z",
+    "role": 1,
+    "module": 38,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.870Z",
+    "updated_at": "2026-08-23T07:12:29.870Z",
+    "role": 1,
+    "module": 39,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.871Z",
+    "updated_at": "2026-08-23T07:12:29.871Z",
+    "role": 1,
+    "module": 40,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.871Z",
+    "updated_at": "2026-08-23T07:12:29.871Z",
+    "role": 1,
+    "module": 41,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.873Z",
+    "updated_at": "2026-08-23T07:12:29.873Z",
+    "role": 1,
+    "module": 42,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.873Z",
+    "updated_at": "2026-08-23T07:12:29.873Z",
+    "role": 1,
+    "module": 43,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.873Z",
+    "updated_at": "2026-08-23T07:12:29.873Z",
+    "role": 1,
+    "module": 44,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 45,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 46,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 47,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 48,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 49,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 50,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 51,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 51,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 52,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 52,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 53,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 54,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 54,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 53,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 55,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 55,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 56,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 56,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 57,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 57,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 58,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 58,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 59,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 59,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 60,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 60,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 61,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 61,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 62,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 62,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 63,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.876Z",
+    "updated_at": "2026-08-23T07:12:29.876Z",
+    "role": 1,
+    "module": 63,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 64,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 64,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 65,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 65,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 66,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 66,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 67,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 67,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 68,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 68,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 69,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 69,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 70,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 70,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 71,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.889Z",
+    "updated_at": "2026-08-23T07:12:29.889Z",
+    "role": 1,
+    "module": 71,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 72,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 72,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 73,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 73,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 74,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 74,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 75,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 75,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 76,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 76,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 77,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 77,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 78,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 78,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 79,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 79,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 80,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 80,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 81,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 81,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 82,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 82,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 83,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 83,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 84,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 84,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 85,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.895Z",
+    "updated_at": "2026-08-23T07:12:29.895Z",
+    "role": 1,
+    "module": 85,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 86,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 86,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 87,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 87,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 88,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 88,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 89,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 89,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 90,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 90,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 91,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 91,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 92,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 92,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 93,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 93,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 94,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 94,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 95,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 95,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 96,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 96,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 97,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 97,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 98,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.906Z",
+    "updated_at": "2026-08-23T07:12:29.906Z",
+    "role": 1,
+    "module": 98,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 99,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 99,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 100,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 100,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 101,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 101,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 102,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 102,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 103,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 103,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 104,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 104,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 105,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 1,
+    "module": 105,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": true,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 106,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.916Z",
+    "updated_at": "2026-08-23T07:12:29.916Z",
+    "role": 2,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 107,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.923Z",
+    "updated_at": "2026-08-23T07:12:29.923Z",
+    "role": 2,
+    "module": 2,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 108,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.923Z",
+    "updated_at": "2026-08-23T07:12:29.923Z",
+    "role": 2,
+    "module": 3,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 109,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.923Z",
+    "updated_at": "2026-08-23T07:12:29.923Z",
+    "role": 2,
+    "module": 4,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 110,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.923Z",
+    "updated_at": "2026-08-23T07:12:29.923Z",
+    "role": 2,
+    "module": 5,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 111,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.923Z",
+    "updated_at": "2026-08-23T07:12:29.923Z",
+    "role": 2,
+    "module": 6,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 112,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.926Z",
+    "updated_at": "2026-08-23T07:12:29.926Z",
+    "role": 2,
+    "module": 7,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 113,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.926Z",
+    "updated_at": "2026-08-23T07:12:29.926Z",
+    "role": 2,
+    "module": 8,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 114,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.926Z",
+    "updated_at": "2026-08-23T07:12:29.926Z",
+    "role": 2,
+    "module": 9,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 115,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 10,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 116,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 11,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 117,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 12,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 118,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 13,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 119,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 14,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 120,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 15,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 121,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 16,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 122,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 17,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 123,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 18,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 124,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 19,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 125,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 20,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 126,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 21,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 127,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 22,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 128,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.928Z",
+    "role": 2,
+    "module": 23,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 129,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.928Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 24,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 130,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 25,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 131,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 26,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 132,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 31,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 133,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 27,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 134,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 28,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 135,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 32,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 136,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.939Z",
+    "updated_at": "2026-08-23T07:12:29.939Z",
+    "role": 2,
+    "module": 29,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 137,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 33,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 138,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 34,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 139,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 30,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 140,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 35,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 141,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 36,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 142,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 37,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 143,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.945Z",
+    "updated_at": "2026-08-23T07:12:29.945Z",
+    "role": 2,
+    "module": 38,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 144,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 39,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 145,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 40,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 146,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 41,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 147,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 42,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 148,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 43,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 149,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 44,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 150,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 45,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 151,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 46,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 152,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 47,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 153,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 48,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 154,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 49,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 155,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 50,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 156,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.950Z",
+    "updated_at": "2026-08-23T07:12:29.950Z",
+    "role": 2,
+    "module": 51,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 157,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.960Z",
+    "updated_at": "2026-08-23T07:12:29.960Z",
+    "role": 2,
+    "module": 52,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 158,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.960Z",
+    "updated_at": "2026-08-23T07:12:29.960Z",
+    "role": 2,
+    "module": 54,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 159,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 53,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 160,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 55,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 161,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 56,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 162,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 57,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 163,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 58,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 164,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 59,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 165,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.961Z",
+    "updated_at": "2026-08-23T07:12:29.961Z",
+    "role": 2,
+    "module": 60,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 166,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.967Z",
+    "updated_at": "2026-08-23T07:12:29.967Z",
+    "role": 2,
+    "module": 61,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 167,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.967Z",
+    "updated_at": "2026-08-23T07:12:29.967Z",
+    "role": 2,
+    "module": 62,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 168,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.969Z",
+    "updated_at": "2026-08-23T07:12:29.969Z",
+    "role": 2,
+    "module": 63,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 169,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.969Z",
+    "updated_at": "2026-08-23T07:12:29.969Z",
+    "role": 2,
+    "module": 64,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 170,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 65,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 171,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 66,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 172,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 67,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 173,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 68,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 174,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 69,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 175,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 70,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 176,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 71,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 177,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.970Z",
+    "updated_at": "2026-08-23T07:12:29.970Z",
+    "role": 2,
+    "module": 72,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 178,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.976Z",
+    "updated_at": "2026-08-23T07:12:29.976Z",
+    "role": 2,
+    "module": 73,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 179,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.976Z",
+    "updated_at": "2026-08-23T07:12:29.976Z",
+    "role": 2,
+    "module": 74,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 180,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.976Z",
+    "updated_at": "2026-08-23T07:12:29.976Z",
+    "role": 2,
+    "module": 75,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 181,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 76,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 182,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 77,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 183,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 78,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 184,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 79,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 185,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 80,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 186,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 81,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 187,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 82,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 188,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 83,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 189,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 84,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 190,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 85,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 191,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.978Z",
+    "updated_at": "2026-08-23T07:12:29.978Z",
+    "role": 2,
+    "module": 86,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 192,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.989Z",
+    "updated_at": "2026-08-23T07:12:29.989Z",
+    "role": 2,
+    "module": 87,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 193,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.989Z",
+    "updated_at": "2026-08-23T07:12:29.989Z",
+    "role": 2,
+    "module": 88,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 194,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.989Z",
+    "updated_at": "2026-08-23T07:12:29.989Z",
+    "role": 2,
+    "module": 89,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 195,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.995Z",
+    "updated_at": "2026-08-23T07:12:29.995Z",
+    "role": 2,
+    "module": 90,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 196,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.995Z",
+    "updated_at": "2026-08-23T07:12:29.995Z",
+    "role": 2,
+    "module": 91,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 197,
+  "fields": {
+    "created_at": "2026-08-23T07:12:29.995Z",
+    "updated_at": "2026-08-23T07:12:29.995Z",
+    "role": 2,
+    "module": 92,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 198,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.004Z",
+    "updated_at": "2026-08-23T07:12:30.004Z",
+    "role": 2,
+    "module": 93,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 199,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.004Z",
+    "updated_at": "2026-08-23T07:12:30.004Z",
+    "role": 2,
+    "module": 94,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 200,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.004Z",
+    "updated_at": "2026-08-23T07:12:30.004Z",
+    "role": 2,
+    "module": 95,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 201,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.004Z",
+    "updated_at": "2026-08-23T07:12:30.004Z",
+    "role": 2,
+    "module": 96,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 202,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.012Z",
+    "updated_at": "2026-08-23T07:12:30.012Z",
+    "role": 2,
+    "module": 97,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 203,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.012Z",
+    "updated_at": "2026-08-23T07:12:30.012Z",
+    "role": 2,
+    "module": 98,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 204,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.012Z",
+    "updated_at": "2026-08-23T07:12:30.012Z",
+    "role": 2,
+    "module": 99,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 205,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.012Z",
+    "updated_at": "2026-08-23T07:12:30.012Z",
+    "role": 2,
+    "module": 100,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 206,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.012Z",
+    "updated_at": "2026-08-23T07:12:30.012Z",
+    "role": 2,
+    "module": 101,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 207,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.022Z",
+    "updated_at": "2026-08-23T07:12:30.022Z",
+    "role": 2,
+    "module": 102,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 208,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.022Z",
+    "updated_at": "2026-08-23T07:12:30.022Z",
+    "role": 2,
+    "module": 103,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 209,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.022Z",
+    "updated_at": "2026-08-23T07:12:30.022Z",
+    "role": 2,
+    "module": 104,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 210,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 2,
+    "module": 105,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 211,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 3,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 212,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 3,
+    "module": 17,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 213,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 3,
+    "module": 18,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 214,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 3,
+    "module": 19,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 215,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.027Z",
+    "updated_at": "2026-08-23T07:12:30.027Z",
+    "role": 3,
+    "module": 20,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 216,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 21,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 217,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 22,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 218,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 23,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 219,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 24,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 220,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 25,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 221,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.039Z",
+    "updated_at": "2026-08-23T07:12:30.039Z",
+    "role": 3,
+    "module": 26,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 222,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 31,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 223,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 27,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 224,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 28,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 225,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 32,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 226,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 29,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 227,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 33,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 228,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.049Z",
+    "updated_at": "2026-08-23T07:12:30.049Z",
+    "role": 3,
+    "module": 34,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 229,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.062Z",
+    "updated_at": "2026-08-23T07:12:30.062Z",
+    "role": 3,
+    "module": 30,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 230,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.064Z",
+    "updated_at": "2026-08-23T07:12:30.064Z",
+    "role": 3,
+    "module": 35,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 231,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.066Z",
+    "updated_at": "2026-08-23T07:12:30.066Z",
+    "role": 3,
+    "module": 36,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 232,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.068Z",
+    "updated_at": "2026-08-23T07:12:30.068Z",
+    "role": 3,
+    "module": 37,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 233,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.071Z",
+    "updated_at": "2026-08-23T07:12:30.071Z",
+    "role": 3,
+    "module": 38,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 234,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.072Z",
+    "updated_at": "2026-08-23T07:12:30.073Z",
+    "role": 3,
+    "module": 39,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 235,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.074Z",
+    "updated_at": "2026-08-23T07:12:30.074Z",
+    "role": 3,
+    "module": 40,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 236,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.077Z",
+    "updated_at": "2026-08-23T07:12:30.077Z",
+    "role": 3,
+    "module": 41,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 237,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.077Z",
+    "updated_at": "2026-08-23T07:12:30.077Z",
+    "role": 3,
+    "module": 42,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 238,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.084Z",
+    "updated_at": "2026-08-23T07:12:30.084Z",
+    "role": 3,
+    "module": 43,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 239,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.084Z",
+    "updated_at": "2026-08-23T07:12:30.084Z",
+    "role": 3,
+    "module": 44,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 240,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.084Z",
+    "updated_at": "2026-08-23T07:12:30.084Z",
+    "role": 3,
+    "module": 45,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 241,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.084Z",
+    "updated_at": "2026-08-23T07:12:30.084Z",
+    "role": 3,
+    "module": 46,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 242,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.090Z",
+    "updated_at": "2026-08-23T07:12:30.090Z",
+    "role": 3,
+    "module": 47,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 243,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.091Z",
+    "updated_at": "2026-08-23T07:12:30.091Z",
+    "role": 3,
+    "module": 48,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 244,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.091Z",
+    "updated_at": "2026-08-23T07:12:30.091Z",
+    "role": 3,
+    "module": 49,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 245,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.091Z",
+    "updated_at": "2026-08-23T07:12:30.091Z",
+    "role": 3,
+    "module": 50,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 246,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.095Z",
+    "updated_at": "2026-08-23T07:12:30.095Z",
+    "role": 3,
+    "module": 51,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 247,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.095Z",
+    "updated_at": "2026-08-23T07:12:30.095Z",
+    "role": 3,
+    "module": 52,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 248,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.095Z",
+    "updated_at": "2026-08-23T07:12:30.095Z",
+    "role": 3,
+    "module": 54,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 249,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 53,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 250,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 55,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 251,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 56,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 252,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 57,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 253,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 58,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 254,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 59,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 255,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 60,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 256,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 61,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": true
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 257,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 62,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 258,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 63,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 259,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 64,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 260,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.100Z",
+    "updated_at": "2026-08-23T07:12:30.100Z",
+    "role": 3,
+    "module": 65,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 261,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 66,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 262,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 67,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 263,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 68,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 264,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 69,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 265,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 70,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 266,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 71,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 267,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.110Z",
+    "updated_at": "2026-08-23T07:12:30.110Z",
+    "role": 3,
+    "module": 72,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 268,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.117Z",
+    "updated_at": "2026-08-23T07:12:30.117Z",
+    "role": 3,
+    "module": 73,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 269,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.117Z",
+    "updated_at": "2026-08-23T07:12:30.118Z",
+    "role": 3,
+    "module": 74,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 270,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 75,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 271,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 76,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 272,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 77,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 273,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 78,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 274,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 79,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 275,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 80,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 276,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 81,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 277,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 82,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 278,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 83,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 279,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 84,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 280,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.119Z",
+    "updated_at": "2026-08-23T07:12:30.119Z",
+    "role": 3,
+    "module": 85,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 281,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.127Z",
+    "updated_at": "2026-08-23T07:12:30.127Z",
+    "role": 3,
+    "module": 86,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 282,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 87,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 283,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 88,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 284,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 89,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 285,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 90,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 286,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 91,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 287,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 92,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 288,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.128Z",
+    "updated_at": "2026-08-23T07:12:30.128Z",
+    "role": 3,
+    "module": 93,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 289,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 94,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 290,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 95,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 291,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 96,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 292,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 97,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 293,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 98,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 294,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.134Z",
+    "updated_at": "2026-08-23T07:12:30.134Z",
+    "role": 3,
+    "module": 99,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 295,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 296,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 2,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 297,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 3,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 298,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 4,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 299,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 10,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 300,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 11,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 301,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.139Z",
+    "updated_at": "2026-08-23T07:12:30.139Z",
+    "role": 4,
+    "module": 12,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 302,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 13,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 303,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 14,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 304,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 15,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 305,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 16,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 306,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 31,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 307,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.145Z",
+    "updated_at": "2026-08-23T07:12:30.145Z",
+    "role": 4,
+    "module": 32,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 308,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 33,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 309,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 34,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 310,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 35,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 311,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 36,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 312,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 37,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 313,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 38,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 314,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.150Z",
+    "updated_at": "2026-08-23T07:12:30.150Z",
+    "role": 4,
+    "module": 39,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 315,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 40,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 316,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 41,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 317,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 54,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 318,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 55,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 319,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 56,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 320,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.156Z",
+    "updated_at": "2026-08-23T07:12:30.156Z",
+    "role": 4,
+    "module": 80,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 321,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.160Z",
+    "updated_at": "2026-08-23T07:12:30.160Z",
+    "role": 4,
+    "module": 81,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 322,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 82,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 323,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 83,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 324,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 93,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 325,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 94,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 326,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 95,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 327,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 96,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 328,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.161Z",
+    "updated_at": "2026-08-23T07:12:30.161Z",
+    "role": 4,
+    "module": 97,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 329,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.167Z",
+    "updated_at": "2026-08-23T07:12:30.167Z",
+    "role": 4,
+    "module": 98,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 330,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.167Z",
+    "updated_at": "2026-08-23T07:12:30.167Z",
+    "role": 4,
+    "module": 99,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 331,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.167Z",
+    "updated_at": "2026-08-23T07:12:30.167Z",
+    "role": 5,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 332,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.170Z",
+    "updated_at": "2026-08-23T07:12:30.170Z",
+    "role": 5,
+    "module": 31,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 333,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.171Z",
+    "updated_at": "2026-08-23T07:12:30.171Z",
+    "role": 5,
+    "module": 32,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 334,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.172Z",
+    "updated_at": "2026-08-23T07:12:30.172Z",
+    "role": 5,
+    "module": 33,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 335,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 34,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 336,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 35,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 337,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 36,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 338,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 37,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 339,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 38,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 340,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.173Z",
+    "updated_at": "2026-08-23T07:12:30.173Z",
+    "role": 5,
+    "module": 39,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 341,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 40,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 342,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 41,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 343,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 42,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 344,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 43,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 345,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 44,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 346,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 45,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 347,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 46,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 348,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.178Z",
+    "updated_at": "2026-08-23T07:12:30.178Z",
+    "role": 5,
+    "module": 47,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 349,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 48,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 350,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 49,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 351,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 50,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 352,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 51,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 353,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 52,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 354,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 54,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 355,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.184Z",
+    "updated_at": "2026-08-23T07:12:30.184Z",
+    "role": 5,
+    "module": 53,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 356,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 55,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 357,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 56,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 358,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 57,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 359,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 58,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 360,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 59,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 361,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 60,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 362,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.189Z",
+    "updated_at": "2026-08-23T07:12:30.189Z",
+    "role": 5,
+    "module": 61,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 363,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 76,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 364,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 77,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 365,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 78,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 366,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 79,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 367,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 80,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 368,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 81,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 369,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.195Z",
+    "updated_at": "2026-08-23T07:12:30.195Z",
+    "role": 5,
+    "module": 82,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 370,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.200Z",
+    "updated_at": "2026-08-23T07:12:30.200Z",
+    "role": 5,
+    "module": 83,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 371,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.201Z",
+    "updated_at": "2026-08-23T07:12:30.201Z",
+    "role": 5,
+    "module": 84,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 372,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.202Z",
+    "updated_at": "2026-08-23T07:12:30.202Z",
+    "role": 5,
+    "module": 85,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 373,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.202Z",
+    "updated_at": "2026-08-23T07:12:30.202Z",
+    "role": 5,
+    "module": 86,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 374,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.202Z",
+    "updated_at": "2026-08-23T07:12:30.202Z",
+    "role": 5,
+    "module": 87,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 375,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.202Z",
+    "updated_at": "2026-08-23T07:12:30.202Z",
+    "role": 5,
+    "module": 88,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 376,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.202Z",
+    "updated_at": "2026-08-23T07:12:30.202Z",
+    "role": 5,
+    "module": 96,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 377,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.206Z",
+    "updated_at": "2026-08-23T07:12:30.206Z",
+    "role": 5,
+    "module": 97,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 378,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.206Z",
+    "updated_at": "2026-08-23T07:12:30.206Z",
+    "role": 5,
+    "module": 98,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 379,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.206Z",
+    "updated_at": "2026-08-23T07:12:30.206Z",
+    "role": 5,
+    "module": 99,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 380,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.206Z",
+    "updated_at": "2026-08-23T07:12:30.206Z",
+    "role": 6,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 381,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.206Z",
+    "updated_at": "2026-08-23T07:12:30.206Z",
+    "role": 6,
+    "module": 31,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 382,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.210Z",
+    "updated_at": "2026-08-23T07:12:30.210Z",
+    "role": 6,
+    "module": 32,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 383,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.210Z",
+    "updated_at": "2026-08-23T07:12:30.210Z",
+    "role": 6,
+    "module": 33,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 384,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 34,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 385,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 35,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 386,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 36,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 387,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 37,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 388,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 38,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 389,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.211Z",
+    "updated_at": "2026-08-23T07:12:30.211Z",
+    "role": 6,
+    "module": 39,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 390,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.217Z",
+    "updated_at": "2026-08-23T07:12:30.217Z",
+    "role": 6,
+    "module": 40,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 391,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.217Z",
+    "updated_at": "2026-08-23T07:12:30.218Z",
+    "role": 6,
+    "module": 41,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 392,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 54,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 393,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 55,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 394,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 56,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 395,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 70,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 396,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 71,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 397,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.219Z",
+    "updated_at": "2026-08-23T07:12:30.219Z",
+    "role": 6,
+    "module": 72,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 398,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 73,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 399,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 74,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 400,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 75,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 401,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 76,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 402,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 77,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 403,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 78,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 404,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.223Z",
+    "updated_at": "2026-08-23T07:12:30.223Z",
+    "role": 6,
+    "module": 79,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": true,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 405,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 80,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 406,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 81,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 407,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 82,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 408,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 83,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 409,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 96,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 410,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 97,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 411,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.228Z",
+    "updated_at": "2026-08-23T07:12:30.228Z",
+    "role": 6,
+    "module": 98,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 412,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 6,
+    "module": 99,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": true,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 413,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 7,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 414,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 7,
+    "module": 80,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 415,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 7,
+    "module": 81,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 416,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 7,
+    "module": 82,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 417,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.234Z",
+    "updated_at": "2026-08-23T07:12:30.234Z",
+    "role": 7,
+    "module": 83,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 418,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 84,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 419,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 85,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 420,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 86,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 421,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 87,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 422,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 88,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 423,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 91,
+    "can_view": true,
+    "can_create": true,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 424,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 100,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 425,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.239Z",
+    "updated_at": "2026-08-23T07:12:30.239Z",
+    "role": 7,
+    "module": 101,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 426,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 7,
+    "module": 102,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 427,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 8,
+    "module": 1,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 428,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 8,
+    "module": 80,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 429,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 8,
+    "module": 81,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 430,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 8,
+    "module": 82,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 431,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.245Z",
+    "updated_at": "2026-08-23T07:12:30.245Z",
+    "role": 8,
+    "module": 83,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 432,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 84,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 433,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 85,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 434,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 86,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 435,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 87,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 436,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 88,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 437,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 100,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 438,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.250Z",
+    "updated_at": "2026-08-23T07:12:30.250Z",
+    "role": 8,
+    "module": 101,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+},
+{
+  "model": "users.rolepermission",
+  "pk": 439,
+  "fields": {
+    "created_at": "2026-08-23T07:12:30.256Z",
+    "updated_at": "2026-08-23T07:12:30.256Z",
+    "role": 8,
+    "module": 102,
+    "can_view": true,
+    "can_create": false,
+    "can_edit": false,
+    "can_delete": false,
+    "can_export": false,
+    "can_approve": false
+  }
+}
+]

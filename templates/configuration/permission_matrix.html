@@ -1,0 +1,121 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Acceso de Perfiles{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-clone-role>
+    {% icon "copy" 15 %} Duplicar perfil
+  </button>
+  <button class="btn btn--secondary btn--sm" type="button" data-toggle-all>
+    {% icon "check" 15 %} Marcar todo
+  </button>
+  <button class="btn btn--primary btn--sm" type="button" data-save-matrix disabled>
+    {% icon "save" 15 %} Guardar permisos
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-sidebar">
+  <!-- ======== Matriz ======== -->
+  <div class="card">
+    <div class="table-toolbar">
+      <div class="field" style="min-width:260px">
+        <select class="select" data-role-select>
+          {% for role in roles %}
+            <option value="{{ role.id }}" data-code="{{ role.code }}">{{ role.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="input-group" style="width:240px">
+        <span class="input-group__icon">{% icon "search" 16 %}</span>
+        <input class="input" type="search" placeholder="Filtrar modulo..." data-filter-module>
+      </div>
+      <div class="spacer"></div>
+      <span class="badge badge--neutral" data-permission-count>0 permisos activos</span>
+    </div>
+
+    <div class="table-wrap" style="max-height:64vh">
+      <table class="perm-matrix" data-matrix>
+        <thead>
+          <tr>
+            <th style="min-width:280px">Modulo</th>
+            {% for key, label in action_labels.items %}
+              <th>
+                <div>{{ label }}</div>
+                <button class="btn btn--ghost btn--sm" type="button" data-column-toggle="{{ key }}"
+                        style="margin-top:2px;font-size:10px">todos</button>
+              </th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody data-matrix-body>
+          <tr><td colspan="7" class="text-center" style="padding:40px"><span class="spinner spinner--lg"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== Panel lateral ======== -->
+  <div class="stack">
+    <div class="card">
+      <div class="card__header">
+        <span class="page-header__icon" style="width:32px;height:32px">{% icon "shield-check" 16 %}</span>
+        <div style="flex:1">
+          <div class="card__title" data-role-name>Perfil</div>
+          <div class="card__subtitle" data-role-code>-</div>
+        </div>
+      </div>
+      <div class="card__body">
+        <div class="stack" style="gap:14px">
+          <div class="row-between">
+            <span class="text-sm text-secondary">Modulos visibles</span>
+            <strong class="text-sm" data-summary-view>0</strong>
+          </div>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Puede crear</span>
+            <strong class="text-sm" data-summary-create>0</strong>
+          </div>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Puede editar</span>
+            <strong class="text-sm" data-summary-edit>0</strong>
+          </div>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Puede eliminar</span>
+            <strong class="text-sm" data-summary-delete>0</strong>
+          </div>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Puede exportar</span>
+            <strong class="text-sm" data-summary-export>0</strong>
+          </div>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Puede aprobar</span>
+            <strong class="text-sm" data-summary-approve>0</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert--info">
+      {% icon "info" 18 %}
+      <div class="text-xs">
+        El perfil <strong>SUPER_ADMIN</strong> conserva acceso total sobre todos los modulos y no puede
+        restringirse. Los cambios se aplican de inmediato a todos los usuarios del perfil.
+      </div>
+    </div>
+
+    <div class="alert alert--warning">
+      {% icon "alert-triangle" 18 %}
+      <div class="text-xs">
+        Retirar el permiso <strong>Consultar</strong> oculta el modulo del menu lateral para ese perfil.
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/permissions.js' %}"></script>
+{% endblock %}

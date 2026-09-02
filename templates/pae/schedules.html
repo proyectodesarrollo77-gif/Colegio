@@ -1,0 +1,113 @@
+{% extends "pae/resource.html" %}
+{% load static %}
+
+{% block page_actions %}
+  <button class="btn btn--primary btn--sm" type="button" data-generate-schedules>
+    {% icon "calendar" 15 %} Generar programacion
+  </button>
+{% endblock %}
+
+{% block pae_before %}
+  <div class="alert alert--info mb-4">
+    {% icon "info" 18 %}
+    <div>
+      La generacion masiva crea una programacion por cada dia habil del rango seleccionado, rotando los dias
+      del ciclo de menu vigente. No duplica fechas ya programadas para el mismo plan.
+    </div>
+  </div>
+{% endblock %}
+
+{% block pae_js %}
+<script type="module">
+  import { Drawer, api, escapeHtml, toast } from "{% static 'js/app.js' %}";
+
+  const WEEKDAYS = [
+    { value: 1, label: "Lunes" },
+    { value: 2, label: "Martes" },
+    { value: 3, label: "Miercoles" },
+    { value: 4, label: "Jueves" },
+    { value: 5, label: "Viernes" },
+    { value: 6, label: "Sabado" },
+    { value: 7, label: "Domingo" },
+  ];
+
+  document.querySelector("[data-generate-schedules]")?.addEventListener("click", async () => {
+    let plans = [];
+    try {
+      const data = await api.get("/api/pae/planes/options/", { page_size: 100 });
+      plans = data.results || data || [];
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+    if (!plans.length) {
+      toast.info("Cree primero un plan operativo aprobado.");
+      return;
+    }
+
+    const drawer = new Drawer({
+      title: "Generar programacion",
+      subtitle: "Se crea una programacion diaria por cada dia seleccionado del rango",
+    });
+    drawer.body.innerHTML = `
+      <div class="form-grid">
+        <div class="field col-12">
+          <label class="field__label" for="gen-plan">Plan operativo</label>
+          <select class="select" id="gen-plan">
+            ${plans
+              .map((plan) => `<option value="${plan.id}">${escapeHtml(plan.label)}</option>`)
+              .join("")}
+          </select>
+        </div>
+        <div class="field col-6">
+          <label class="field__label" for="gen-from">Desde</label>
+          <input class="input" type="date" id="gen-from">
+        </div>
+        <div class="field col-6">
+          <label class="field__label" for="gen-to">Hasta</label>
+          <input class="input" type="date" id="gen-to">
+        </div>
+        <div class="field col-12">
+          <label class="field__label">Dias de atencion</label>
+          <div class="row-wrap" style="gap:12px">
+            ${WEEKDAYS.map(
+              (day) => `<label class="checkbox">
+                <input type="checkbox" value="${day.value}" ${day.value <= 5 ? "checked" : ""} data-weekday>
+                <span>${day.label}</span>
+              </label>`
+            ).join("")}
+          </div>
+          <div class="field__hint">Los dias no seleccionados se omiten en la generacion.</div>
+        </div>
+      </div>`;
+    drawer.footer.innerHTML = `
+      <button class="btn btn--secondary" type="button" data-cancel>Cancelar</button>
+      <button class="btn btn--primary" type="button" data-confirm>Generar</button>`;
+
+    drawer.footer.querySelector("[data-cancel]").addEventListener("click", () => drawer.destroy());
+    drawer.footer.querySelector("[data-confirm]").addEventListener("click", async () => {
+      const payload = {
+        plan: Number(drawer.body.querySelector("#gen-plan").value),
+        start_date: drawer.body.querySelector("#gen-from").value,
+        end_date: drawer.body.querySelector("#gen-to").value,
+        weekdays: Array.from(drawer.body.querySelectorAll("[data-weekday]:checked")).map((input) =>
+          Number(input.value)
+        ),
+      };
+      if (!payload.start_date || !payload.end_date) {
+        toast.error("Indique el rango de fechas.");
+        return;
+      }
+      try {
+        const result = await api.post("/api/pae/programacion/generate/", payload);
+        toast.success(`Programaciones creadas: ${result.created ?? 0}`);
+        drawer.destroy();
+        window.location.reload();
+      } catch (error) {
+        toast.error(error.message);
+      }
+    });
+    drawer.open();
+  });
+</script>
+{% endblock %}

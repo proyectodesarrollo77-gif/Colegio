@@ -1,0 +1,21 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% comment %}
+Pagina CRUD del PAE: identica a la generica de la plataforma, anteponiendo la
+barra de contexto de la vigencia. No introduce estilos ni colores nuevos.
+{% endcomment %}
+
+{% block resource_before %}
+  {% include "pae/_vigencia_bar.html" %}
+  {% block pae_before %}{% endblock %}
+{% endblock %}
+
+{% block resource_after %}
+  {% block pae_after %}{% endblock %}
+{% endblock %}
+
+{% block resource_js %}
+  <script type="module" src="{% static 'js/modules/pae-actions.js' %}"></script>
+  {% block pae_js %}{% endblock %}
+{% endblock %}

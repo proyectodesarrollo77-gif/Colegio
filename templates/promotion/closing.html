@@ -1,0 +1,254 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Cierre Academico{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-sidebar">
+  <div class="stack">
+    <div class="card">
+      <div class="card__header">
+        <span class="page-header__icon" style="width:32px;height:32px">{% icon "refresh" 16 %}</span>
+        <div style="flex:1">
+          <div class="card__title">Consolidacion de notas</div>
+          <div class="card__subtitle">Recalcula definitivas, promedios de area y desempenos del grupo</div>
+        </div>
+      </div>
+      <div class="card__body">
+        <div class="form-grid">
+          <div class="field col-6">
+            <label class="field__label" for="group">Grupo</label>
+            <select class="select" id="group" data-consolidate-group>
+              <option value="">Todos los grupos</option>
+              {% for group in groups %}
+                <option value="{{ group.id }}">{{ group.grade.name }} - {{ group.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field col-6">
+            <label class="field__label" for="period">Periodo</label>
+            <select class="select" id="period" data-consolidate-period>
+              {% for period in periods %}
+                <option value="{{ period.id }}" {% if period.is_current %}selected{% endif %}>{{ period.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card__footer" style="justify-content:flex-end">
+        <button class="btn btn--secondary" type="button" data-run-consolidate>
+          {% icon "refresh" 16 %} Consolidar notas del periodo
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <span class="page-header__icon" style="width:32px;height:32px">{% icon "lock" 16 %}</span>
+        <div style="flex:1">
+          <div class="card__title">Cierre del ano lectivo</div>
+          <div class="card__subtitle">Evalua la promocion de todos los estudiantes matriculados</div>
+        </div>
+      </div>
+      <div class="card__body">
+        <div class="alert alert--warning">
+          {% icon "alert-triangle" 18 %}
+          <div>
+            <div class="alert__title">Proceso de alto impacto</div>
+            El cierre anual evalua asignaturas y areas perdidas de cada estudiante, determina el resultado de
+            promocion y calcula los puestos por grupo. Ejecutelo cuando todas las notas esten consolidadas.
+          </div>
+        </div>
+
+        <div class="form-grid mt-4">
+          <div class="field col-6">
+            <label class="field__label" for="year">Ano lectivo</label>
+            <select class="select" id="year" data-closing-year>
+              {% for year in years %}
+                <option value="{{ year.id }}" {% if year.is_current %}selected{% endif %}>{{ year.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field col-6">
+            <label class="field__label" for="scope">Alcance</label>
+            <select class="select" id="scope" data-closing-scope>
+              <option value="PERIODO">Cierre de periodo</option>
+              <option value="ANUAL">Cierre anual con promocion</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card__footer" style="justify-content:flex-end">
+        <button class="btn btn--danger" type="button" data-run-closing>
+          {% icon "lock" 16 %} Ejecutar cierre academico
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <div style="flex:1"><div class="card__title">Historial de cierres</div></div>
+        <button class="icon-btn" type="button" data-reload-history>{% icon "refresh" 16 %}</button>
+      </div>
+      <div class="card__body card__body--flush">
+        <div class="table-wrap">
+          <table class="table table--stack">
+            <thead><tr>
+              <th>Fecha</th><th>Alcance</th><th>Periodo</th><th>Notas</th><th>Estudiantes</th><th>Estado</th>
+            </tr></thead>
+            <tbody data-closing-history>
+              <tr><td colspan="6" class="text-center" style="padding:32px"><span class="spinner"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stack">
+    <div class="card">
+      <div class="card__header"><div class="card__title">Resumen de promocion</div></div>
+      <div class="card__body">
+        <div data-promotion-summary>
+          <div class="text-sm text-muted">Ejecute el cierre anual para ver el resumen.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Reglas de promocion</div></div>
+      <div class="card__body">
+        <ul class="stack" style="gap:10px;font-size:var(--text-sm);color:var(--text-secondary)">
+          <li class="row" style="gap:8px;align-items:flex-start">
+            {% icon "check" 15 %} <span><strong>Promovido:</strong> sin areas ni asignaturas perdidas.</span>
+          </li>
+          <li class="row" style="gap:8px;align-items:flex-start">
+            {% icon "alert-triangle" 15 %} <span><strong>Promovido con compromiso:</strong> hasta 1 area y 2 asignaturas perdidas.</span>
+          </li>
+          <li class="row" style="gap:8px;align-items:flex-start">
+            {% icon "refresh" 15 %} <span><strong>Pendiente de recuperacion:</strong> requiere nivelacion antes del cierre.</span>
+          </li>
+          <li class="row" style="gap:8px;align-items:flex-start">
+            {% icon "x" 15 %} <span><strong>No promovido:</strong> mas de 2 asignaturas o mas de 2 areas perdidas.</span>
+          </li>
+          <li class="row" style="gap:8px;align-items:flex-start">
+            {% icon "award" 15 %} <span><strong>Graduado:</strong> aprueba el grado marcado como grado de graduacion.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, api, confirmDialog, escapeHtml, formatDate, icon, toast } from "{% static 'js/app.js' %}";
+
+  const STATUS_TONES = {
+    PENDIENTE: "neutral", EN_PROCESO: "warning", CONSOLIDADO: "success",
+    CERRADO: "brand", REABIERTO: "danger",
+  };
+
+  async function loadHistory() {
+    const body = $("[data-closing-history]");
+    try {
+      const data = await api.get("/api/closing-processes/", { page_size: 15 });
+      const rows = data.results || [];
+      body.innerHTML = rows.length
+        ? rows.map((row) => `
+            <tr>
+              <td class="cell-primary">${escapeHtml(formatDate(row.created_at, true))}</td>
+              <td>${escapeHtml(row.scope_display)}</td>
+              <td>${escapeHtml(row.period_name || "-")}</td>
+              <td style="text-align:center">${row.processed_grades}</td>
+              <td style="text-align:center">${row.processed_students}</td>
+              <td><span class="badge badge--${STATUS_TONES[row.status] || "neutral"}">${escapeHtml(row.status_display)}</span></td>
+            </tr>`).join("")
+        : '<tr><td colspan="6" class="text-muted text-center" style="padding:28px">Sin cierres ejecutados.</td></tr>';
+    } catch (error) {
+      body.innerHTML = `<tr><td colspan="6" class="text-danger text-center">${escapeHtml(error.message)}</td></tr>`;
+    }
+  }
+
+  async function loadSummary() {
+    try {
+      const data = await api.get("/api/promotion-results/summary/");
+      const container = $("[data-promotion-summary]");
+      if (!data.total) return;
+      container.innerHTML = `
+        <div class="stat-card__value" style="margin-bottom:14px">${data.total}</div>
+        <div class="text-xs text-muted mb-4">estudiantes evaluados</div>
+        ${data.by_result.map((row) => `
+          <div class="row-between" style="padding:6px 0">
+            <span class="text-sm text-secondary">${escapeHtml(row.result.replace(/_/g, " "))}</span>
+            <strong class="text-sm">${row.total}</strong>
+          </div>`).join("")}
+        <hr>
+        <div class="row-between">
+          <span class="text-sm text-secondary">Cuadro de honor</span>
+          <strong class="text-sm text-success">${data.honor_roll}</strong>
+        </div>`;
+    } catch (error) {
+      /* sin datos aun */
+    }
+  }
+
+  $("[data-run-consolidate]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const group = $("[data-consolidate-group]").value;
+    const period = $("[data-consolidate-period]").value;
+    if (!period) return toast.warning("Seleccione un periodo.");
+    if (!group) return toast.warning("Seleccione un grupo para consolidar.");
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner"></span> Consolidando...';
+    try {
+      const data = await api.post("/api/subject-grades/consolidate/", { group, period });
+      toast.success(`Se consolidaron ${data.processed} notas.`);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = `${icon("refresh", 16)} Consolidar notas del periodo`;
+    }
+  });
+
+  $("[data-run-closing]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const scope = $("[data-closing-scope]").value;
+    const confirmed = await confirmDialog({
+      title: scope === "ANUAL" ? "Ejecutar cierre anual" : "Ejecutar cierre de periodo",
+      message: scope === "ANUAL"
+        ? "Se evaluara la promocion de todos los estudiantes matriculados y se calcularan los puestos. Desea continuar?"
+        : "Se consolidaran las notas de todos los grupos del periodo seleccionado. Desea continuar?",
+      confirmText: "Ejecutar cierre",
+    });
+    if (!confirmed) return;
+
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner"></span> Procesando...';
+    try {
+      const data = await api.post("/api/closing-processes/run/", {
+        school_year: $("[data-closing-year]").value,
+        period: $("[data-consolidate-period]").value || null,
+        scope,
+      });
+      toast.success(`Cierre ${data.process.status.toLowerCase()}: ${data.process.processed_grades} notas, ${data.process.processed_students} estudiantes.`);
+      loadHistory();
+      loadSummary();
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = `${icon("lock", 16)} Ejecutar cierre academico`;
+    }
+  });
+
+  $("[data-reload-history]")?.addEventListener("click", loadHistory);
+
+  loadHistory();
+  loadSummary();
+</script>
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "layouts/dashboard.html" %}
+
+{% comment %}
+Panorama de la plataforma: lo que ve el Super Administrador mientras no ha
+entrado a ninguna institucion. Al entrar a una con `Ingresar` pasa a ver el
+dashboard normal de esa institucion.
+{% endcomment %}
+
+{% block title %}Panorama de la plataforma{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'institutions:panel' %}">
+    {% icon "building" 15 %} Panel de Instituciones
+  </a>
+  <a class="btn btn--primary btn--sm" href="{% url 'institutions:create' %}">
+    {% icon "plus" 15 %} Nueva institucion
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div class="alert alert--info mb-4">
+  {% icon "shield-check" 18 %}
+  <div>
+    <div class="alert__title">Esta administrando la plataforma</div>
+    Desde aqui ve todas las instituciones a la vez. Para trabajar dentro de una
+    (estudiantes, notas, asistencia, boletines) entre a ella con
+    <strong>Ingresar</strong>: el menu y este panel pasan a ser los de esa institucion.
+  </div>
+</div>
+
+<!-- ============ Indicadores de la plataforma ============ -->
+<div class="grid grid-4 mb-6">
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Instituciones</span>
+      <span class="stat-card__icon">{% icon "building" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ cards.institutions }}</div>
+    <div class="stat-card__meta">
+      {% if cards.inactive %}{{ cards.inactive }} inactiva(s){% else %}Todas activas{% endif %}
+      &middot; {{ cards.campuses }} sede(s)
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Estudiantes</span>
+      <span class="stat-card__icon">{% icon "graduation-cap" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ cards.students }}</div>
+    <div class="stat-card__meta">Sumando todas las instituciones</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Docentes</span>
+      <span class="stat-card__icon">{% icon "presentation" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ cards.teachers }}</div>
+    <div class="stat-card__meta">{{ cards.groups }} grupo(s) en total</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Usuarios</span>
+      <span class="stat-card__icon">{% icon "users" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ cards.users }}</div>
+    <div class="stat-card__meta">{{ cards.active_users }} con acceso en 30 dias</div>
+  </div>
+</div>
+
+<!-- ============ Que necesita atencion ============ -->
+{% if alerts %}
+  <div class="stack mb-6">
+    {% for alerta in alerts %}
+      <div class="alert alert--{{ alerta.tone }}">
+        {% if alerta.tone == "danger" %}{% icon "alert-triangle" 18 %}
+        {% elif alerta.tone == "warning" %}{% icon "alert-circle" 18 %}
+        {% else %}{% icon "info" 18 %}{% endif %}
+        <div>
+          <div class="alert__title">{{ alerta.institution.short_name|default:alerta.institution.name }}</div>
+          {{ alerta.text }}
+        </div>
+        <a class="btn btn--ghost btn--sm" href="{% url 'institutions:switch' alerta.institution.pk %}">
+          {% icon "log-out" 14 %} Ingresar
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<!-- ============ Funcionamiento de cada institucion ============ -->
+<div class="card">
+  <div class="card__header">
+    <span class="page-header__icon" style="width:32px;height:32px">{% icon "grid" 16 %}</span>
+    <div style="flex:1">
+      <div class="card__title">Funcionamiento de cada institucion</div>
+      <div class="card__subtitle">
+        {% for estado, cuantas in states.items %}{% if cuantas %}{{ cuantas }} {{ estado|lower }}{% if not forloop.last %} &middot; {% endif %}{% endif %}{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Institucion</th>
+            <th style="width:104px" class="text-center">Estudiantes</th>
+            <th style="width:92px" class="text-center">Docentes</th>
+            <th style="width:88px" class="text-center">Grupos</th>
+            <th style="width:140px" class="text-center">Actividad</th>
+            <th style="width:200px">Funcionamiento</th>
+            <th style="width:120px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in institutions %}
+            <tr>
+              <td class="cell-primary">
+                <div style="font-weight:500;color:var(--text-primary)">
+                  {{ item.entity.name }}
+                  {% if item.entity.is_default %}<span class="badge badge--info">Predeterminada</span>{% endif %}
+                </div>
+                <div class="text-xs text-muted">
+                  <span class="text-mono">{{ item.entity.code }}</span>
+                  &middot; {{ item.entity.city|default:"Sin ciudad" }}
+                  {% if item.summary.school_year %} &middot; {{ item.summary.school_year.name }}{% endif %}
+                </div>
+              </td>
+              <td class="text-center">{{ item.summary.students }}</td>
+              <td class="text-center">{{ item.summary.teachers }}</td>
+              <td class="text-center">{{ item.summary.groups }}</td>
+              <td class="text-center text-xs">
+                <div>{{ item.summary.grades_recorded }} notas</div>
+                <div class="text-muted">
+                  {% if item.summary.last_login %}Acceso {{ item.summary.last_login|timesince }}
+                  {% else %}Sin accesos{% endif %}
+                </div>
+              </td>
+              <td>
+                {% if not item.entity.is_active %}
+                  <span class="badge badge--neutral">Inactiva</span>
+                {% else %}
+                  <span class="badge badge--{{ item.summary.tone }}">{{ item.summary.status }}</span>
+                  <div class="text-xs text-muted mt-2">
+                    {% if item.summary.missing %}Falta: {{ item.summary.missing|join:", " }}
+                    {% else %}{{ item.summary.active_users }} usuario(s) activo(s){% endif %}
+                  </div>
+                {% endif %}
+              </td>
+              <td>
+                <div class="row" style="gap:6px;justify-content:flex-end">
+                  {% if item.entity.is_active %}
+                    <a class="btn btn--secondary btn--sm"
+                       href="{% url 'institutions:switch' item.entity.pk %}">
+                      {% icon "log-out" 14 %} Ingresar
+                    </a>
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7">
+                <div class="empty-state">
+                  <div class="empty-state__icon">{% icon "building" 26 %}</div>
+                  <div class="empty-state__title">Aun no hay instituciones</div>
+                  <div class="empty-state__message">Cree la primera con el boton Nueva institucion.</div>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

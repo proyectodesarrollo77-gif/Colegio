@@ -1,0 +1,107 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Registro de Asistencia{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-mark-all="PRESENTE">
+    {% icon "check" 15 %} Todos presentes
+  </button>
+  <button class="btn btn--primary btn--sm" type="button" data-save-attendance disabled>
+    {% icon "save" 15 %} Guardar asistencia
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-4">
+        <label class="field__label" for="assignment">Asignacion academica <span class="required">*</span></label>
+        <select class="select" id="assignment" data-assignment>
+          <option value="">Seleccione asignatura y grupo</option>
+          {% for assignment in assignments %}
+            <option value="{{ assignment.id }}">
+              {{ assignment.group.grade.name }} - {{ assignment.group.name }} &middot; {{ assignment.subject.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label" for="period">Periodo</label>
+        <select class="select" id="period" data-period>
+          {% for period in periods %}
+            <option value="{{ period.id }}" {% if period.is_current %}selected{% endif %}>{{ period.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-2">
+        <label class="field__label" for="date">Fecha</label>
+        <input class="input" type="date" id="date" data-date>
+      </div>
+      <div class="field col-1">
+        <label class="field__label" for="block">Bloque</label>
+        <input class="input" type="number" id="block" data-block value="1" min="1" max="12">
+      </div>
+      <div class="field col-2">
+        <label class="field__label">&nbsp;</label>
+        <button class="btn btn--secondary btn--block" type="button" data-load-attendance>
+          {% icon "search" 16 %} Cargar
+        </button>
+      </div>
+      <div class="field col-12">
+        <label class="field__label" for="topic">Tema de la clase</label>
+        <input class="input" id="topic" data-topic placeholder="Tema desarrollado durante la sesion">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-5 mb-6 hidden" data-attendance-stats>
+  <div class="stat-card"><div class="stat-card__label">Presentes</div>
+    <div class="stat-card__value text-success" data-count-PRESENTE>0</div></div>
+  <div class="stat-card"><div class="stat-card__label">Ausentes</div>
+    <div class="stat-card__value text-danger" data-count-AUSENTE>0</div></div>
+  <div class="stat-card"><div class="stat-card__label">Tarde</div>
+    <div class="stat-card__value text-warning" data-count-TARDE>0</div></div>
+  <div class="stat-card"><div class="stat-card__label">Excusas</div>
+    <div class="stat-card__value" data-count-EXCUSA>0</div></div>
+  <div class="stat-card"><div class="stat-card__label">Retiros</div>
+    <div class="stat-card__value" data-count-RETIRO>0</div></div>
+</div>
+
+<div class="card">
+  <div class="table-toolbar">
+    <div class="input-group">
+      <span class="input-group__icon">{% icon "search" 16 %}</span>
+      <input class="input" type="search" placeholder="Filtrar estudiante..." data-filter-student>
+    </div>
+    <div class="spacer"></div>
+    <div class="row" data-attendance-meta></div>
+  </div>
+  <div class="table-wrap" style="max-height:64vh">
+    <table class="table" data-attendance-table>
+      <thead>
+        <tr>
+          <th style="width:50px">#</th>
+          <th>Estudiante</th>
+          <th style="width:420px">Estado</th>
+          <th style="width:110px">Min. tarde</th>
+          <th>Observacion</th>
+        </tr>
+      </thead>
+      <tbody data-attendance-body>
+        <tr><td colspan="5" class="text-center text-muted" style="padding:48px">
+          Seleccione la asignacion y presione <strong>Cargar</strong>.
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/attendance.js' %}"></script>
+{% endblock %}

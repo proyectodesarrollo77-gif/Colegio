@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{ issue.title }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  <div class="print-sheet">
+    {% include "partials/print_header.html" %}
+
+    <div class="print-title">{{ issue.title }}</div>
+    <div class="text-right" style="font-size:11px;color:#555;margin-bottom:12px">
+      Consecutivo: <strong>{{ issue.consecutive }}</strong>
+    </div>
+
+    <div class="print-body">{{ issue.content|linebreaks }}</div>
+
+    <div class="print-signatures">
+      <div class="print-signature">
+        {% if institution.rector_signature %}
+          <img src="{{ institution.rector_signature.url }}" alt="" style="height:46px;margin:0 auto">
+        {% endif %}
+        <div class="print-signature__line">
+          <strong>{{ institution.rector_name }}</strong><br>Rector(a)
+        </div>
+      </div>
+      <div class="print-signature">
+        {% if institution.secretary_signature %}
+          <img src="{{ institution.secretary_signature.url }}" alt="" style="height:46px;margin:0 auto">
+        {% endif %}
+        <div class="print-signature__line">
+          <strong>{{ institution.secretary_name }}</strong><br>Secretaria academica
+        </div>
+      </div>
+    </div>
+
+    <div class="print-footer">
+      {{ issue.template.footer|default:"" }}<br>
+      Codigo de verificacion: <strong>{{ issue.verification_code }}</strong> &middot;
+      Emitido el {{ issue.issued_at|date:"d/m/Y H:i" }} &middot; Impresiones: {{ issue.print_count }}
+    </div>
+  </div>
+</div>
+{% endblock %}

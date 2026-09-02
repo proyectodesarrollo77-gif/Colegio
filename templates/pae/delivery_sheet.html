@@ -1,0 +1,77 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Planilla diaria de entregas{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:deliveries' %}">{% icon "list" 15 %} Ver entregas</a>
+  <button class="btn btn--primary btn--sm" type="button" data-save-sheet>{% icon "save" 15 %} Guardar planilla</button>
+{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-4">
+        <label class="field__label" for="sheet-date">Fecha de servicio</label>
+        <input class="input" type="date" id="sheet-date">
+      </div>
+      <div class="field col-8">
+        <label class="field__label" for="sheet-plan">Plan operativo</label>
+        <select class="select" id="sheet-plan">
+          <option value="">Todos los planes en ejecucion</option>
+          {% for plan in plans %}
+            <option value="{{ plan.id }}">{{ plan.code }} &middot; {{ plan.name }} ({{ plan.campus.name }})</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <div style="flex:1">
+      <div class="card__title">Registro del dia</div>
+      <div class="card__subtitle">
+        faltantes = programadas &minus; recibidas &nbsp;&middot;&nbsp;
+        no entregadas = recibidas &minus; entregadas &nbsp;&middot;&nbsp;
+        cumplimiento = entregadas / programadas &times; 100
+      </div>
+    </div>
+    <div data-sheet-totals class="row" style="gap:16px"></div>
+  </div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table table--compact table--bordered">
+        <thead>
+          <tr>
+            <th>Sede</th>
+            <th>Jornada</th>
+            <th>Complemento</th>
+            <th>Menu</th>
+            <th class="text-right" style="width:110px">Programadas</th>
+            <th style="width:120px">Recibidas</th>
+            <th style="width:120px">Entregadas</th>
+            <th class="text-right" style="width:90px">Faltan</th>
+            <th class="text-right" style="width:110px">Cumplim.</th>
+            <th style="width:90px">Menu ok</th>
+            <th style="width:220px">Justificacion</th>
+          </tr>
+        </thead>
+        <tbody data-sheet-rows>
+          <tr><td colspan="11"><div class="skeleton" style="width:100%"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  <script type="module" src="{% static 'js/modules/pae-delivery.js' %}"></script>
+{% endblock %}

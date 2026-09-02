@@ -1,0 +1,74 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Calendario Institucional{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'agenda:events' %}">
+    {% icon "list" 15 %} Administrar eventos
+  </a>
+  <a class="btn btn--primary btn--sm" href="{% url 'agenda:mail' %}">
+    {% icon "mail" 15 %} Enviar circular
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-sidebar">
+  <div class="card">
+    <div class="card__header">
+      <button class="icon-btn" type="button" data-calendar-prev aria-label="Mes anterior">{% icon "chevron-left" 18 %}</button>
+      <div style="flex:1;text-align:center">
+        <div class="card__title" data-calendar-title>Cargando...</div>
+        <div class="card__subtitle" data-calendar-count></div>
+      </div>
+      <button class="icon-btn" type="button" data-calendar-next aria-label="Mes siguiente">{% icon "chevron-right" 18 %}</button>
+      <button class="btn btn--secondary btn--sm" type="button" data-calendar-today>Hoy</button>
+    </div>
+    <div class="card__body">
+      <div class="calendar" data-calendar>
+        <div class="calendar__head">Lun</div>
+        <div class="calendar__head">Mar</div>
+        <div class="calendar__head">Mie</div>
+        <div class="calendar__head">Jue</div>
+        <div class="calendar__head">Vie</div>
+        <div class="calendar__head">Sab</div>
+        <div class="calendar__head">Dom</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stack">
+    <div class="card">
+      <div class="card__header">
+        <span class="page-header__icon" style="width:32px;height:32px">{% icon "calendar-check" 16 %}</span>
+        <div style="flex:1">
+          <div class="card__title">Eventos del mes</div>
+          <div class="card__subtitle">Listado cronologico</div>
+        </div>
+      </div>
+      <div class="card__body card__body--flush">
+        <div data-calendar-list style="max-height:520px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Convenciones</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:8px">
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#4F46E5"></span>Academico</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#0EA5E9"></span>Institucional</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#10B981"></span>Cultural / Deportivo</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#F59E0B"></span>Evaluacion</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#EF4444"></span>Festivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/calendar.js' %}"></script>
+{% endblock %}

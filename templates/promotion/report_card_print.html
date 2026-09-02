@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Boletin - {{ card.student.display_name }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  {% include "promotion/_report_card_sheet.html" %}
+</div>
+{% endblock %}

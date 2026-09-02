@@ -1,0 +1,164 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Reportes Administrativos{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4 mb-6" data-admin-cards>
+  {% for i in "1234" %}
+    <div class="stat-card">
+      <div class="skeleton" style="width:110px;margin-bottom:12px"></div>
+      <div class="skeleton" style="width:70px;height:26px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="grid grid-2 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Usuarios por perfil</div>
+        <div class="card__subtitle">Distribucion de cuentas de la plataforma</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-roles style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Matriculas por tipo</div>
+        <div class="card__subtitle">Nuevos, antiguos, reintegros y traslados</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-enrollment style="position:relative"></div></div>
+  </div>
+</div>
+
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card__header"><div class="card__title">Exportaciones rapidas</div></div>
+    <div class="card__body">
+      <div class="stack" style="gap:8px">
+        <button class="btn btn--secondary btn--block" type="button" data-export="/api/users/export/">
+          {% icon "download" 15 %} Listado de usuarios
+        </button>
+        <button class="btn btn--secondary btn--block" type="button" data-export="/api/teachers/export/">
+          {% icon "download" 15 %} Planta docente
+        </button>
+        <button class="btn btn--secondary btn--block" type="button" data-export="/api/enrollments/export/">
+          {% icon "download" 15 %} Matriculas del ano
+        </button>
+        <button class="btn btn--secondary btn--block" type="button" data-export="/api/audit-logs/export/">
+          {% icon "download" 15 %} Bitacora de auditoria
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header"><div class="card__title">Seguridad</div></div>
+    <div class="card__body">
+      <div class="stack" style="gap:12px" data-security-panel>
+        <div class="skeleton" style="width:80%"></div>
+        <div class="skeleton" style="width:70%"></div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a class="btn btn--ghost btn--sm" href="{% url 'users:access_report' %}">Ver reporte de accesos</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header"><div class="card__title">Planta docente</div></div>
+    <div class="card__body">
+      <div class="stack" style="gap:12px" data-teachers-panel>
+        <div class="skeleton" style="width:80%"></div>
+        <div class="skeleton" style="width:60%"></div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a class="btn btn--ghost btn--sm" href="{% url 'teachers:load' %}">Ver carga academica</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, $$, api, escapeHtml, formatNumber, icon, toast } from "{% static 'js/app.js' %}";
+  import { donutChart, horizontalBars, palette } from "{% static 'js/modules/charts.js' %}";
+
+  async function load() {
+    try {
+      const data = await api.get("/api/statistics/administrative/");
+
+      $("[data-admin-cards]").innerHTML = [
+        { label: "Usuarios totales", value: formatNumber(data.users.total), icon: "users" },
+        { label: "Usuarios activos", value: formatNumber(data.users.active), icon: "check" },
+        { label: "Con doble factor", value: formatNumber(data.users.with_2fa), icon: "shield-check" },
+        { label: "Matriculas activas", value: formatNumber(data.enrollment.active), icon: "clipboard-check" },
+      ].map((card) => `
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">${escapeHtml(card.label)}</span>
+            <span class="stat-card__icon">${icon(card.icon, 18)}</span>
+          </div>
+          <div class="stat-card__value">${card.value}</div>
+        </div>`).join("");
+
+      donutChart($("[data-chart-roles]"), {
+        items: data.users.by_role.map((row, index) => ({
+          label: row.role__name || "Sin perfil",
+          value: row.total,
+          color: palette[index % palette.length],
+        })),
+        size: 180,
+        centerValue: formatNumber(data.users.total),
+        centerLabel: "usuarios",
+      });
+
+      horizontalBars($("[data-chart-enrollment]"), {
+        items: data.enrollment.by_type.map((row, index) => ({
+          label: row.enrollment_type,
+          value: row.total,
+          color: palette[index % palette.length],
+        })),
+      });
+
+      $("[data-security-panel]").innerHTML = `
+        <div class="row-between"><span class="text-sm text-secondary">Ingresos hoy</span>
+          <strong class="text-sm">${formatNumber(data.access.logins_today)}</strong></div>
+        <div class="row-between"><span class="text-sm text-secondary">Eventos fallidos</span>
+          <strong class="text-sm text-danger">${formatNumber(data.access.failed)}</strong></div>
+        <div class="row-between"><span class="text-sm text-secondary">Cuentas con 2FA</span>
+          <strong class="text-sm text-success">${formatNumber(data.users.with_2fa)}</strong></div>`;
+
+      $("[data-teachers-panel]").innerHTML = `
+        <div class="row-between"><span class="text-sm text-secondary">Docentes registrados</span>
+          <strong class="text-sm">${formatNumber(data.teachers.total)}</strong></div>
+        <div class="row-between"><span class="text-sm text-secondary">Docentes activos</span>
+          <strong class="text-sm text-success">${formatNumber(data.teachers.active)}</strong></div>
+        <div class="row-between"><span class="text-sm text-secondary">Asignaciones academicas</span>
+          <strong class="text-sm">${formatNumber(data.teachers.assignments)}</strong></div>`;
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  $$("[data-export]").forEach((button) =>
+    button.addEventListener("click", async () => {
+      try {
+        await api.download(button.dataset.export, { format: "xlsx" }, "reporte");
+        toast.success("Archivo generado.");
+      } catch (error) {
+        toast.error(error.message);
+      }
+    })
+  );
+
+  load();
+</script>
+{% endblock %}

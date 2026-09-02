@@ -1,0 +1,65 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_before %}
+<div class="alert alert--info mb-6">
+  {% icon "info" 18 %}
+  <div>
+    <div class="alert__title">Escala valorativa institucional</div>
+    Cree la escala del ano lectivo y luego cargue los niveles de desempeno. El boton
+    <strong>Aplicar escala nacional</strong> genera los cuatro desempenos del Decreto 1290
+    (Superior, Alto, Basico y Bajo) con sus rangos por defecto.
+  </div>
+</div>
+
+<div class="grid grid-4 mb-6">
+  <div class="stat-card" style="border-left:3px solid #059669">
+    <div class="stat-card__label">Superior</div>
+    <div class="stat-card__value" style="font-size:var(--text-xl)">4.60 - 5.00</div>
+    <div class="stat-card__meta">Aprueba</div>
+  </div>
+  <div class="stat-card" style="border-left:3px solid #0EA5E9">
+    <div class="stat-card__label">Alto</div>
+    <div class="stat-card__value" style="font-size:var(--text-xl)">4.00 - 4.59</div>
+    <div class="stat-card__meta">Aprueba</div>
+  </div>
+  <div class="stat-card" style="border-left:3px solid #F59E0B">
+    <div class="stat-card__label">Basico</div>
+    <div class="stat-card__value" style="font-size:var(--text-xl)">3.00 - 3.99</div>
+    <div class="stat-card__meta">Aprueba</div>
+  </div>
+  <div class="stat-card" style="border-left:3px solid #EF4444">
+    <div class="stat-card__label">Bajo</div>
+    <div class="stat-card__value" style="font-size:var(--text-xl)">1.00 - 2.99</div>
+    <div class="stat-card__meta">No aprueba</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-apply-scale>
+    {% icon "sparkles" 15 %} Aplicar escala nacional
+  </button>
+  <a class="btn btn--secondary btn--sm" href="/api/grading-levels/">
+    {% icon "list" 15 %} Niveles de desempeno
+  </a>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, toast } from "{% static 'js/app.js' %}";
+
+  document.querySelector("[data-apply-scale]")?.addEventListener("click", async () => {
+    const rows = window.PLSGE_TABLE?.state.rows || [];
+    const target = rows.find((row) => row.is_default) || rows[0];
+    if (!target) return toast.warning("Cree primero una escala valorativa.");
+    try {
+      const data = await api.post(`/api/grading-scales/${target.id}/apply-default-levels/`, {});
+      toast.success(`Se crearon ${data.created} niveles de desempeno en "${target.name}".`);
+      window.PLSGE_TABLE?.load();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

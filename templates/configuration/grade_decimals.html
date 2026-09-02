@@ -1,0 +1,81 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_before %}
+<div class="grid grid-4 mb-6">
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Aproximacion normal</span>
+      <span class="stat-card__icon">{% icon "sparkles" 18 %}</span>
+    </div>
+    <div class="text-sm text-secondary">2.95 se convierte en <strong class="text-success">3.0</strong></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Truncar decimales</span>
+      <span class="stat-card__icon">{% icon "filter" 18 %}</span>
+    </div>
+    <div class="text-sm text-secondary">2.99 se convierte en <strong class="text-danger">2.9</strong></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Desde una decima</span>
+      <span class="stat-card__icon">{% icon "target" 18 %}</span>
+    </div>
+    <div class="text-sm text-secondary">2.50 o mas sube a <strong class="text-success">3.0</strong></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Sin aproximacion</span>
+      <span class="stat-card__icon">{% icon "circle" 18 %}</span>
+    </div>
+    <div class="text-sm text-secondary">Se conserva el valor exacto calculado</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-preview-rounding>
+    {% icon "activity" 15 %} Simular aproximacion
+  </button>
+{% endblock %}
+
+{% block resource_after %}
+<div class="card mt-6 hidden" data-preview-card>
+  <div class="card__header">
+    <div class="card__title">Simulacion de aproximacion</div>
+  </div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Nota calculada</th><th>Nota aproximada</th></tr></thead>
+        <tbody data-preview-body></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, toast } from "{% static 'js/app.js' %}";
+
+  document.querySelector("[data-preview-rounding]")?.addEventListener("click", async () => {
+    const rows = window.PLSGE_TABLE?.state.rows || [];
+    const target = rows.find((row) => row.is_default) || rows[0];
+    if (!target) return toast.warning("Cree primero una configuracion de decimas.");
+    try {
+      const data = await api.post(`/api/grade-decimals/${target.id}/preview/`, {
+        values: [2.44, 2.45, 2.94, 2.95, 3.44, 3.46, 4.55, 4.94],
+      });
+      const body = document.querySelector("[data-preview-body]");
+      body.innerHTML = data.results
+        .map((row) => `<tr><td class="text-mono">${row.input}</td><td class="text-mono text-bold">${row.output}</td></tr>`)
+        .join("");
+      document.querySelector("[data-preview-card]").classList.remove("hidden");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

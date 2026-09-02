@@ -1,0 +1,150 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Dashboard PAE{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--ghost btn--sm" type="button" data-pae-notify>
+    {% icon "bell" 15 %} Notificar alertas
+  </button>
+  <button class="btn btn--secondary btn--sm" type="button" onclick="window.print()">
+    {% icon "printer" 15 %} Imprimir
+  </button>
+{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-3">
+        <label class="field__label" for="pae-campus">Sede</label>
+        <select class="select" id="pae-campus" data-pae-filter="campus">
+          <option value="">Todas las sedes</option>
+          {% for campus in campuses %}<option value="{{ campus.id }}">{{ campus.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label" for="pae-shift">Jornada</label>
+        <select class="select" id="pae-shift" data-pae-filter="shift">
+          <option value="">Todas las jornadas</option>
+          {% for shift in shifts %}<option value="{{ shift.id }}">{{ shift.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label" for="pae-operator">Operador</label>
+        <select class="select" id="pae-operator" data-pae-filter="operator">
+          <option value="">Todos los operadores</option>
+          {% for operator in operators %}<option value="{{ operator.id }}">{{ operator.business_name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label" for="pae-from">Desde</label>
+        <input class="input" type="date" id="pae-from" data-pae-filter="date_from">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-5 mb-6" data-pae-cards>
+  {% for i in "1234567890" %}
+    <div class="stat-card">
+      <div class="skeleton" style="width:110px;margin-bottom:12px"></div>
+      <div class="skeleton" style="width:70px;height:26px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="grid grid-sidebar mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Raciones programadas, recibidas y entregadas</div>
+        <div class="card__subtitle">Comportamiento de la operacion en la vigencia</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="rations" style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Alertas</div>
+        <div class="card__subtitle">Situaciones que requieren gestion</div>
+      </div>
+    </div>
+    <div class="card__body card__body--flush"><div data-pae-alerts></div></div>
+  </div>
+</div>
+
+<div class="grid grid-2 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Cumplimiento mensual</div>
+        <div class="card__subtitle">Raciones entregadas frente a programadas</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="monthly_compliance" style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Beneficiarios por sede</div>
+        <div class="card__subtitle">Distribucion de la poblacion atendida</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="beneficiaries_by_campus" style="position:relative"></div></div>
+  </div>
+</div>
+
+<div class="grid grid-3 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Novedades por tipo</div>
+        <div class="card__subtitle">Vigencia en curso</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="incidents_by_type" style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Novedades por estado</div>
+        <div class="card__subtitle">Avance de la gestion</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="incidents_by_status" style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Hallazgos por severidad</div>
+        <div class="card__subtitle">Resultado de las visitas</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-pae-chart="findings_by_severity" style="position:relative"></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <div style="flex:1">
+      <div class="card__title">Cumplimiento por operador</div>
+      <div class="card__subtitle">Porcentaje de raciones entregadas sobre programadas</div>
+    </div>
+  </div>
+  <div class="card__body"><div data-pae-chart="compliance_by_operator"></div></div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  <script type="module" src="{% static 'js/modules/pae-dashboard.js' %}"></script>
+{% endblock %}

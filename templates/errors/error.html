@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div style="min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--bg-app)">
+  <div class="card" style="max-width:520px;width:100%;text-align:center">
+    <div class="card__body" style="padding:44px 32px">
+      <div class="empty-state__icon" style="margin:0 auto 20px;width:64px;height:64px;
+           background:var(--danger-50);color:var(--danger-600)">
+        {% icon "alert-triangle" 28 %}
+      </div>
+      <div style="font-size:52px;font-weight:700;letter-spacing:-0.04em;line-height:1;color:var(--text-primary)">
+        {{ status }}
+      </div>
+      <h1 style="font-size:var(--text-xl);margin:12px 0 8px">{{ title }}</h1>
+      <p class="text-sm text-secondary" style="max-width:42ch;margin:0 auto 26px">{{ message }}</p>
+      <div class="row" style="justify-content:center;gap:10px">
+        <a class="btn btn--secondary" href="javascript:history.back()">{% icon "arrow-left" 16 %} Volver</a>
+        <a class="btn btn--primary" href="/">{% icon "layout-dashboard" 16 %} Ir al inicio</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Reportes Estadisticos{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" onclick="window.print()">
+    {% icon "printer" 15 %} Imprimir tablero
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-5 mb-6" data-stat-cards>
+  {% for i in "12345" %}
+    <div class="stat-card">
+      <div class="skeleton" style="width:100px;margin-bottom:12px"></div>
+      <div class="skeleton" style="width:70px;height:26px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="grid grid-2 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Promedio por area</div>
+        <div class="card__subtitle">Rendimiento academico institucional</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-areas style="position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Distribucion de desempenos</div>
+        <div class="card__subtitle">Valoraciones registradas en el ano lectivo</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-performance style="position:relative"></div></div>
+  </div>
+</div>
+
+<div class="grid grid-2 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Estudiantes por grado</div>
+        <div class="card__subtitle">Distribucion de la matricula activa</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-grades style="height:300px;position:relative"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Promedio por periodo</div>
+        <div class="card__subtitle">Evolucion academica</div>
+      </div>
+    </div>
+    <div class="card__body"><div data-chart-periods style="height:300px;position:relative"></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <div style="flex:1">
+      <div class="card__title">Matricula por grupo</div>
+      <div class="card__subtitle">Ocupacion de cada grupo del ano lectivo</div>
+    </div>
+  </div>
+  <div class="card__body"><div data-chart-groups></div></div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, api, escapeHtml, formatNumber, icon, toast } from "{% static 'js/app.js' %}";
+  import { barChart, donutChart, horizontalBars, lineChart, palette } from "{% static 'js/modules/charts.js' %}";
+
+  async function load() {
+    try {
+      const data = await api.get("/api/statistics/academic/");
+      const totals = data.totals;
+
+      $("[data-stat-cards]").innerHTML = [
+        { label: "Estudiantes activos", value: formatNumber(totals.students), icon: "graduation-cap" },
+        { label: "Grupos", value: formatNumber(totals.groups), icon: "users" },
+        { label: "Notas registradas", value: formatNumber(totals.grades_recorded), icon: "clipboard-check" },
+        { label: "Promedio general", value: totals.average, icon: "trending-up" },
+        { label: "Tasa de aprobacion", value: `${totals.pass_rate}%`, icon: "award" },
+      ].map((card) => `
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">${escapeHtml(card.label)}</span>
+            <span class="stat-card__icon">${icon(card.icon, 18)}</span>
+          </div>
+          <div class="stat-card__value">${card.value}</div>
+        </div>`).join("");
+
+      horizontalBars($("[data-chart-areas]"), {
+        items: data.by_area.map((row, index) => ({
+          label: row.subject__area__name || "Sin area",
+          value: Number((row.average || 0).toFixed(2)),
+          color: palette[index % palette.length],
+        })),
+        formatter: (value) => Number(value).toFixed(2),
+      });
+
+      donutChart($("[data-chart-performance]"), {
+        items: data.performance.map((row) => ({
+          label: row.performance__name || "Sin desempeno",
+          value: row.total,
+          color: row.performance__color || undefined,
+        })),
+        size: 190,
+        centerValue: formatNumber(totals.grades_recorded),
+        centerLabel: "notas",
+      });
+
+      barChart($("[data-chart-grades]"), {
+        labels: data.by_grade.map((row) => row.group__grade__name || "-"),
+        series: [{ name: "Estudiantes", data: data.by_grade.map((row) => row.total), color: palette[0] }],
+        height: 300,
+      });
+
+      lineChart($("[data-chart-periods]"), {
+        labels: data.by_period.map((row) => row.period__name || "-"),
+        series: [{
+          name: "Promedio",
+          data: data.by_period.map((row) => Number((row.average || 0).toFixed(2))),
+          color: palette[2],
+        }],
+        height: 300,
+        formatter: (value) => Number(value).toFixed(1),
+      });
+
+      horizontalBars($("[data-chart-groups]"), {
+        items: data.by_group.map((row, index) => ({
+          label: row.group__name || "-",
+          value: row.total,
+          color: palette[index % palette.length],
+        })),
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  load();
+</script>
+{% endblock %}

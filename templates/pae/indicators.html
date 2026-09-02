@@ -1,0 +1,171 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Indicadores del PAE{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--primary btn--sm" type="button" data-refresh-indicators>
+    {% icon "refresh" 15 %} Recalcular
+  </button>
+  <button class="btn btn--secondary btn--sm" type="button" data-export-indicators>
+    {% icon "download" 15 %} Exportar
+  </button>
+{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="grid grid-4 mb-6" data-indicator-cards>
+  {% for i in "1234" %}
+    <div class="stat-card">
+      <div class="skeleton" style="width:110px;margin-bottom:12px"></div>
+      <div class="skeleton" style="width:70px;height:26px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <div style="flex:1">
+      <div class="card__title">Indicadores de la vigencia</div>
+      <div class="card__subtitle">Valor obtenido frente a la meta definida en la configuracion del programa</div>
+    </div>
+  </div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Indicador</th>
+            <th>Sede</th>
+            <th class="text-right">Meta</th>
+            <th class="text-right">Valor</th>
+            <th style="width:220px">Avance</th>
+            <th>Periodo</th>
+          </tr>
+        </thead>
+        <tbody data-indicator-rows>
+          <tr><td colspan="6"><div class="skeleton" style="width:100%"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { api, escapeHtml, formatNumber, icon, toast } from "{% static 'js/app.js' %}";
+
+  const cardsSlot = document.querySelector("[data-indicator-cards]");
+  const rowsSlot = document.querySelector("[data-indicator-rows]");
+
+  function progressTone(value, goal) {
+    if (!goal) return "";
+    const ratio = Number(value) / Number(goal);
+    if (ratio >= 1) return " progress__bar--success";
+    if (ratio >= 0.8) return " progress__bar--warning";
+    return " progress__bar--danger";
+  }
+
+  async function loadSummary() {
+    try {
+      const data = await api.get("/api/pae/dashboard/");
+      const totals = data.totals || {};
+      const vigencia = data.vigencia || {};
+      const cards = [
+        { label: "Cobertura", value: totals.coverage, suffix: "%", goal: vigencia.coverage_goal, icon: "target" },
+        { label: "Cumplimiento", value: totals.compliance, suffix: "%", goal: vigencia.compliance_goal, icon: "trending-up" },
+        { label: "Novedades cerradas", value: totals.incidents_closed, icon: "check" },
+        { label: "Acciones vencidas", value: totals.overdue_actions, icon: "clock" },
+      ];
+      cardsSlot.innerHTML = cards
+        .map((card) => {
+          const value = card.suffix === "%" ? `${formatNumber(card.value || 0, 1)}%` : formatNumber(card.value || 0);
+          const meta = card.goal
+            ? `<span class="stat-card__trend stat-card__trend--${Number(card.value) >= Number(card.goal) ? "up" : "down"}">
+                 meta ${formatNumber(card.goal, 1)}%</span>`
+            : "";
+          return `<div class="stat-card">
+            <div class="stat-card__top">
+              <span class="stat-card__label">${escapeHtml(card.label)}</span>
+              <span class="stat-card__icon">${icon(card.icon, 18)}</span>
+            </div>
+            <div class="stat-card__value">${value}</div>
+            <div class="stat-card__meta">${meta}</div>
+          </div>`;
+        })
+        .join("");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  async function loadRows() {
+    try {
+      const data = await api.get("/api/pae/indicadores/", { page_size: 100, ordering: "code" });
+      const rows = data.results || [];
+      if (!rows.length) {
+        rowsSlot.innerHTML = `<tr><td colspan="6">
+          <div class="empty-state">
+            <div class="empty-state__icon">${icon("bar-chart", 24)}</div>
+            <div class="empty-state__title">Aun no hay indicadores calculados</div>
+            <div class="empty-state__message">Use el boton Recalcular para generarlos a partir de la operacion registrada.</div>
+          </div></td></tr>`;
+        return;
+      }
+      rowsSlot.innerHTML = rows
+        .map((row) => {
+          const goal = Number(row.goal || 0);
+          const value = Number(row.value || 0);
+          const percent = goal ? Math.min(Math.round((value / goal) * 100), 100) : 0;
+          return `<tr>
+            <td class="cell-primary">${escapeHtml(row.name || row.code || "")}</td>
+            <td>${escapeHtml(row.campus_name || "Institucional")}</td>
+            <td class="text-right">${formatNumber(goal, 2)}</td>
+            <td class="text-right">${formatNumber(value, 2)}</td>
+            <td>
+              <div class="progress progress--sm">
+                <div class="progress__bar${progressTone(value, goal)}" style="width:${percent}%"></div>
+              </div>
+            </td>
+            <td>${escapeHtml(row.period_label || row.period_display || "")}</td>
+          </tr>`;
+        })
+        .join("");
+    } catch (error) {
+      rowsSlot.innerHTML = `<tr><td colspan="6" class="text-sm text-danger">${escapeHtml(error.message)}</td></tr>`;
+    }
+  }
+
+  document.querySelector("[data-refresh-indicators]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    try {
+      const dashboard = await api.get("/api/pae/dashboard/");
+      const current = dashboard.vigencia;
+      if (!current) {
+        toast.error("No hay vigencia configurada.");
+        return;
+      }
+      const result = await api.post(`/api/pae/vigencias/${current.id}/refresh-indicators/`, {});
+      toast.success(`Indicadores actualizados: ${result.indicators ?? 0}`);
+      loadSummary();
+      loadRows();
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  document.querySelector("[data-export-indicators]")?.addEventListener("click", () => {
+    api.download("/api/pae/indicadores/export/", { format: "xlsx" }, "pae_indicadores.xlsx");
+  });
+
+  loadSummary();
+  loadRows();
+</script>
+{% endblock %}

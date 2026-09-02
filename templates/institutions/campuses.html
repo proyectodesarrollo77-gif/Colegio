@@ -1,0 +1,19 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'institutions:profile' %}">
+    {% icon "building" 15 %} Datos institucionales
+  </a>
+{% endblock %}
+
+{% block resource_before %}
+<div class="alert alert--info mb-6">
+  {% icon "building" 18 %}
+  <div>
+    <div class="alert__title">Sedes y jornadas</div>
+    Registre cada sede fisica de la institucion. Las sedes se asocian a los grupos para organizar
+    la matricula, los horarios y los reportes por jornada.
+  </div>
+</div>
+{% endblock %}

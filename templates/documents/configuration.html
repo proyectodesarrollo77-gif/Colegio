@@ -1,0 +1,77 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_before %}
+<div class="alert alert--info mb-6">
+  {% icon "info" 18 %}
+  <div style="flex:1">
+    <div class="alert__title">Variables disponibles en las plantillas</div>
+    <div class="text-xs text-muted mt-2">
+      Escriba la variable dentro del cuerpo del documento y sera reemplazada al emitirlo.
+    </div>
+    <div class="row row-wrap mt-3" style="gap:6px">
+      {% verbatim %}
+        <code class="chip">{{estudiante}}</code>
+        <code class="chip">{{documento}}</code>
+        <code class="chip">{{tipo_documento}}</code>
+        <code class="chip">{{numero_documento}}</code>
+        <code class="chip">{{codigo}}</code>
+        <code class="chip">{{grado}}</code>
+        <code class="chip">{{grupo}}</code>
+        <code class="chip">{{ano}}</code>
+        <code class="chip">{{fecha}}</code>
+        <code class="chip">{{institucion}}</code>
+        <code class="chip">{{rector}}</code>
+        <code class="chip">{{ciudad}}</code>
+        <code class="chip">{{consecutivo}}</code>
+        <code class="chip">{{acudiente}}</code>
+        <code class="chip">{{estado}}</code>
+        <code class="chip">{{dirigido_a}}</code>
+      {% endverbatim %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-preview-template>
+    {% icon "eye" 15 %} Previsualizar plantilla
+  </button>
+  <a class="btn btn--secondary btn--sm" href="{% url 'documents:printing' %}">
+    {% icon "printer" 15 %} Impresion de documentos
+  </a>
+{% endblock %}
+
+{% block resource_after %}
+<div class="card mt-6 hidden" data-preview-card>
+  <div class="card__header"><div class="card__title">Vista previa del documento</div></div>
+  <div class="card__body">
+    <div class="print-sheet" style="max-width:none;box-shadow:none;padding:24px">
+      <div class="print-body" data-preview-content></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, escapeHtml, toast } from "{% static 'js/app.js' %}";
+
+  document.querySelector("[data-preview-template]")?.addEventListener("click", async () => {
+    const rows = window.PLSGE_TABLE?.state.rows || [];
+    const target = rows[0];
+    if (!target) {
+      toast.warning("Cree primero una plantilla de documento.");
+      return;
+    }
+    try {
+      const data = await api.post(`/api/document-templates/${target.id}/preview/`, {});
+      document.querySelector("[data-preview-content]").innerHTML =
+        escapeHtml(data.content || "La plantilla no tiene contenido.").replace(/\n/g, "<br>");
+      document.querySelector("[data-preview-card]").classList.remove("hidden");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

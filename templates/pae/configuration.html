@@ -1,0 +1,139 @@
+{% extends "layouts/dashboard.html" %}
+
+{% block title %}Configuracion del PAE{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="grid grid-4 mb-6">
+  <a class="stat-card" href="{% url 'pae:vigencias' %}">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Vigencias</span>
+      <span class="stat-card__icon">{% icon "calendar-check" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ pae_vigencias|length }}</div>
+    <div class="stat-card__meta">Calendario y metas del programa</div>
+  </a>
+
+  <a class="stat-card" href="{% url 'pae:normative' %}">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Normativa</span>
+      <span class="stat-card__icon">{% icon "book" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ normatives|length }}</div>
+    <div class="stat-card__meta">Versiones registradas</div>
+  </a>
+
+  <a class="stat-card" href="{% url 'pae:modalities' %}">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Modalidades</span>
+      <span class="stat-card__icon">{% icon "layers" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ modalities_count }}</div>
+    <div class="stat-card__meta">Formas de atencion parametrizadas</div>
+  </a>
+
+  <a class="stat-card" href="{% url 'pae:complement_types' %}">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Complementos</span>
+      <span class="stat-card__icon">{% icon "utensils" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ complements_count }}</div>
+    <div class="stat-card__meta">Tipos de complemento alimentario</div>
+  </a>
+</div>
+
+<div class="grid grid-sidebar">
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Catalogos parametrizables</div>
+        <div class="card__subtitle">
+          Listas configurables del programa. Se administran desde una sola pantalla, filtrando por tipo,
+          para no multiplicar tablas equivalentes.
+        </div>
+      </div>
+      <a class="btn btn--secondary btn--sm" href="{% url 'pae:catalogs' %}">
+        {% icon "settings" 15 %} Administrar
+      </a>
+    </div>
+    <div class="card__body card__body--flush">
+      <div class="table-wrap">
+        <table class="table table--compact">
+          <thead>
+            <tr><th>Catalogo</th><th style="width:120px" class="text-right">Elementos</th><th style="width:1%"></th></tr>
+          </thead>
+          <tbody>
+            {% for value, label in catalog_types %}
+              <tr>
+                <td class="cell-primary">{{ label }}</td>
+                <td class="text-right">
+                  <span class="badge badge--neutral">{{ catalog_counts|get_item:value|default:0 }}</span>
+                </td>
+                <td>
+                  <a class="icon-btn" href="{% url 'pae:catalogs' %}?catalog_type={{ value }}"
+                     title="Abrir catalogo">{% icon "chevron-right" 15 %}</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Normativa aplicable</div>
+        <div class="card__subtitle">Cada vigencia apunta a la norma que la rige</div>
+      </div>
+    </div>
+    <div class="card__body card__body--flush">
+      {% for norma in normatives %}
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle)">
+          <div class="row-between" style="gap:8px">
+            <span class="text-bold">{{ norma.code }}</span>
+            {% if norma.status == 'VIGENTE' %}
+              <span class="badge badge--success">Vigente</span>
+            {% elif norma.status == 'POR_VALIDAR' %}
+              <span class="badge badge--warning">Por validar</span>
+            {% else %}
+              <span class="badge badge--neutral">Derogada</span>
+            {% endif %}
+          </div>
+          <div class="text-xs text-muted mt-2">{{ norma.name }}</div>
+          <div class="text-xs text-muted">{{ norma.issuer }}{% if norma.issued_on %} &middot; {{ norma.issued_on|date:"d/m/Y" }}{% endif %}</div>
+        </div>
+      {% empty %}
+        <div class="empty-state">
+          <div class="empty-state__icon">{% icon "book" 24 %}</div>
+          <div class="empty-state__title">Sin normativa registrada</div>
+          <div class="empty-state__message">
+            Registre la norma aplicable para que los datos historicos conserven su version.
+          </div>
+        </div>
+      {% endfor %}
+      <div style="padding:12px 16px">
+        <a class="btn btn--secondary btn--block btn--sm" href="{% url 'pae:normative' %}">
+          {% icon "book" 15 %} Administrar normativa
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="alert alert--info mt-6">
+  {% icon "info" 18 %}
+  <div>
+    <div class="alert__title">Requisitos marcados como POR VALIDAR</div>
+    Los parametros normativos no estan codificados de forma rigida: se administran desde estos catalogos.
+    Cuando una exigencia no pueda confirmarse contra la norma publicada, registrela con estado
+    <span class="badge badge--warning">Por validar</span> y ajuste el valor sin modificar el software.
+  </div>
+</div>
+
+{% endblock %}

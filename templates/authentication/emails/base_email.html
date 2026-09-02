@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>{{ subject|default:"PL_SGE" }}</title></head>
+<body style="margin:0;padding:0;background:#f2f4f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#101828">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f2f4f7;padding:32px 16px">
+    <tr><td align="center">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e4e7ec">
+        <tr>
+          <td style="background:linear-gradient(135deg,#4F46E5,#312E81);padding:26px 28px;color:#ffffff">
+            <div style="font-size:18px;font-weight:700;letter-spacing:-0.02em">{{ app.NAME }}</div>
+            <div style="font-size:12px;opacity:.8">{{ app.LONG_NAME }}</div>
+          </td>
+        </tr>
+        <tr><td style="padding:30px 28px">{% block content %}{% endblock %}</td></tr>
+        <tr>
+          <td style="padding:18px 28px;background:#f9fafb;border-top:1px solid #e4e7ec;font-size:11px;color:#667085">
+            Este es un mensaje automatico de {{ app.NAME }}. Por favor no responda a este correo.<br>
+            Soporte: {{ app.SUPPORT_EMAIL }}
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

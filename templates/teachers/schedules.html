@@ -1,0 +1,13 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_before %}
+<div class="alert alert--warning mb-6">
+  {% icon "clock" 18 %}
+  <div>
+    <div class="alert__title">Validacion automatica de cruces</div>
+    La plataforma impide asignar dos clases al mismo docente en el mismo dia y franja horaria.
+    Si intenta guardar un cruce, el sistema mostrara el conflicto en el formulario.
+  </div>
+</div>
+{% endblock %}

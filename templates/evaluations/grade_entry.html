@@ -1,0 +1,113 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Asignacion de Notas{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-manage-processes>
+    {% icon "plus" 15 %} Nuevo proceso
+  </button>
+  <button class="btn btn--secondary btn--sm" type="button" data-consolidate>
+    {% icon "refresh" 15 %} Consolidar grupo
+  </button>
+  <button class="btn btn--primary btn--sm" type="button" data-save-sheet disabled>
+    {% icon "save" 15 %} Guardar notas
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-6">
+        <label class="field__label" for="assignment">Asignacion academica <span class="required">*</span></label>
+        <select class="select" id="assignment" data-assignment>
+          <option value="">Seleccione asignatura y grupo</option>
+          {% for assignment in assignments %}
+            <option value="{{ assignment.id }}">
+              {{ assignment.group.grade.name }} - {{ assignment.group.name }} &middot; {{ assignment.subject.name }}
+              {% if not user.role_code == "DOCENTE" %}({{ assignment.teacher.full_name }}){% endif %}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label" for="period">Periodo <span class="required">*</span></label>
+        <select class="select" id="period" data-period>
+          {% for period in periods %}
+            <option value="{{ period.id }}" {% if period.is_current %}selected{% endif %}>{{ period.name }}</option>
+          {% empty %}
+            <option value="">Sin periodos configurados</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-3">
+        <label class="field__label">&nbsp;</label>
+        <button class="btn btn--secondary btn--block" type="button" data-load-sheet>
+          {% icon "search" 16 %} Cargar planilla
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-5 mb-6 hidden" data-stats>
+  <div class="stat-card">
+    <div class="stat-card__label">Estudiantes</div>
+    <div class="stat-card__value" data-stat-total>0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__label">Promedio</div>
+    <div class="stat-card__value" data-stat-average>0.0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__label">Aprobados</div>
+    <div class="stat-card__value text-success" data-stat-passing>0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__label">Reprobados</div>
+    <div class="stat-card__value text-danger" data-stat-failing>0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__label">Tasa de aprobacion</div>
+    <div class="stat-card__value" data-stat-rate>0%</div>
+  </div>
+</div>
+
+<div data-sheet-alert></div>
+
+<div class="card">
+  <div class="table-toolbar">
+    <div class="input-group">
+      <span class="input-group__icon">{% icon "search" 16 %}</span>
+      <input class="input" type="search" placeholder="Filtrar estudiante..." data-filter-student>
+    </div>
+    <div class="spacer"></div>
+    <div class="row" data-sheet-meta></div>
+  </div>
+  <div class="table-wrap" style="max-height:66vh">
+    <table class="grade-sheet" data-sheet>
+      <thead data-sheet-head></thead>
+      <tbody data-sheet-body>
+        <tr><td class="text-center text-muted" style="padding:48px">
+          Seleccione una asignacion academica y presione <strong>Cargar planilla</strong>.
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-footer">
+    <div class="text-xs text-muted">
+      Use <kbd>Enter</kbd> o las flechas para desplazarse entre celdas. Los cambios se marcan hasta guardar.
+    </div>
+    <div class="row">
+      <span class="badge badge--warning hidden" data-pending-badge>Cambios sin guardar</span>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/grades.js' %}"></script>
+{% endblock %}

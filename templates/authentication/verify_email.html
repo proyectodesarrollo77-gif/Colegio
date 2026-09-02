@@ -1,0 +1,28 @@
+{% extends "layouts/auth.html" %}
+{% block title %}Verificacion de correo{% endblock %}
+
+{% block auth_content %}
+<div class="auth-card__header">
+  <h1 class="auth-card__title">Verificacion de correo</h1>
+</div>
+
+{% if valid %}
+  <div class="alert alert--success mb-4">
+    {% icon "check" 18 %}
+    <div>
+      <div class="alert__title">Correo verificado</div>
+      La direccion <strong>{{ user_email }}</strong> quedo confirmada correctamente.
+    </div>
+  </div>
+{% else %}
+  <div class="alert alert--danger mb-4">
+    {% icon "alert-triangle" 18 %}
+    <div>
+      <div class="alert__title">Enlace invalido</div>
+      El enlace de verificacion no es valido o ya expiro.
+    </div>
+  </div>
+{% endif %}
+
+<a class="btn btn--primary btn--block" href="{% url 'authentication:login' %}">Ir al inicio de sesion</a>
+{% endblock %}

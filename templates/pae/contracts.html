@@ -1,0 +1,34 @@
+{% extends "pae/resource.html" %}
+{% load static %}
+
+{% block pae_before %}
+  <div data-contract-alerts class="mb-4"></div>
+{% endblock %}
+
+{% block pae_js %}
+<script type="module">
+  import { api, escapeHtml, icon } from "{% static 'js/app.js' %}";
+
+  const slot = document.querySelector("[data-contract-alerts]");
+
+  api.get("/api/pae/contratos/expiring/", { days: 30 })
+    .then((data) => {
+      const rows = data.results || [];
+      if (!rows.length) return;
+      slot.innerHTML = `<div class="alert alert--warning">
+        ${icon("clock", 18)}
+        <div>
+          <div class="alert__title">${rows.length} contrato(s) proximo(s) a vencer</div>
+          ${rows
+            .map(
+              (row) =>
+                `<div class="text-sm">${escapeHtml(row.number || "")} &middot;
+                 ${escapeHtml(row.operator_name || "")} &middot; vence ${escapeHtml(row.end_date || "")}</div>`
+            )
+            .join("")}
+        </div>
+      </div>`;
+    })
+    .catch(() => {});
+</script>
+{% endblock %}

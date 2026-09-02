@@ -1,0 +1,21 @@
+{% extends "pae/resource.html" %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:prioritization' %}">
+    {% icon "target" 15 %} Priorizacion
+  </a>
+  <a class="btn btn--secondary btn--sm" href="{% url 'pae:import' %}">
+    {% icon "upload" 15 %} Importar
+  </a>
+{% endblock %}
+
+{% block pae_before %}
+  <div class="alert alert--info mb-4">
+    {% icon "info" 18 %}
+    <div>
+      Los datos personales del beneficiario provienen del modulo de Estudiantes y su matricula vigente:
+      el PAE solo registra la vinculacion al programa, el criterio de focalizacion y el estado.
+      Un estudiante no puede quedar vinculado dos veces en la misma vigencia.
+    </div>
+  </div>
+{% endblock %}

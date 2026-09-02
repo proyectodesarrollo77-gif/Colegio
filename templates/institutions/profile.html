@@ -1,0 +1,87 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Datos Institucionales{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'institutions:campuses' %}">
+    {% icon "building" 15 %} Sedes y jornadas
+  </a>
+  <button class="btn btn--primary btn--sm" type="submit" form="institution-form">
+    {% icon "save" 15 %} Guardar cambios
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" id="institution-form">
+  {% csrf_token %}
+
+  <div class="grid grid-sidebar">
+    <div class="stack">
+      {% include "institutions/_form_fields.html" %}
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <div class="card__header"><div class="card__title">Identidad visual</div></div>
+        <div class="card__body" style="text-align:center">
+          {% if entity.logo %}
+            <img src="{{ entity.logo.url }}" alt="Logo" style="max-height:110px;margin:0 auto 14px">
+          {% else %}
+            <div class="empty-state__icon" style="margin:0 auto 14px">{% icon "building" 24 %}</div>
+          {% endif %}
+          <div class="field">
+            <label class="field__label" for="logo">Logotipo</label>
+            <input class="input" type="file" id="logo" name="logo" accept="image/*" style="padding-top:7px">
+          </div>
+          <div class="field mt-3">
+            <label class="field__label" for="seal">Sello institucional</label>
+            <input class="input" type="file" id="seal" name="seal" accept="image/*" style="padding-top:7px">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <div style="flex:1"><div class="card__title">Sedes</div></div>
+          <a class="btn btn--ghost btn--sm" href="{% url 'institutions:campuses' %}">Administrar</a>
+        </div>
+        <div class="card__body card__body--flush">
+          <div class="stack" style="gap:0">
+            {% for campus in campuses %}
+              <div style="padding:12px 18px;border-bottom:1px solid var(--border-subtle)">
+                <div class="row-between">
+                  <div style="min-width:0">
+                    <div class="text-sm text-bold truncate">{{ campus.name }}</div>
+                    <div class="text-xs text-muted truncate">{{ campus.address|default:"Sin direccion" }}</div>
+                  </div>
+                  {% if campus.is_main %}<span class="badge badge--brand">Principal</span>{% endif %}
+                </div>
+              </div>
+            {% empty %}
+              <div class="text-sm text-muted" style="padding:18px">Sin sedes registradas.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header"><div class="card__title">Jornadas</div></div>
+        <div class="card__body">
+          <div class="row row-wrap" style="gap:8px">
+            {% for shift in shifts %}
+              <span class="chip">{{ shift.name }}
+                {% if shift.start_time %}({{ shift.start_time|time:"H:i" }} - {{ shift.end_time|time:"H:i" }}){% endif %}
+              </span>
+            {% empty %}
+              <span class="text-sm text-muted">Sin jornadas registradas.</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

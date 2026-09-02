@@ -1,0 +1,40 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Resultados Electorales{% endblock %}
+
+{% block page_actions %}
+  <button class="btn btn--primary btn--sm" type="button" data-consolidate-results>
+    {% icon "refresh" 15 %} Consolidar escrutinio
+  </button>
+{% endblock %}
+
+{% block content %}
+{% if not elections %}
+  <div class="card">
+    <div class="empty-state">
+      <div class="empty-state__icon">{% icon "bar-chart" 26 %}</div>
+      <div class="empty-state__title">Sin procesos electorales</div>
+      <div class="empty-state__message">Configure un proceso electoral para consultar sus resultados.</div>
+    </div>
+  </div>
+{% else %}
+  <div class="card mb-6">
+    <div class="card__body">
+      <div class="field">
+        <label class="field__label" for="election-results">Proceso electoral</label>
+        <select class="select" id="election-results" data-election-results>
+          {% for election in elections %}
+            <option value="{{ election.id }}">{{ election.name }} - {{ election.get_status_display }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div data-results></div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/modules/elections.js' %}"></script>
+{% endblock %}

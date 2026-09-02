@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+
+{% block body_class %}auth-body{% endblock %}
+
+{% block body %}
+<div class="auth-shell">
+  <aside class="auth-aside">
+    <div class="auth-brand">
+      <span class="auth-brand__mark">{% if institution.logo %}<img src="{{ institution.logo.url }}" alt="">{% else %}P{% endif %}</span>
+      <span>{{ APP.NAME }}</span>
+    </div>
+
+    <div class="auth-hero">
+      <h1>{% block hero_title %}Gestion academica sin friccion{% endblock %}</h1>
+      <p>{% block hero_text %}Centralice matriculas, calificaciones, convivencia, boletines y comunicacion institucional en una sola plataforma segura.{% endblock %}</p>
+
+      <div class="auth-features">
+        <div class="auth-feature">
+          <span class="auth-feature__icon">{% icon "shield-check" 16 %}</span>
+          <span>Autenticacion con doble factor y auditoria completa</span>
+        </div>
+        <div class="auth-feature">
+          <span class="auth-feature__icon">{% icon "clipboard-check" 16 %}</span>
+          <span>Digitacion de notas, boletines y promocion automatizada</span>
+        </div>
+        <div class="auth-feature">
+          <span class="auth-feature__icon">{% icon "users" 16 %}</span>
+          <span>Perfiles y permisos configurables por modulo y accion</span>
+        </div>
+        <div class="auth-feature">
+          <span class="auth-feature__icon">{% icon "bar-chart" 16 %}</span>
+          <span>Reportes academicos y estadisticos exportables</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-footnote">
+      {{ institution.name|default:APP.LONG_NAME }} &middot; {{ APP.NAME }} v{{ APP.VERSION }} &middot; {{ APP.VENDOR }}
+    </div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      {% block auth_content %}{% endblock %}
+    </div>
+  </main>
+</div>
+{% endblock %}

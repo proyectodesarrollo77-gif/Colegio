@@ -1,0 +1,186 @@
+{% comment %}
+Campos de la institucion. Se usa en tres lugares para que el formulario sea
+identico en todos: Datos Institucionales, crear una institucion nueva y
+modificar una existente desde el Panel de Instituciones.
+
+Contexto esperado:
+  entity           institucion a editar, o None para un formulario en blanco
+  nature_choices   opciones de naturaleza
+  calendar_choices opciones de calendario
+{% endcomment %}
+
+      <div class="card">
+        <div class="card__header">
+          <span class="page-header__icon" style="width:32px;height:32px">{% icon "building" 16 %}</span>
+          <div style="flex:1">
+            <div class="card__title">Identificacion institucional</div>
+            <div class="card__subtitle">Informacion oficial usada en boletines, certificados y actas</div>
+          </div>
+        </div>
+        <div class="card__body">
+          <div class="form-grid">
+            <div class="field col-8">
+              <label class="field__label" for="name">Nombre de la institucion <span class="required">*</span></label>
+              <input class="input" id="name" name="name" value="{{ entity.name|default:'' }}" required>
+            </div>
+            <div class="field col-4">
+              <label class="field__label" for="short_name">Nombre corto</label>
+              <input class="input" id="short_name" name="short_name" value="{{ entity.short_name|default:'' }}">
+            </div>
+            <div class="field col-4">
+              <label class="field__label" for="code">Codigo DANE <span class="required">*</span></label>
+              <input class="input" id="code" name="code" value="{{ entity.code|default:'' }}" required>
+            </div>
+            <div class="field col-4">
+              <label class="field__label" for="nit">NIT</label>
+              <input class="input" id="nit" name="nit" value="{{ entity.nit|default:'' }}">
+            </div>
+            <div class="field col-4">
+              <label class="field__label" for="nature">Naturaleza</label>
+              <select class="select" id="nature" name="nature">
+                {% for value, label in nature_choices %}
+                  <option value="{{ value }}" {% if entity.nature == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field col-12">
+              <label class="field__label" for="resolution">Resolucion de aprobacion</label>
+              <input class="input" id="resolution" name="resolution" value="{{ entity.resolution|default:'' }}">
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="calendar">Calendario</label>
+              <select class="select" id="calendar" name="calendar">
+                {% for value, label in calendar_choices %}
+                  <option value="{{ value }}" {% if entity.calendar == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="country">Pais</label>
+              <input class="input" id="country" name="country" value="{{ entity.country|default:'Colombia' }}">
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="department">Departamento</label>
+              <input class="input" id="department" name="department" value="{{ entity.department|default:'' }}">
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="city">Ciudad</label>
+              <input class="input" id="city" name="city" value="{{ entity.city|default:'' }}">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="address">Direccion</label>
+              <input class="input" id="address" name="address" value="{{ entity.address|default:'' }}">
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="phone">Telefono</label>
+              <input class="input" id="phone" name="phone" value="{{ entity.phone|default:'' }}">
+            </div>
+            <div class="field col-3">
+              <label class="field__label" for="email">Correo institucional</label>
+              <input class="input" type="email" id="email" name="email" value="{{ entity.email|default:'' }}">
+            </div>
+            <div class="field col-12">
+              <label class="field__label" for="website">Sitio web</label>
+              <input class="input" id="website" name="website" value="{{ entity.website|default:'' }}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <span class="page-header__icon" style="width:32px;height:32px">{% icon "user" 16 %}</span>
+          <div style="flex:1">
+            <div class="card__title">Firmas autorizadas</div>
+            <div class="card__subtitle">Aparecen al pie de los documentos generados</div>
+          </div>
+        </div>
+        <div class="card__body">
+          <div class="form-grid">
+            <div class="field col-6">
+              <label class="field__label" for="rector_name">Nombre del rector</label>
+              <input class="input" id="rector_name" name="rector_name" value="{{ entity.rector_name|default:'' }}">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="rector_document">Documento del rector</label>
+              <input class="input" id="rector_document" name="rector_document" value="{{ entity.rector_document|default:'' }}">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="rector_signature">Firma del rector</label>
+              <input class="input" type="file" id="rector_signature" name="rector_signature" accept="image/*" style="padding-top:7px">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="secretary_name">Nombre de secretaria</label>
+              <input class="input" id="secretary_name" name="secretary_name" value="{{ entity.secretary_name|default:'' }}">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="secretary_signature">Firma de secretaria</label>
+              <input class="input" type="file" id="secretary_signature" name="secretary_signature" accept="image/*" style="padding-top:7px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <span class="page-header__icon" style="width:32px;height:32px">{% icon "sparkles" 16 %}</span>
+          <div style="flex:1">
+            <div class="card__title">Identidad y horizonte institucional</div>
+          </div>
+        </div>
+        <div class="card__body">
+          <div class="form-grid">
+            <div class="field col-12">
+              <label class="field__label" for="motto">Lema</label>
+              <input class="input" id="motto" name="motto" value="{{ entity.motto|default:'' }}">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="mission">Mision</label>
+              <textarea class="textarea" id="mission" name="mission" rows="5">{{ entity.mission|default:'' }}</textarea>
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="vision">Vision</label>
+              <textarea class="textarea" id="vision" name="vision" rows="5">{{ entity.vision|default:'' }}</textarea>
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="primary_color">Color primario</label>
+              <input class="input" type="color" id="primary_color" name="primary_color"
+                     value="{{ entity.primary_color|default:'#4F46E5' }}" style="padding:4px;height:38px">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="accent_color">Color de acento</label>
+              <input class="input" type="color" id="accent_color" name="accent_color"
+                     value="{{ entity.accent_color|default:'#0EA5E9' }}" style="padding:4px;height:38px">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="card">
+        <div class="card__header">
+          <span class="page-header__icon" style="width:32px;height:32px">{% icon "sparkles" 16 %}</span>
+          <div style="flex:1">
+            <div class="card__title">Identidad visual</div>
+            <div class="card__subtitle">Se usan en el encabezado de boletines y certificados</div>
+          </div>
+        </div>
+        <div class="card__body">
+          <div class="form-grid">
+            <div class="field col-6">
+              <label class="field__label" for="logo">Logotipo</label>
+              {% if entity and entity.logo %}
+                <img src="{{ entity.logo.url }}" alt="Logo actual" style="max-height:70px;margin-bottom:8px">
+              {% endif %}
+              <input class="input" type="file" id="logo" name="logo" accept="image/*" style="padding-top:7px">
+            </div>
+            <div class="field col-6">
+              <label class="field__label" for="seal">Sello institucional</label>
+              {% if entity and entity.seal %}
+                <img src="{{ entity.seal.url }}" alt="Sello actual" style="max-height:70px;margin-bottom:8px">
+              {% endif %}
+              <input class="input" type="file" id="seal" name="seal" accept="image/*" style="padding-top:7px">
+            </div>
+          </div>
+        </div>
+      </div>

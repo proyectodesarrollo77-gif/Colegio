@@ -1,0 +1,252 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Hoja de vida - {{ student.display_name }}{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'students:resume' %}">
+    {% icon "arrow-left" 15 %} Buscar otro
+  </a>
+  <button class="btn btn--secondary btn--sm" type="button" onclick="window.print()">
+    {% icon "printer" 15 %} Imprimir
+  </button>
+  <a class="btn btn--primary btn--sm" href="{% url 'students:certificates' %}">
+    {% icon "file-text" 15 %} Emitir certificado
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-sidebar">
+  <div class="stack">
+    <!-- Identificacion -->
+    <div class="card">
+      <div class="card__body">
+        <div class="row" style="gap:18px;align-items:flex-start">
+          <span class="avatar avatar--xl">
+            {% if student.photo %}<img src="{{ student.photo.url }}" alt="">{% else %}{{ student.first_name|slice:":1" }}{{ student.last_name|slice:":1" }}{% endif %}
+          </span>
+          <div style="flex:1;min-width:0">
+            <h2 style="font-size:var(--text-xl)">{{ student.display_name }}</h2>
+            <div class="text-sm text-muted">
+              {{ student.get_document_type_display }} {{ student.document_number }} &middot;
+              Codigo {{ student.student_code }}
+            </div>
+            <div class="row row-wrap mt-3" style="gap:8px">
+              <span class="badge badge--brand">{{ student.current_group.grade.name|default:"Sin grado" }}</span>
+              <span class="badge badge--neutral">{{ student.current_group.name|default:"Sin grupo" }}</span>
+              {% if student.status == "ACTIVO" %}
+                <span class="badge badge--success"><span class="badge__dot"></span>{{ student.get_status_display }}</span>
+              {% else %}
+                <span class="badge badge--warning"><span class="badge__dot"></span>{{ student.get_status_display }}</span>
+              {% endif %}
+              {% if student.age %}<span class="badge badge--info">{{ student.age }} anos</span>{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card__footer" style="justify-content:space-around;flex-wrap:wrap;gap:16px">
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Promedio general</div>
+          <div class="text-lg text-bold">{{ summary.average }}</div>
+        </div>
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Asignaturas perdidas</div>
+          <div class="text-lg text-bold {% if summary.failed_subjects %}text-danger{% endif %}">{{ summary.failed_subjects }}</div>
+        </div>
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Matriculas</div>
+          <div class="text-lg text-bold">{{ enrollments|length }}</div>
+        </div>
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Observaciones</div>
+          <div class="text-lg text-bold">{{ observer_entries|length }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestanas -->
+    <div data-tabs>
+      <div class="tabs">
+        <button class="tab is-active" data-tab="academico" type="button">Academico</button>
+        <button class="tab" data-tab="matriculas" type="button">Matriculas</button>
+        <button class="tab" data-tab="observador" type="button">Observador</button>
+        <button class="tab" data-tab="documentos" type="button">Documentos</button>
+      </div>
+
+      <div class="tab-panel is-active" data-tab-panel="academico">
+        <div class="card">
+          <div class="card__header"><div class="card__title">Promedio por area</div></div>
+          <div class="card__body">
+            {% for area in summary.areas %}
+              <div class="meter-row">
+                <div class="meter-row__label truncate">{{ area.area }}</div>
+                <div class="progress" style="flex:1">
+                  <div class="progress__bar {% if area.average < 3 %}progress__bar--danger{% elif area.average < 4 %}progress__bar--warning{% else %}progress__bar--success{% endif %}"
+                       style="width:{% widthratio area.average 5 100 %}%"></div>
+                </div>
+                <div class="meter-row__value">{{ area.average }}</div>
+              </div>
+            {% empty %}
+              <div class="text-sm text-muted">Aun no hay notas registradas para este estudiante.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="matriculas">
+        <div class="card">
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table table--stack">
+                <thead><tr>
+                  <th>Ano lectivo</th><th>Grado</th><th>Grupo</th><th>N. matricula</th><th>Fecha</th><th>Estado</th>
+                </tr></thead>
+                <tbody>
+                  {% for enrollment in enrollments %}
+                    <tr>
+                      <td class="cell-primary">{{ enrollment.school_year.name }}</td>
+                      <td>{{ enrollment.group.grade.name }}</td>
+                      <td>{{ enrollment.group.name }}</td>
+                      <td class="text-mono">{{ enrollment.enrollment_number }}</td>
+                      <td>{{ enrollment.enrollment_date|date:"d M Y" }}</td>
+                      <td>
+                        {% if enrollment.status == "ACTIVA" %}
+                          <span class="badge badge--success">{{ enrollment.get_status_display }}</span>
+                        {% else %}
+                          <span class="badge badge--neutral">{{ enrollment.get_status_display }}</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% empty %}
+                    <tr><td colspan="6" class="text-muted text-center" style="padding:28px">Sin matriculas registradas.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="observador">
+        <div class="card">
+          <div class="card__body">
+            <div class="timeline">
+              {% for entry in observer_entries %}
+                <div class="timeline__item">
+                  <span class="timeline__dot" style="border-color:{{ entry.category.color }}"></span>
+                  <div class="timeline__title">{{ entry.category.name }}</div>
+                  <div class="timeline__meta">
+                    {{ entry.date|date:"d M Y" }} &middot; {{ entry.get_status_display }}
+                    {% if entry.place %}&middot; {{ entry.place }}{% endif %}
+                  </div>
+                  <div class="text-sm text-secondary mt-2">{{ entry.description|truncatewords:40 }}</div>
+                </div>
+              {% empty %}
+                <div class="text-sm text-muted">Sin anotaciones en el observador.</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="documentos">
+        <div class="card">
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table table--stack">
+                <thead><tr><th>Documento</th><th>Tipo</th><th>Verificado</th><th>Fecha</th><th></th></tr></thead>
+                <tbody>
+                  {% for document in documents %}
+                    <tr>
+                      <td class="cell-primary">{{ document.name }}</td>
+                      <td>{{ document.get_kind_display }}</td>
+                      <td>
+                        {% if document.is_verified %}
+                          <span class="badge badge--success">Verificado</span>
+                        {% else %}
+                          <span class="badge badge--warning">Pendiente</span>
+                        {% endif %}
+                      </td>
+                      <td>{{ document.created_at|date:"d M Y" }}</td>
+                      <td class="cell-actions">
+                        {% if document.file %}
+                          <a class="btn btn--ghost btn--sm" href="{{ document.file.url }}" target="_blank" rel="noopener">
+                            {% icon "download" 14 %}
+                          </a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% empty %}
+                    <tr><td colspan="5" class="text-muted text-center" style="padding:28px">Sin documentos anexos.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel lateral -->
+  <div class="stack">
+    <div class="card">
+      <div class="card__header"><div class="card__title">Contacto</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:12px">
+          <div><div class="text-xs text-muted">Correo</div><div class="text-sm">{{ student.email|default:"-" }}</div></div>
+          <div><div class="text-xs text-muted">Celular</div><div class="text-sm">{{ student.mobile|default:"-" }}</div></div>
+          <div><div class="text-xs text-muted">Direccion</div><div class="text-sm">{{ student.address|default:"-" }}</div></div>
+          <div><div class="text-xs text-muted">Ciudad</div><div class="text-sm">{{ student.city|default:"-" }}</div></div>
+          <div><div class="text-xs text-muted">EPS</div><div class="text-sm">{{ student.eps|default:"-" }}</div></div>
+          <div><div class="text-xs text-muted">Grupo sanguineo</div><div class="text-sm">{{ student.blood_type|default:"-" }}</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Acudientes</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:14px">
+          {% for link in guardians %}
+            <div class="row" style="gap:10px">
+              <span class="avatar avatar--sm">{{ link.guardian.first_name|slice:":1" }}{{ link.guardian.last_name|slice:":1" }}</span>
+              <div style="min-width:0;flex:1">
+                <div class="text-sm text-bold truncate">{{ link.guardian.full_name }}</div>
+                <div class="text-xs text-muted">
+                  {{ link.guardian.get_relation_display }}
+                  {% if link.is_primary %}&middot; Principal{% endif %}
+                </div>
+                <div class="text-xs text-muted">{{ link.guardian.mobile }} &middot; {{ link.guardian.email }}</div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="text-sm text-muted">Sin acudientes registrados.</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Certificados emitidos</div></div>
+      <div class="card__body card__body--flush">
+        <div class="stack" style="gap:0">
+          {% for certificate in certificates %}
+            <a class="dropdown__item" href="{% url 'students:certificate_print' certificate.pk %}">
+              {% icon "file-text" 15 %}
+              <span style="flex:1;min-width:0">
+                <span class="truncate" style="display:block">{{ certificate.get_kind_display }}</span>
+                <span class="text-xs text-muted">{{ certificate.consecutive }} &middot; {{ certificate.issued_at|date:"d M Y" }}</span>
+              </span>
+            </a>
+          {% empty %}
+            <div class="text-sm text-muted" style="padding:16px">Sin certificados emitidos.</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

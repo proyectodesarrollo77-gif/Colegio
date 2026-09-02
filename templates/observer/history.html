@@ -1,0 +1,150 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Historial Estudiantil{% endblock %}
+
+{% block content %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-8">
+        <label class="field__label" for="student-search">Estudiante</label>
+        <div class="input-group">
+          <span class="input-group__icon">{% icon "search" 16 %}</span>
+          <input class="input" id="student-search" data-student-search
+                 placeholder="Buscar por nombre o documento (minimo 3 caracteres)">
+        </div>
+      </div>
+      <div class="field col-4">
+        <label class="field__label">&nbsp;</label>
+        <select class="select" data-student-select disabled>
+          <option value="">Seleccione un estudiante</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-sidebar">
+  <div class="card">
+    <div class="card__header">
+      <span class="page-header__icon" style="width:32px;height:32px">{% icon "activity" 16 %}</span>
+      <div style="flex:1">
+        <div class="card__title">Linea de tiempo</div>
+        <div class="card__subtitle" data-timeline-subtitle>Seleccione un estudiante para ver su historial</div>
+      </div>
+    </div>
+    <div class="card__body">
+      <div data-timeline>
+        <div class="empty-state" style="padding:44px 0">
+          <div class="empty-state__icon">{% icon "eye" 24 %}</div>
+          <div class="empty-state__title">Historial disciplinario</div>
+          <div class="empty-state__message">
+            Consulte todas las anotaciones, seguimientos y compromisos registrados de un estudiante.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stack">
+    <div class="card">
+      <div class="card__header"><div class="card__title">Resumen</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:12px" data-summary>
+          <div class="text-sm text-muted">Sin datos.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Tipificacion</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:10px">
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#F59E0B"></span>Tipo I - Leve</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#EF4444"></span>Tipo II - Grave</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#991B1B"></span>Tipo III - Gravisima</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#10B981"></span>Reconocimiento</div>
+          <div class="chart-legend__item"><span class="chart-legend__swatch" style="background:#0EA5E9"></span>Academica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $, api, debounce, escapeHtml, formatDate, icon, toast } from "{% static 'js/app.js' %}";
+
+  const select = $("[data-student-select]");
+
+  const search = debounce(async (term) => {
+    if (term.length < 3) return;
+    try {
+      const data = await api.get("/api/students/", { search: term, page_size: 30 });
+      select.innerHTML = '<option value="">Seleccione un estudiante</option>' +
+        (data.results || []).map((student) =>
+          `<option value="${student.id}">${escapeHtml(student.display_name)} - ${escapeHtml(student.document_number)}</option>`
+        ).join("");
+      select.disabled = false;
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, 380);
+
+  async function loadHistory(studentId) {
+    const timeline = $("[data-timeline]");
+    timeline.innerHTML = '<div class="text-center" style="padding:44px"><span class="spinner spinner--lg"></span></div>';
+    try {
+      const data = await api.get("/api/observer-entries/", { student: studentId, page_size: 100 });
+      const rows = data.results || [];
+      const label = select.options[select.selectedIndex]?.text || "";
+      $("[data-timeline-subtitle]").textContent = `${label} · ${rows.length} anotaciones`;
+
+      timeline.innerHTML = rows.length
+        ? `<div class="timeline">${rows.map((entry) => `
+            <div class="timeline__item">
+              <span class="timeline__dot" style="border-color:${entry.severity === "POSITIVA" ? "#10B981" : "#EF4444"}"></span>
+              <div class="timeline__title">${escapeHtml(entry.category_name)}</div>
+              <div class="timeline__meta">
+                ${escapeHtml(formatDate(entry.date))} · ${escapeHtml(entry.severity_display)}
+                ${entry.place ? ` · ${escapeHtml(entry.place)}` : ""} · ${escapeHtml(entry.reported_by_name || "")}
+              </div>
+              <div class="text-sm text-secondary mt-2">${escapeHtml(entry.description)}</div>
+              ${entry.commitments ? `<div class="alert alert--neutral mt-2"><div class="text-xs"><strong>Compromisos:</strong> ${escapeHtml(entry.commitments)}</div></div>` : ""}
+              ${(entry.follow_ups || []).map((followUp) => `
+                <div class="text-xs text-muted mt-2">${icon("chevron-right", 12)} Seguimiento ${escapeHtml(formatDate(followUp.date))}: ${escapeHtml(followUp.description)}</div>
+              `).join("")}
+            </div>`).join("")}</div>`
+        : `<div class="empty-state" style="padding:40px 0">
+             <div class="empty-state__icon">${icon("check", 22)}</div>
+             <div class="empty-state__title">Sin anotaciones</div>
+             <div class="empty-state__message">Este estudiante no registra observaciones en el observador.</div>
+           </div>`;
+
+      const bySeverity = {};
+      rows.forEach((row) => {
+        bySeverity[row.severity_display] = (bySeverity[row.severity_display] || 0) + 1;
+      });
+      $("[data-summary]").innerHTML = `
+        <div class="row-between"><span class="text-sm text-secondary">Total anotaciones</span>
+          <strong class="text-sm">${rows.length}</strong></div>
+        ${Object.entries(bySeverity).map(([key, value]) => `
+          <div class="row-between"><span class="text-sm text-secondary">${escapeHtml(key)}</span>
+            <strong class="text-sm">${value}</strong></div>`).join("")}
+        <div class="row-between"><span class="text-sm text-secondary">Abiertas</span>
+          <strong class="text-sm text-warning">${rows.filter((row) => row.status === "ABIERTA").length}</strong></div>`;
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  $("[data-student-search]")?.addEventListener("input", (event) => search(event.target.value.trim()));
+  select?.addEventListener("change", () => {
+    if (select.value) loadHistory(select.value);
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "pae/resource.html" %}
+
+{% block pae_before %}
+  <div class="card mb-4">
+    <div class="card__body" style="padding:12px 18px">
+      <div class="row-wrap" style="gap:10px;align-items:center">
+        <span class="text-xs text-muted">Ciclo de la novedad</span>
+        <span class="badge badge--warning">Reportada</span>
+        {% icon "arrow-right" 13 %}
+        <span class="badge badge--info">Asignada</span>
+        {% icon "arrow-right" 13 %}
+        <span class="badge badge--info">En investigacion</span>
+        {% icon "arrow-right" 13 %}
+        <span class="badge badge--brand">En correccion</span>
+        {% icon "arrow-right" 13 %}
+        <span class="badge badge--success">Solucionada</span>
+        {% icon "arrow-right" 13 %}
+        <span class="badge badge--neutral">Cerrada</span>
+        <span class="spacer"></span>
+        <span class="text-xs text-muted">
+          Para cerrar se exige causa raiz, accion correctiva y evidencia registrada.
+        </span>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{ certificate.get_kind_display }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  <div class="print-sheet">
+    {% include "partials/print_header.html" %}
+
+    <div class="print-title">{{ certificate.get_kind_display }}</div>
+    <div class="text-right" style="font-size:11px;color:#555;margin-bottom:14px">
+      No. {{ certificate.consecutive }}
+    </div>
+
+    <div class="print-body">
+      {% if certificate.content %}
+        {{ certificate.content|linebreaks }}
+      {% else %}
+        <p>
+          El suscrito Rector de la institucion {{ institution.name }} hace constar que el(la) estudiante
+          <strong>{{ certificate.student.display_name|upper }}</strong>, identificado(a) con
+          {{ certificate.student.get_document_type_display }} No. {{ certificate.student.document_number }},
+          se encuentra registrado(a) en la base de datos institucional.
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="print-signatures">
+      <div class="print-signature">
+        {% if institution.rector_signature %}
+          <img src="{{ institution.rector_signature.url }}" alt="" style="height:46px;margin:0 auto">
+        {% endif %}
+        <div class="print-signature__line"><strong>{{ institution.rector_name }}</strong><br>Rector(a)</div>
+      </div>
+      <div class="print-signature">
+        <div class="print-signature__line"><strong>{{ institution.secretary_name }}</strong><br>Secretaria academica</div>
+      </div>
+    </div>
+
+    <div class="print-footer">
+      Codigo de verificacion: <strong>{{ certificate.verification_code }}</strong> &middot;
+      Expedido el {{ certificate.issued_at|date:"d/m/Y" }} en {{ institution.city }}
+    </div>
+  </div>
+</div>
+{% endblock %}

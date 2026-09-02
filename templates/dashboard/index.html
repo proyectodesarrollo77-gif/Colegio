@@ -1,0 +1,204 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--secondary btn--sm" href="{% url 'reports:statistics' %}">
+    {% icon "bar-chart" 15 %} Ver estadisticas
+  </a>
+  <button class="btn btn--secondary btn--sm" type="button" data-dashboard-refresh>
+    {% icon "refresh" 15 %} Actualizar
+  </button>
+{% endblock %}
+
+{% block content %}
+
+<!-- ============ Alertas institucionales ============ -->
+<div class="stack mb-6" data-alerts></div>
+
+<!-- ============ Indicadores ============ -->
+<div class="grid grid-3 mb-6" data-kpi-grid>
+  {% for i in "123456" %}
+    <div class="stat-card">
+      <div class="stat-card__top">
+        <div class="skeleton" style="width:110px"></div>
+        <div class="skeleton" style="width:36px;height:36px;border-radius:8px"></div>
+      </div>
+      <div class="skeleton" style="width:80px;height:28px;margin-bottom:10px"></div>
+      <div class="skeleton" style="width:130px"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- ============ Accesos rapidos ============ -->
+<div class="card mb-6">
+  <div class="card__header">
+    <span class="page-header__icon" style="width:32px;height:32px">{% icon "sparkles" 16 %}</span>
+    <div style="flex:1">
+      <div class="card__title">Accesos rapidos</div>
+      <div class="card__subtitle">Acciones frecuentes segun su perfil {{ user.role_name }}</div>
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="grid grid-4" data-quick-actions></div>
+  </div>
+</div>
+
+<!-- ============ Graficas ============ -->
+<div class="grid grid-sidebar mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Estudiantes matriculados por grado</div>
+        <div class="card__subtitle">{{ school_year.name|default:"Sin ano lectivo configurado" }}</div>
+      </div>
+      <span class="badge badge--brand">{% icon "users" 13 %} Matricula</span>
+    </div>
+    <div class="card__body">
+      <div data-chart-enrollment style="height:280px;position:relative"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Distribucion de desempeno</div>
+        <div class="card__subtitle">Valoraciones registradas</div>
+      </div>
+    </div>
+    <div class="card__body">
+      <div data-chart-performance style="position:relative"></div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-2 mb-6">
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Promedio institucional por periodo</div>
+        <div class="card__subtitle">Evolucion academica del ano lectivo</div>
+      </div>
+      <span class="badge badge--success">{% icon "trending-up" 13 %} Academico</span>
+    </div>
+    <div class="card__body">
+      <div data-chart-average style="height:260px;position:relative"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div style="flex:1">
+        <div class="card__title">Accesos a la plataforma</div>
+        <div class="card__subtitle">Ultimos 14 dias</div>
+      </div>
+      <span class="badge badge--info">{% icon "activity" 13 %} Seguridad</span>
+    </div>
+    <div class="card__body">
+      <div data-chart-access style="height:260px;position:relative"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Paneles por rol ============ -->
+<div data-role-panel class="mb-6"></div>
+
+<!-- ============ Agenda y ano lectivo ============ -->
+<div class="grid grid-2">
+  <div class="card">
+    <div class="card__header">
+      <span class="page-header__icon" style="width:32px;height:32px">{% icon "calendar" 16 %}</span>
+      <div style="flex:1">
+        <div class="card__title">Proximos eventos</div>
+        <div class="card__subtitle">Agenda institucional</div>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="{% url 'agenda:calendar' %}">Ver todo</a>
+    </div>
+    <div class="card__body card__body--flush">
+      {% if upcoming_events %}
+        <div class="timeline" style="padding:20px 20px 20px 44px">
+          {% for event in upcoming_events %}
+            <div class="timeline__item">
+              <span class="timeline__dot" style="border-color:{{ event.color }}"></span>
+              <div class="timeline__title">{{ event.title }}</div>
+              <div class="timeline__meta">
+                {{ event.start_at|date:"d M Y, H:i" }}
+                {% if event.place %}&middot; {{ event.place }}{% endif %}
+                &middot; {{ event.get_event_type_display }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-state__icon">{% icon "calendar" 24 %}</div>
+          <div class="empty-state__title">Sin eventos programados</div>
+          <div class="empty-state__message">Los proximos eventos de la agenda institucional apareceran aqui.</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <span class="page-header__icon" style="width:32px;height:32px">{% icon "compass" 16 %}</span>
+      <div style="flex:1">
+        <div class="card__title">Estado del ano lectivo</div>
+        <div class="card__subtitle">{{ school_year.name|default:"No configurado" }}</div>
+      </div>
+    </div>
+    <div class="card__body">
+      {% if school_year %}
+        <div class="row-between mb-2">
+          <span class="text-sm text-secondary">Avance del calendario academico</span>
+          <strong class="text-sm">{{ school_year.progress }}%</strong>
+        </div>
+        <div class="progress mb-4"><div class="progress__bar" style="width:{{ school_year.progress }}%"></div></div>
+
+        <div class="grid grid-2" style="gap:12px">
+          <div>
+            <div class="text-xs text-muted">Inicio</div>
+            <div class="text-sm text-bold">{{ school_year.start_date|date:"d M Y" }}</div>
+          </div>
+          <div>
+            <div class="text-xs text-muted">Finalizacion</div>
+            <div class="text-sm text-bold">{{ school_year.end_date|date:"d M Y" }}</div>
+          </div>
+          <div>
+            <div class="text-xs text-muted">Periodo actual</div>
+            <div class="text-sm text-bold">{{ current_period.name|default:"Sin periodo activo" }}</div>
+          </div>
+          <div>
+            <div class="text-xs text-muted">Estado</div>
+            <div><span class="badge badge--brand">{{ school_year.get_status_display }}</span></div>
+          </div>
+        </div>
+
+        {% if current_period %}
+          <hr>
+          <div class="row-between">
+            <span class="text-sm text-secondary">Digitacion de notas</span>
+            {% if current_period.is_open_now %}
+              <span class="badge badge--success"><span class="badge__dot"></span>Abierta</span>
+            {% else %}
+              <span class="badge badge--danger"><span class="badge__dot"></span>Cerrada</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="empty-state" style="padding:32px 0">
+          <div class="empty-state__icon">{% icon "alert-triangle" 24 %}</div>
+          <div class="empty-state__title">Sin ano lectivo</div>
+          <div class="empty-state__message">Configure el ano lectivo para habilitar la operacion academica.</div>
+          <a class="btn btn--primary" href="{% url 'academic:years' %}">{% icon "plus" 16 %} Crear ano lectivo</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

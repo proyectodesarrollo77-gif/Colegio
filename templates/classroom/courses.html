@@ -1,0 +1,20 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, toast } from "{% static 'js/app.js' %}";
+
+  document.addEventListener("resource:action", async (event) => {
+    const { action, row, table } = event.detail;
+    if (action?.name !== "publish") return;
+    try {
+      await api.post(`/api/courses/${row.id}/publish/`, {});
+      toast.success("Curso publicado para el grupo.");
+      table.load();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

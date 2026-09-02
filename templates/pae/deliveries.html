@@ -1,0 +1,32 @@
+{% extends "pae/resource.html" %}
+
+{% block page_actions %}
+  <a class="btn btn--primary btn--sm" href="{% url 'pae:delivery_sheet' %}">
+    {% icon "clipboard-check" 15 %} Planilla del dia
+  </a>
+{% endblock %}
+
+{% block pae_before %}
+  <div class="card mb-4">
+    <div class="card__body" style="padding:12px 18px">
+      <div class="row-wrap" style="gap:22px;align-items:center">
+        <div>
+          <div class="text-xs text-muted">Raciones faltantes</div>
+          <div class="text-mono text-sm">programadas &minus; recibidas</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted">Raciones no entregadas</div>
+          <div class="text-mono text-sm">recibidas &minus; entregadas</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted">Cumplimiento</div>
+          <div class="text-mono text-sm">entregadas / programadas &times; 100</div>
+        </div>
+        <span class="spacer"></span>
+        <span class="text-xs text-muted">
+          Todo incumplimiento exige justificacion; no se pueden entregar mas raciones de las recibidas.
+        </span>
+      </div>
+    </div>
+  </div>
+{% endblock %}

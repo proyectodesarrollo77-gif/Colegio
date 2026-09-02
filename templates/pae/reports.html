@@ -1,0 +1,96 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Informes del PAE{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-4">
+        <label class="field__label" for="rep-campus">Sede</label>
+        <select class="select" id="rep-campus" data-report-filter="campus">
+          <option value="">Todas las sedes</option>
+          {% for campus in campuses %}<option value="{{ campus.id }}">{{ campus.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field col-4">
+        <label class="field__label" for="rep-from">Desde</label>
+        <input class="input" type="date" id="rep-from" data-report-filter="service_date__gte">
+      </div>
+      <div class="field col-4">
+        <label class="field__label" for="rep-to">Hasta</label>
+        <input class="input" type="date" id="rep-to" data-report-filter="service_date__lte">
+      </div>
+    </div>
+    <div class="text-xs text-muted mt-3">
+      Los filtros aplican a los informes que manejan fecha de servicio. Todos los informes se descargan
+      en XLSX o CSV y quedan registrados en la bitacora de auditoria del modulo.
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-3">
+  {% for report in reports %}
+    <div class="card">
+      <div class="card__body">
+        <div class="row" style="gap:12px;align-items:flex-start">
+          <span class="page-header__icon" style="width:38px;height:38px">{% icon report.icon 18 %}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;color:var(--text-primary)">{{ report.name }}</div>
+            <div class="text-xs text-muted mt-2">{{ report.description }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card__footer" style="justify-content:space-between">
+        <span class="badge badge--neutral">{{ report.code|upper }}</span>
+        <div class="row" style="gap:6px">
+          <button class="btn btn--ghost btn--sm" type="button"
+                  data-report="{{ report.endpoint }}" data-code="{{ report.code }}" data-format="csv">
+            {% icon "file-text" 14 %} CSV
+          </button>
+          <button class="btn btn--secondary btn--sm" type="button"
+                  data-report="{{ report.endpoint }}" data-code="{{ report.code }}" data-format="xlsx">
+            {% icon "save" 14 %} Excel
+          </button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $$, api, toast } from "{% static 'js/app.js' %}";
+
+  const DATE_AWARE = ["raciones", "entregas", "faltantes"];
+
+  $$("[data-report]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const endpoint = button.dataset.report;
+      const code = button.dataset.code;
+      const format = button.dataset.format;
+      const params = { format };
+
+      $$("[data-report-filter]").forEach((control) => {
+        const key = control.dataset.reportFilter;
+        if (!control.value) return;
+        if (key.startsWith("service_date") && !DATE_AWARE.includes(code)) return;
+        params[key] = control.value;
+      });
+
+      try {
+        await api.download(endpoint, params, `pae_${code}.${format}`);
+        toast.success("Informe generado correctamente.");
+      } catch (error) {
+        toast.error(error.message);
+      }
+    });
+  });
+</script>
+{% endblock %}

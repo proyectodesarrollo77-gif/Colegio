@@ -1,0 +1,123 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block page_actions %}
+  <button class="btn btn--secondary btn--sm" type="button" data-publish-cards>
+    {% icon "check" 15 %} Publicar boletines
+  </button>
+  <button class="btn btn--secondary btn--sm" type="button" data-print-cards>
+    {% icon "printer" 15 %} Imprimir grupo
+  </button>
+  <button class="btn btn--primary btn--sm" type="button" data-generate-cards>
+    {% icon "file-text" 15 %} Generar boletines
+  </button>
+{% endblock %}
+
+{% block resource_before %}
+<div class="card mb-6">
+  <div class="card__header">
+    <span class="page-header__icon" style="width:32px;height:32px">{% icon "printer" 16 %}</span>
+    <div style="flex:1">
+      <div class="card__title">Generacion de boletines</div>
+      <div class="card__subtitle">Seleccione el grupo y el periodo antes de generar o publicar</div>
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-4">
+        <label class="field__label">Grupo</label>
+        <select class="select" data-card-group><option value="">Seleccione un grupo</option></select>
+      </div>
+      <div class="field col-4">
+        <label class="field__label">Periodo</label>
+        <select class="select" data-card-period><option value="">Consolidado del ano</option></select>
+      </div>
+      <div class="field col-4">
+        <label class="field__label">Tipo de boletin</label>
+        <select class="select" data-card-final>
+          <option value="0">Boletin de periodo</option>
+          <option value="1">Boletin final del ano</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, toast } from "{% static 'js/app.js' %}";
+
+  async function fillSelect(selector, endpoint) {
+    const select = document.querySelector(selector);
+    if (!select) return;
+    try {
+      const data = await api.get(endpoint);
+      (data.results || []).forEach((option) => {
+        const node = document.createElement("option");
+        node.value = option.id;
+        node.textContent = option.label;
+        select.appendChild(node);
+      });
+    } catch (error) {
+      /* silencioso: el selector queda vacio */
+    }
+  }
+
+  fillSelect("[data-card-group]", "/api/groups/options/");
+  fillSelect("[data-card-period]", "/api/periods/options/");
+
+  document.querySelector("[data-generate-cards]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const group = document.querySelector("[data-card-group]").value;
+    const period = document.querySelector("[data-card-period]").value;
+    const isFinal = document.querySelector("[data-card-final]").value === "1";
+    if (!group) {
+      toast.warning("Seleccione un grupo para generar los boletines.");
+      return;
+    }
+    button.disabled = true;
+    try {
+      const data = await api.post("/api/report-cards/generate/", {
+        group,
+        period: period || null,
+        is_final: isFinal,
+      });
+      toast.success(`Se generaron ${data.generated} boletines.`);
+      window.PLSGE_TABLE?.load();
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  document.querySelector("[data-print-cards]")?.addEventListener("click", () => {
+    const group = document.querySelector("[data-card-group]").value;
+    const period = document.querySelector("[data-card-period]").value;
+    const isFinal = document.querySelector("[data-card-final]").value === "1";
+    if (!group) {
+      toast.warning("Seleccione un grupo para imprimir sus boletines.");
+      return;
+    }
+    const params = new URLSearchParams({ group, final: isFinal ? "1" : "0" });
+    if (period) params.set("period", period);
+    window.open(`/promocion/boletines/imprimir/?${params}`, "_blank");
+  });
+
+  document.querySelector("[data-publish-cards]")?.addEventListener("click", async () => {
+    const group = document.querySelector("[data-card-group]").value;
+    if (!group) {
+      toast.warning("Seleccione un grupo para publicar los boletines.");
+      return;
+    }
+    try {
+      const data = await api.post("/api/report-cards/publish/", { group });
+      toast.success(`Se publicaron ${data.published} boletines.`);
+      window.PLSGE_TABLE?.load();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "layouts/base.html" %}
+{% block title %}Ciclo de menu {{ cycle.code }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  <div class="print-sheet">
+    {% include "partials/print_header.html" %}
+
+    <div class="print-title">Ciclo de menu &mdash; Programa de Alimentacion Escolar</div>
+
+    <table class="table table--compact table--bordered" style="margin-bottom:16px">
+      <tbody>
+        <tr>
+          <th style="width:22%">Ciclo</th><td>{{ cycle.code }} &middot; {{ cycle.name }}</td>
+          <th style="width:18%">Version</th><td>{{ cycle.version }}</td>
+        </tr>
+        <tr>
+          <th>Vigencia</th><td>{{ cycle.vigencia.name|default:"-" }}</td>
+          <th>Estado</th><td>{{ cycle.get_status_display }}</td>
+        </tr>
+        <tr>
+          <th>Modalidad</th><td>{{ cycle.modality.name|default:"-" }}</td>
+          <th>Complemento</th><td>{{ cycle.complement_type.name|default:"-" }}</td>
+        </tr>
+        <tr>
+          <th>Nutricionista</th><td>{{ cycle.nutritionist|default:"-" }}</td>
+          <th>Dias del ciclo</th><td>{{ days|length }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="print-body">
+      {% for day in days %}
+        <table class="table table--compact table--bordered" style="margin-bottom:14px">
+          <thead>
+            <tr>
+              <th colspan="4" style="text-align:left">
+                Dia {{ day.day_number }}{% if day.weekday %} ({{ day.get_weekday_display }}){% endif %}
+                {% if day.name %} &mdash; {{ day.name }}{% endif %}
+                {% if day.total_calories %} &middot; {{ day.total_calories }} kcal{% endif %}
+              </th>
+            </tr>
+            <tr>
+              <th style="width:28%">Preparacion</th>
+              <th style="width:22%">Componente</th>
+              <th style="width:12%">Porcion</th>
+              <th>Ingredientes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for preparation in day.preparations.all %}
+              {% if not preparation.deleted_at %}
+                <tr>
+                  <td>{{ preparation.name }}</td>
+                  <td>{{ preparation.get_component_display }}</td>
+                  <td>{{ preparation.portion|default:"-" }}</td>
+                  <td>
+                    {% for ingredient in preparation.ingredients.all %}
+                      {% if not ingredient.deleted_at %}
+                        {{ ingredient.name }}{% if ingredient.quantity %} ({{ ingredient.quantity }} {{ ingredient.unit }}){% endif %}{% if not forloop.last %}; {% endif %}
+                      {% endif %}
+                    {% empty %}
+                      -
+                    {% endfor %}
+                  </td>
+                </tr>
+              {% endif %}
+            {% empty %}
+              <tr><td colspan="4">Sin preparaciones registradas para este dia.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% empty %}
+        <p>El ciclo aun no tiene dias registrados.</p>
+      {% endfor %}
+    </div>
+
+    <div class="print-signatures">
+      <div class="print-signature">
+        <div class="print-signature__line"><strong>{{ cycle.nutritionist|default:"____________________" }}</strong><br>Nutricionista responsable</div>
+      </div>
+      <div class="print-signature">
+        <div class="print-signature__line"><strong>{{ institution.rector_name }}</strong><br>Rector(a)</div>
+      </div>
+    </div>
+
+    <div class="print-footer">
+      {% if cycle.vigencia.normative %}
+        Norma aplicable: {{ cycle.vigencia.normative.code }} &middot; {{ cycle.vigencia.normative.issuer }}
+        {% if cycle.vigencia.normative.status == 'POR_VALIDAR' %} (por validar){% endif %} &middot;
+      {% endif %}
+      Impreso el {% now "d/m/Y H:i" %}
+    </div>
+  </div>
+</div>
+{% endblock %}

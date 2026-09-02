@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.venv/
+venv/
+env/
+staticfiles/
+media/
+logs/
+database/*.sqlite3
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Entorno y respaldos
+.venv/
+database/respaldos/*.backup
+database/respaldos/*.sqlite3

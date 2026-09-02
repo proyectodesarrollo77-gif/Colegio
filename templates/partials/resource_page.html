@@ -1,0 +1,37 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% comment %}
+Pagina generica de recurso: tabla + filtros + formulario lateral.
+La configuracion llega serializada desde config.resource.ResourceView.
+{% endcomment %}
+
+{% block content %}
+  {% block resource_before %}{% endblock %}
+
+  {% if stat_cards %}
+    <div class="grid grid-4 mb-6">
+      {% for card in stat_cards %}
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">{{ card.label }}</span>
+            <span class="stat-card__icon">{% icon card.icon|default:"activity" 18 %}</span>
+          </div>
+          <div class="stat-card__value">{{ card.value }}</div>
+          <div class="stat-card__meta">{{ card.hint }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div id="resource-root"></div>
+
+  {{ resource_config|json_script:"resource-config" }}
+
+  {% block resource_after %}{% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+  <script type="module" src="{% static 'js/modules/crud.js' %}"></script>
+  {% block resource_js %}{% endblock %}
+{% endblock %}

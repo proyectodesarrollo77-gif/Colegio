@@ -1,0 +1,125 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-4">
+        <label class="field__label" for="report-year">Ano lectivo</label>
+        <input class="input" id="report-year" value="{{ school_year.name|default:'Sin configurar' }}" disabled>
+      </div>
+      <div class="field col-4">
+        <label class="field__label" for="report-period">Periodo</label>
+        <select class="select" id="report-period" data-report-period>
+          <option value="">Todos los periodos</option>
+          {% for period in periods %}
+            <option value="{{ period.id }}" {% if period.is_current %}selected{% endif %}>{{ period.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-4">
+        <label class="field__label" for="report-group">Grupo</label>
+        <select class="select" id="report-group" data-report-group>
+          <option value="">Todos los grupos</option>
+          {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.grade.name }} - {{ group.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-3">
+  {% for report in reports %}
+    <div class="card">
+      <div class="card__body">
+        <div class="row" style="gap:12px;align-items:flex-start">
+          <span class="page-header__icon" style="width:38px;height:38px">{% icon report.icon 18 %}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;color:var(--text-primary)">{{ report.name }}</div>
+            <div class="text-xs text-muted mt-2">{{ report.description }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card__footer" style="justify-content:space-between">
+        <span class="badge badge--neutral">{{ report.default_output }}</span>
+        <div class="row" style="gap:6px">
+          <button class="btn btn--ghost btn--sm" type="button" data-run-report="{{ report.code }}" data-format="XLSX">
+            {% icon "save" 14 %} Excel
+          </button>
+          <button class="btn btn--secondary btn--sm" type="button" data-run-report="{{ report.code }}" data-format="PDF">
+            {% icon "printer" 14 %} Generar
+          </button>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="card" style="grid-column:1/-1">
+      <div class="empty-state">
+        <div class="empty-state__icon">{% icon "bar-chart" 26 %}</div>
+        <div class="empty-state__title">Sin reportes configurados</div>
+        <div class="empty-state__message">
+          Ejecute <code class="text-mono">python manage.py seed_reports</code> para cargar el catalogo base
+          de reportes de la plataforma.
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import { $$, api, toast } from "{% static 'js/app.js' %}";
+
+  const ENDPOINTS = {
+    "STUDENTS_LIST": "/api/students/export/",
+    "ENROLLMENT_LIST": "/api/enrollments/export/",
+    "GRADES_SHEET": "/api/subject-grades/export/",
+    "TEACHERS_LIST": "/api/teachers/export/",
+    "ATTENDANCE_SUMMARY": "/api/attendance-summaries/export/",
+    "PROMOTION_RESULTS": "/api/promotion-results/export/",
+    "OBSERVER_ENTRIES": "/api/observer-entries/export/",
+    "AUDIT_LOG": "/api/audit-logs/export/",
+    "USERS_LIST": "/api/users/export/",
+    "CERTIFICATES": "/api/student-certificates/export/",
+    "RECOVERY_RESULTS": "/api/recovery-enrollments/export/",
+    "EMPHASIS_ENROLLMENT": "/api/emphasis-enrollments/export/",
+  };
+
+  $$("[data-run-report]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const code = button.dataset.runReport;
+      const format = (button.dataset.format || "XLSX").toLowerCase();
+      const endpoint = ENDPOINTS[code];
+      if (!endpoint) {
+        toast.info("Este reporte se genera desde su modulo correspondiente.");
+        return;
+      }
+      const params = { format: format === "pdf" ? "xlsx" : format };
+      const period = document.querySelector("[data-report-period]")?.value;
+      const group = document.querySelector("[data-report-group]")?.value;
+      if (period) params.period = period;
+      if (group) params.group = group;
+
+      try {
+        await api.download(endpoint, params, code.toLowerCase());
+        toast.success("Reporte generado correctamente.");
+        await api.post("/api/report-executions/", {
+          definition: null,
+          parameters: params,
+          output_format: format.toUpperCase(),
+        }).catch(() => {});
+      } catch (error) {
+        toast.error(error.message);
+      }
+    });
+  });
+</script>
+{% endblock %}

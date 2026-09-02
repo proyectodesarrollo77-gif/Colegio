@@ -1,0 +1,54 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Aplicacion de lista de verificacion{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--ghost btn--sm" href="{% url 'pae:quality' %}">{% icon "list" 15 %} Ver verificaciones</a>
+  <button class="btn btn--primary btn--sm" type="button" data-save-checklist>{% icon "save" 15 %} Guardar</button>
+{% endblock %}
+
+{% block content %}
+
+{% include "pae/_vigencia_bar.html" %}
+
+<div class="card mb-6">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field col-8">
+        <label class="field__label" for="check-verification">Verificacion</label>
+        <select class="select" id="check-verification">
+          <option value="">Seleccione la verificacion a aplicar</option>
+          {% for verification in verifications %}
+            <option value="{{ verification.id }}">
+              {{ verification.verification_date|date:"d/m/Y" }} &middot;
+              {{ verification.campus.name }} &middot; {{ verification.checklist.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field col-4">
+        <label class="field__label">Resultado calculado</label>
+        <div data-check-result class="mt-2"><span class="badge badge--neutral">Sin evaluar</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-check-body></div>
+
+<div class="card mt-6">
+  <div class="card__body">
+    <div class="field">
+      <label class="field__label" for="check-observations">Observaciones generales</label>
+      <textarea class="textarea" id="check-observations" rows="3"
+                placeholder="Conclusiones de la verificacion"></textarea>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  <script type="module" src="{% static 'js/modules/pae-checklist.js' %}"></script>
+{% endblock %}

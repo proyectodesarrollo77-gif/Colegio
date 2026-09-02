@@ -1,0 +1,346 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-sidebar">
+  <!-- ================= Columna principal ================= -->
+  <div class="stack">
+    <div data-tabs>
+      <div class="tabs">
+        <button class="tab is-active" data-tab="datos" type="button">Datos personales</button>
+        <button class="tab" data-tab="security" type="button">Seguridad</button>
+        <button class="tab" data-tab="sessions" type="button">Sesiones</button>
+        <button class="tab" data-tab="activity" type="button">Actividad</button>
+      </div>
+
+      <!-- ---- Datos personales ---- -->
+      <div class="tab-panel is-active" data-tab-panel="datos">
+        <div class="card">
+          <div class="card__header">
+            <div style="flex:1">
+              <div class="card__title">Informacion personal</div>
+              <div class="card__subtitle">Estos datos aparecen en los documentos y reportes que usted genera</div>
+            </div>
+          </div>
+          <form method="post" action="{% url 'users:profile_update' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card__body">
+              <div class="form-grid">
+                <div class="field col-6">
+                  <label class="field__label" for="first_name">Nombres</label>
+                  <input class="input" id="first_name" name="first_name" value="{{ profile_user.first_name }}" required>
+                </div>
+                <div class="field col-6">
+                  <label class="field__label" for="last_name">Apellidos</label>
+                  <input class="input" id="last_name" name="last_name" value="{{ profile_user.last_name }}">
+                </div>
+                <div class="field col-6">
+                  <label class="field__label">Correo electronico</label>
+                  <input class="input" value="{{ profile_user.email }}" disabled>
+                  <div class="field__hint">
+                    {% if profile_user.email_verified %}
+                      <span class="text-success">Correo verificado</span>
+                    {% else %}
+                      <a href="{% url 'authentication:resend_verification' %}">Verificar correo electronico</a>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="field col-6">
+                  <label class="field__label">Documento</label>
+                  <input class="input" value="{{ profile_user.get_document_type_display }} {{ profile_user.document_number }}" disabled>
+                </div>
+                <div class="field col-4">
+                  <label class="field__label" for="phone">Telefono</label>
+                  <input class="input" id="phone" name="phone" value="{{ profile_user.phone }}">
+                </div>
+                <div class="field col-4">
+                  <label class="field__label" for="mobile">Celular</label>
+                  <input class="input" id="mobile" name="mobile" value="{{ profile_user.mobile }}">
+                </div>
+                <div class="field col-4">
+                  <label class="field__label" for="birth_date">Fecha de nacimiento</label>
+                  <input class="input" type="date" id="birth_date" name="birth_date"
+                         value="{{ profile_user.birth_date|date:'Y-m-d' }}">
+                </div>
+                <div class="field col-6">
+                  <label class="field__label" for="address">Direccion</label>
+                  <input class="input" id="address" name="address" value="{{ profile_user.address }}">
+                </div>
+                <div class="field col-6">
+                  <label class="field__label" for="city">Ciudad</label>
+                  <input class="input" id="city" name="city" value="{{ profile_user.city }}">
+                </div>
+                <div class="field col-6">
+                  <label class="field__label" for="gender">Genero</label>
+                  <select class="select" id="gender" name="gender">
+                    {% for value, label in genders %}
+                      <option value="{{ value }}" {% if profile_user.gender == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="field col-6">
+                  <label class="field__label" for="theme">Tema de la interfaz</label>
+                  <select class="select" id="theme" name="theme">
+                    <option value="light" {% if profile_user.theme == 'light' %}selected{% endif %}>Claro</option>
+                    <option value="dark" {% if profile_user.theme == 'dark' %}selected{% endif %}>Oscuro</option>
+                    <option value="auto" {% if profile_user.theme == 'auto' %}selected{% endif %}>Segun el sistema</option>
+                  </select>
+                </div>
+                <div class="field col-12">
+                  <label class="field__label" for="photo">Fotografia</label>
+                  <input class="input" type="file" id="photo" name="photo" accept="image/*" style="padding-top:7px">
+                </div>
+              </div>
+            </div>
+            <div class="card__footer" style="justify-content:flex-end">
+              <button class="btn btn--primary" type="submit">{% icon "save" 16 %} Guardar cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ---- Seguridad ---- -->
+      <div class="tab-panel" data-tab-panel="security" id="security">
+        <div class="stack">
+          <div class="card">
+            <div class="card__header">
+              <span class="page-header__icon" style="width:32px;height:32px">{% icon "key" 16 %}</span>
+              <div style="flex:1">
+                <div class="card__title">Cambiar contrasena</div>
+                <div class="card__subtitle">
+                  Ultimo cambio: {{ profile_user.last_password_change|date:"d M Y, H:i"|default:"nunca" }}
+                </div>
+              </div>
+            </div>
+            <form method="post" action="{% url 'users:profile_password' %}" novalidate>
+              {% csrf_token %}
+              <div class="card__body">
+                <div class="form-grid">
+                  <div class="field col-12">
+                    <label class="field__label" for="current_password">Contrasena actual</label>
+                    <div class="input-group">
+                      <span class="input-group__icon">{% icon "lock" 16 %}</span>
+                      <input class="input" type="password" id="current_password" name="current_password" required>
+                      <button class="input-group__action" type="button" data-toggle-password>{% icon "eye" 16 %}</button>
+                    </div>
+                  </div>
+                  <div class="field col-6">
+                    <label class="field__label" for="new_password">Nueva contrasena</label>
+                    <input class="input" type="password" id="new_password" name="new_password" required data-password-strength>
+                  </div>
+                  <div class="field col-6">
+                    <label class="field__label" for="confirm_password">Confirmar contrasena</label>
+                    <input class="input" type="password" id="confirm_password" name="confirm_password" required>
+                    <div class="field__error"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card__footer" style="justify-content:flex-end">
+                <button class="btn btn--primary" type="submit">{% icon "shield-check" 16 %} Actualizar contrasena</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <span class="page-header__icon" style="width:32px;height:32px">{% icon "smartphone" 16 %}</span>
+              <div style="flex:1">
+                <div class="card__title">Doble factor de autenticacion</div>
+                <div class="card__subtitle">Google Authenticator, Microsoft Authenticator o Authy</div>
+              </div>
+              {% if profile_user.two_factor_enabled %}
+                <span class="badge badge--success"><span class="badge__dot"></span>Activo</span>
+              {% else %}
+                <span class="badge badge--warning"><span class="badge__dot"></span>Inactivo</span>
+              {% endif %}
+            </div>
+            <div class="card__body">
+              {% if profile_user.two_factor_enabled %}
+                <p class="text-sm text-secondary">
+                  Su cuenta esta protegida con verificacion en dos pasos desde
+                  {{ device.confirmed_at|date:"d M Y" }}. Ultimo uso:
+                  {{ device.last_used_at|date:"d M Y, H:i"|default:"sin registro" }}.
+                </p>
+                <form method="post" action="{% url 'authentication:two_factor_disable' %}" class="mt-4">
+                  {% csrf_token %}
+                  <button class="btn btn--danger-soft" type="submit">{% icon "x" 16 %} Desactivar doble factor</button>
+                </form>
+              {% else %}
+                <p class="text-sm text-secondary">
+                  Anada una capa extra de seguridad: al ingresar se solicitara un codigo temporal generado
+                  por su telefono, valido por 30 segundos.
+                </p>
+                <a class="btn btn--primary mt-4" href="{% url 'authentication:two_factor_setup' %}">
+                  {% icon "qr" 16 %} Activar doble factor
+                </a>
+              {% endif %}
+              {% if profile_user.two_factor_enforced %}
+                <div class="alert alert--warning mt-4">
+                  {% icon "alert-triangle" 18 %}
+                  <div class="text-xs">La institucion exige doble factor para su perfil.</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- Sesiones ---- -->
+      <div class="tab-panel" data-tab-panel="sessions">
+        <div class="card">
+          <div class="card__header">
+            <div style="flex:1">
+              <div class="card__title">Sesiones activas</div>
+              <div class="card__subtitle">Dispositivos donde su cuenta tiene sesion abierta</div>
+            </div>
+            <button class="btn btn--danger-soft btn--sm" type="button" data-close-sessions>
+              {% icon "log-out" 15 %} Cerrar otras sesiones
+            </button>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table table--stack">
+                <thead>
+                  <tr><th>Dispositivo</th><th>Direccion IP</th><th>Ultima actividad</th><th>Estado</th></tr>
+                </thead>
+                <tbody>
+                  {% for session in sessions %}
+                    <tr>
+                      <td class="cell-primary truncate" style="max-width:320px">{{ session.user_agent|default:"Desconocido" }}</td>
+                      <td class="text-mono">{{ session.ip_address|default:"-" }}</td>
+                      <td>{{ session.last_activity|date:"d M Y, H:i" }}</td>
+                      <td>
+                        {% if session.session_key == current_session_key %}
+                          <span class="badge badge--brand">Sesion actual</span>
+                        {% elif session.is_active %}
+                          <span class="badge badge--success">Activa</span>
+                        {% else %}
+                          <span class="badge badge--neutral">Cerrada</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% empty %}
+                    <tr><td colspan="4" class="text-muted text-center" style="padding:32px">Sin sesiones registradas.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- Actividad ---- -->
+      <div class="tab-panel" data-tab-panel="activity">
+        <div class="card">
+          <div class="card__header">
+            <div style="flex:1">
+              <div class="card__title">Actividad reciente</div>
+              <div class="card__subtitle">Eventos de seguridad de su cuenta</div>
+            </div>
+          </div>
+          <div class="card__body">
+            <div class="timeline">
+              {% for entry in recent_activity %}
+                <div class="timeline__item">
+                  <span class="timeline__dot {% if not entry.success %}timeline__dot--danger{% elif entry.event == 'LOGIN' %}timeline__dot--success{% else %}timeline__dot--muted{% endif %}"></span>
+                  <div class="timeline__title">{{ entry.get_event_display }}</div>
+                  <div class="timeline__meta">
+                    {{ entry.created_at|date:"d M Y, H:i" }} &middot; {{ entry.ip_address|default:"-" }}
+                    {% if entry.device %}&middot; {{ entry.device }}{% endif %}
+                    {% if entry.detail %}&middot; {{ entry.detail }}{% endif %}
+                  </div>
+                </div>
+              {% empty %}
+                <div class="text-sm text-muted">Sin actividad registrada.</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Columna lateral ================= -->
+  <div class="stack">
+    <div class="card">
+      <div class="card__body" style="text-align:center">
+        <span class="avatar avatar--xl" style="margin:0 auto 14px">
+          {% if profile_user.photo %}<img src="{{ profile_user.photo.url }}" alt="">{% else %}{{ profile_user.initials }}{% endif %}
+        </span>
+        <div style="font-size:var(--text-lg);font-weight:600">{{ profile_user.get_full_name }}</div>
+        <div class="text-sm text-muted">{{ profile_user.email }}</div>
+        <div class="mt-3"><span class="badge badge--brand">{{ profile_user.role_name }}</span></div>
+        {% if institution %}
+          <div class="text-xs text-muted mt-3">{{ institution.name }}</div>
+        {% endif %}
+      </div>
+      <div class="card__footer" style="justify-content:space-around">
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Usuario</div>
+          <div class="text-sm text-mono">{{ profile_user.username }}</div>
+        </div>
+        <div style="text-align:center">
+          <div class="text-xs text-muted">Ultimo acceso</div>
+          <div class="text-sm">{{ profile_user.last_login|date:"d M, H:i"|default:"-" }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><div class="card__title">Mis permisos</div></div>
+      <div class="card__body">
+        <div class="stack" style="gap:10px">
+          {% for action, label in action_labels.items %}
+            <div class="row-between">
+              <span class="text-sm text-secondary">{{ label }}</span>
+              <span class="text-sm text-bold" data-perm-count="{{ action }}">-</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card__footer">
+        <span class="text-xs text-muted">Modulos habilitados segun su perfil</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/auth.js' %}"></script>
+<script type="module">
+  import { $, api, confirmDialog, toast } from "{% static 'js/app.js' %}";
+
+  const perms = {{ perms_map|jsonify }};
+  const counters = {};
+  Object.values(perms).forEach((module) => {
+    Object.entries(module).forEach(([action, value]) => {
+      if (value) counters[action] = (counters[action] || 0) + 1;
+    });
+  });
+  Object.entries(counters).forEach(([action, total]) => {
+    const node = document.querySelector(`[data-perm-count="${action}"]`);
+    if (node) node.textContent = total;
+  });
+
+  $("[data-close-sessions]")?.addEventListener("click", async () => {
+    const confirmed = await confirmDialog({
+      title: "Cerrar otras sesiones",
+      message: "Se cerraran todas las sesiones abiertas en otros dispositivos. Desea continuar?",
+      confirmText: "Cerrar sesiones",
+    });
+    if (!confirmed) return;
+    try {
+      const data = await api.post("/api/user-sessions/close-mine/", {});
+      toast.success(`Se cerraron ${data.closed} sesiones.`);
+      setTimeout(() => window.location.reload(), 900);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

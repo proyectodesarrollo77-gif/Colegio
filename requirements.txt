@@ -1,0 +1,33 @@
+# ==========================================================================
+# PL_SGE - Plataforma Web Integral de Gestion Academica Institucional
+# Python 3.11+  |  pip install -r requirements.txt
+# ==========================================================================
+
+# ---- Framework ----
+Django==5.2.17
+djangorestframework==3.18.0
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.9.0
+django-filter==25.2
+
+# ---- Base de datos ----
+psycopg2-binary==2.9.10
+
+# ---- Servidor y estaticos ----
+gunicorn==23.0.0
+whitenoise==6.11.0
+
+# ---- Seguridad y doble factor ----
+PyJWT==2.10.1
+qrcode==8.0
+pillow==11.3.0
+
+# ---- Exportacion de reportes ----
+openpyxl==3.1.5
+reportlab==4.2.5
+xhtml2pdf==0.2.16
+
+# ---- Utilidades ----
+python-dateutil==2.9.0.post0
+sqlparse==0.5.3
+tzdata==2025.2

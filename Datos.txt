@@ -1,0 +1,3 @@
+   Direccion   : http://localhost:8000/
+   Usuario     : admin@datly.local
+   Contrasena  : Admin123*

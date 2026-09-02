@@ -1,0 +1,55 @@
+{% extends "layouts/auth.html" %}
+{% load static %}
+{% block title %}Verificacion en dos pasos{% endblock %}
+{% block hero_title %}Un paso mas para su seguridad{% endblock %}
+{% block hero_text %}Ingrese el codigo temporal generado por su aplicacion de autenticacion para confirmar su identidad.{% endblock %}
+
+{% block auth_content %}
+<div class="auth-card__header">
+  <h1 class="auth-card__title">Verificacion en dos pasos</h1>
+  <p class="auth-card__subtitle">Abra su aplicacion de autenticacion e ingrese el codigo de 6 digitos.</p>
+</div>
+
+{% if error %}
+  <div class="alert alert--danger mb-4">{% icon "alert-triangle" 18 %}<div>{{ error }}</div></div>
+{% endif %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
+
+  <div class="field" data-otp>
+    <label class="field__label">Codigo de verificacion <span class="required">*</span></label>
+    <input type="hidden" name="token">
+    <div class="row" style="gap:8px;justify-content:space-between">
+      {% for i in "123456" %}
+        <input class="input text-mono" data-otp-box inputmode="numeric" maxlength="1"
+               style="height:52px;font-size:22px;text-align:center;padding:0" aria-label="Digito {{ forloop.counter }}">
+      {% endfor %}
+    </div>
+    <div class="field__hint">Tambien puede usar uno de sus codigos de recuperacion.</div>
+  </div>
+
+  <button class="btn btn--primary btn--lg btn--block mt-4" type="submit">
+    {% icon "check" 18 %} Verificar e ingresar
+  </button>
+</form>
+
+<div class="auth-divider">o</div>
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="field">
+    <label class="field__label" for="recovery">Codigo de recuperacion</label>
+    <div class="input-group">
+      <span class="input-group__icon">{% icon "key" 16 %}</span>
+      <input class="input" type="text" id="recovery" name="token" placeholder="00000-00000">
+    </div>
+  </div>
+  <button class="btn btn--secondary btn--block mt-3" type="submit">Usar codigo de recuperacion</button>
+</form>
+
+<div class="auth-meta"><a href="{% url 'authentication:logout' %}">Cancelar y cerrar sesion</a></div>
+{% endblock %}
+
+{% block extra_js %}<script type="module" src="{% static 'js/auth.js' %}"></script>{% endblock %}

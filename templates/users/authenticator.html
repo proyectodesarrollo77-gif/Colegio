@@ -1,0 +1,38 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block resource_before %}
+<div class="alert alert--info mb-6">
+  {% icon "smartphone" 18 %}
+  <div>
+    <div class="alert__title">Doble factor de autenticacion (TOTP)</div>
+    Los usuarios activan Google Authenticator, Microsoft Authenticator o Authy desde
+    <strong>Mi Perfil &rsaquo; Seguridad</strong>. Desde este modulo puede reiniciar el dispositivo de un
+    usuario que perdio acceso a su telefono; al hacerlo debera configurarlo nuevamente.
+  </div>
+</div>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, confirmDialog, toast } from "{% static 'js/app.js' %}";
+
+  document.addEventListener("resource:action", async (event) => {
+    const { action, row, table } = event.detail;
+    if (action?.name !== "reset") return;
+    const confirmed = await confirmDialog({
+      title: "Reiniciar dispositivo 2FA",
+      message: `Se desactivara el doble factor de ${row.user_name} y debera configurarlo nuevamente.`,
+      confirmText: "Reiniciar dispositivo",
+    });
+    if (!confirmed) return;
+    try {
+      await api.post(`/api/two-factor-devices/${row.id}/reset/`, {});
+      toast.success("Dispositivo reiniciado correctamente.");
+      table.load();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

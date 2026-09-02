@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+
+{% comment %}
+Boletines de un grupo completo en un solo documento.
+
+Cada boletin usa la misma hoja que la impresion individual
+(promotion/_report_card_sheet.html), de modo que el documento entregado al
+acudiente es identico se imprima de a uno o en lote.
+{% endcomment %}
+
+{% block title %}Boletines - {{ group.name }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  {% if cards %}
+    <div class="print-batch-note no-print">
+      {% icon "file-text" 15 %}
+      {{ cards|length }} boletin(es) de {{ group.name }}
+      {% if period %}&middot; {{ period.name }}{% else %}&middot; Consolidado del ano{% endif %}
+      {% if is_final %}&middot; Boletin final{% endif %}
+      &middot; cada uno en su propia hoja
+    </div>
+
+    {% for item in cards %}
+      {% include "promotion/_report_card_sheet.html" with card=item.card areas=item.areas %}
+    {% endfor %}
+  {% else %}
+    <div class="print-sheet no-print">
+      <div class="empty-state">
+        <div class="empty-state__icon">{% icon "file-text" 26 %}</div>
+        <div class="empty-state__title">No hay boletines generados con ese filtro</div>
+        <div class="empty-state__message">
+          Vuelva a Boletines Finales y genere los del grupo
+          {{ group.name }}{% if period %} para {{ period.name }}{% endif %} antes de imprimirlos.
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

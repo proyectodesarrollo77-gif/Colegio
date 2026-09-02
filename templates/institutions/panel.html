@@ -1,0 +1,181 @@
+{% extends "layouts/dashboard.html" %}
+{% load static %}
+
+{% block title %}Panel de Instituciones{% endblock %}
+
+{% block page_actions %}
+  <a class="btn btn--primary btn--sm" href="{% url 'institutions:create' %}">
+    {% icon "plus" 15 %} Nueva institucion
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div class="alert alert--info mb-4">
+  {% icon "shield-check" 18 %}
+  <div>
+    <div class="alert__title">Panel del Super Administrador</div>
+    Es la unica pantalla que ve todas las instituciones a la vez. Desde aqui las crea,
+    las activa o desactiva, y entra a cualquiera sin cerrar la sesion. El resto de la
+    plataforma sigue mostrando solo los datos de la institucion en la que trabaja.
+  </div>
+</div>
+
+<div class="grid grid-4 mb-6">
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Instituciones</span>
+      <span class="stat-card__icon">{% icon "building" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ institutions|length }}</div>
+    <div class="stat-card__meta">Registradas en la plataforma</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Estudiantes</span>
+      <span class="stat-card__icon">{% icon "graduation-cap" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ total_students }}</div>
+    <div class="stat-card__meta">Sumando todas las instituciones</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Usuarios</span>
+      <span class="stat-card__icon">{% icon "users" 18 %}</span>
+    </div>
+    <div class="stat-card__value">{{ total_users }}</div>
+    <div class="stat-card__meta">Cuentas de acceso</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__top">
+      <span class="stat-card__label">Trabajando en</span>
+      <span class="stat-card__icon">{% icon "target" 18 %}</span>
+    </div>
+    <div class="stat-card__value" style="font-size:var(--text-lg);line-height:1.3">
+      {{ active_institution.short_name|default:active_institution.name|default:"-" }}
+    </div>
+    <div class="stat-card__meta">Institucion de la sesion actual</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <div style="flex:1">
+      <div class="card__title">Funcionamiento de cada institucion</div>
+      <div class="card__subtitle">
+        Estructura, actividad registrada y que le falta a cada una para operar.
+        Entre a cualquiera para administrarla con sus propios datos.
+      </div>
+    </div>
+  </div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Institucion</th>
+            <th style="width:92px" class="text-center">Sedes</th>
+            <th style="width:92px" class="text-center">Grupos</th>
+            <th style="width:110px" class="text-center">Estudiantes</th>
+            <th style="width:98px" class="text-center">Docentes</th>
+            <th style="width:150px" class="text-center">Actividad</th>
+            <th style="width:190px">Funcionamiento</th>
+            <th style="width:200px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in institutions %}
+            <tr>
+              <td class="cell-primary">
+                <div style="font-weight:500;color:var(--text-primary)">
+                  {{ item.entity.name }}
+                  {% if item.is_active_session %}
+                    <span class="badge badge--brand">En uso</span>
+                  {% endif %}
+                  {% if item.entity.is_default %}
+                    <span class="badge badge--info">Predeterminada</span>
+                  {% endif %}
+                </div>
+                <div class="text-xs text-muted">
+                  <span class="text-mono">{{ item.entity.code }}</span>
+                  &middot; {{ item.entity.city|default:"Sin ciudad" }}
+                  {% if item.summary.school_year %} &middot; {{ item.summary.school_year.name }}{% endif %}
+                </div>
+              </td>
+              <td class="text-center">{{ item.summary.campuses }}</td>
+              <td class="text-center">{{ item.summary.groups }}</td>
+              <td class="text-center">{{ item.summary.students }}</td>
+              <td class="text-center">{{ item.summary.teachers }}</td>
+              <td class="text-center text-xs">
+                <div>{{ item.summary.grades_recorded }} notas</div>
+                <div class="text-muted">{{ item.summary.attendance_recorded }} asistencias</div>
+                {% if item.summary.last_login %}
+                  <div class="text-muted">Acceso {{ item.summary.last_login|timesince }}</div>
+                {% else %}
+                  <div class="text-muted">Sin accesos</div>
+                {% endif %}
+              </td>
+              <td>
+                {% if not item.entity.is_active %}
+                  <span class="badge badge--neutral">Inactiva</span>
+                {% else %}
+                  <span class="badge badge--{{ item.summary.tone }}">{{ item.summary.status }}</span>
+                  {% if item.summary.missing %}
+                    <div class="text-xs text-muted mt-2">
+                      Falta: {{ item.summary.missing|join:", " }}
+                    </div>
+                  {% else %}
+                    <div class="text-xs text-muted mt-2">
+                      {{ item.summary.active_users }} usuario(s) activo(s)
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </td>
+              <td>
+                <div class="row" style="gap:6px;justify-content:flex-end">
+                  <a class="btn btn--ghost btn--sm"
+                     href="{% url 'institutions:edit' item.entity.pk %}">
+                    {% icon "pencil" 14 %} Editar
+                  </a>
+                  <a class="btn btn--ghost btn--sm"
+                     href="{% url 'institutions:users' item.entity.pk %}"
+                     data-tooltip="Usuarios y contrasenas">
+                    {% icon "key" 14 %} Accesos
+                  </a>
+                  {% if item.entity.is_active and not item.is_active_session %}
+                    <a class="btn btn--secondary btn--sm"
+                       href="{% url 'institutions:switch' item.entity.pk %}">
+                      {% icon "log-out" 14 %} Ingresar
+                    </a>
+                  {% endif %}
+                  <form method="post" action="{% url 'institutions:toggle' item.entity.pk %}"
+                        style="display:inline">
+                    {% csrf_token %}
+                    <button class="btn btn--ghost btn--sm" type="submit"
+                            {% if item.entity.is_default and item.entity.is_active %}disabled
+                            title="La institucion predeterminada no se puede desactivar"{% endif %}>
+                      {% if item.entity.is_active %}{% icon "x" 14 %} Desactivar
+                      {% else %}{% icon "check" 14 %} Activar{% endif %}
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <div class="empty-state__icon">{% icon "building" 26 %}</div>
+                  <div class="empty-state__title">Aun no hay instituciones</div>
+                  <div class="empty-state__message">Cree la primera con el boton Nueva institucion.</div>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

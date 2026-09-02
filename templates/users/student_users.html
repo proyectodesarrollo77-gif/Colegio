@@ -1,0 +1,44 @@
+{% extends "partials/resource_page.html" %}
+{% load static %}
+
+{% block page_actions %}
+  <button class="btn btn--primary btn--sm" type="button" data-bulk-students>
+    {% icon "users" 15 %} Generar usuarios masivos
+  </button>
+{% endblock %}
+
+{% block resource_before %}
+<div class="alert alert--info mb-6">
+  {% icon "key" 18 %}
+  <div>
+    <div class="alert__title">Credenciales de estudiantes</div>
+    Al generar usuarios masivos se crea una cuenta por cada estudiante activo sin usuario, con contrasena
+    temporal. Las credenciales quedan disponibles para impresion en
+    <strong>Usuarios &rsaquo; Certificados de Usuario y Contrasena</strong>.
+  </div>
+</div>
+{% endblock %}
+
+{% block resource_js %}
+<script type="module">
+  import { api, confirmDialog, toast } from "{% static 'js/app.js' %}";
+
+  document.querySelector("[data-bulk-students]")?.addEventListener("click", async () => {
+    const confirmed = await confirmDialog({
+      title: "Generar usuarios de estudiantes",
+      message: "Se crearan cuentas de acceso para los estudiantes activos que aun no tienen usuario. Desea continuar?",
+      confirmText: "Generar usuarios",
+      tone: "primary",
+      iconName: "users",
+    });
+    if (!confirmed) return;
+    try {
+      const data = await api.post("/api/users/bulk-create-students/", {});
+      toast.success(`Se generaron ${data.created} usuarios de estudiantes.`);
+      window.PLSGE_TABLE?.load();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  });
+</script>
+{% endblock %}

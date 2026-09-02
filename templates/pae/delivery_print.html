@@ -1,0 +1,109 @@
+{% extends "layouts/base.html" %}
+{% block title %}Acta de entrega {{ delivery.service_date|date:"d/m/Y" }}{% endblock %}
+
+{% block body %}
+<div style="padding:24px;background:var(--bg-app);min-height:100vh">
+  {% include "partials/print_toolbar.html" %}
+
+  <div class="print-sheet">
+    {% include "partials/print_header.html" %}
+
+    <div class="print-title">Acta de entrega diaria &mdash; Programa de Alimentacion Escolar</div>
+
+    <table class="table table--compact table--bordered" style="margin-bottom:16px">
+      <tbody>
+        <tr>
+          <th style="width:22%">Fecha de servicio</th><td>{{ delivery.service_date|date:"d/m/Y" }}</td>
+          <th style="width:18%">Estado</th><td>{{ delivery.get_status_display }}</td>
+        </tr>
+        <tr>
+          <th>Sede</th><td>{{ delivery.campus.name }}</td>
+          <th>Jornada</th><td>{{ delivery.shift.name|default:"-" }}</td>
+        </tr>
+        <tr>
+          <th>Plan</th><td>{{ delivery.plan.code }} &middot; {{ delivery.plan.name }}</td>
+          <th>Contrato</th><td>{{ delivery.contract.number|default:"-" }}</td>
+        </tr>
+        <tr>
+          <th>Operador</th><td>{{ delivery.operator.business_name|default:"-" }}</td>
+          <th>Complemento</th><td>{{ delivery.complement_type.name|default:"-" }}</td>
+        </tr>
+        <tr>
+          <th>Menu programado</th><td>{{ delivery.scheduled_menu|default:"-" }}</td>
+          <th>Menu corresponde</th>
+          <td>{% if delivery.menu_matches %}Si{% else %}No &mdash; {{ delivery.received_menu_detail|default:"sin detalle" }}{% endif %}</td>
+        </tr>
+        <tr>
+          <th>Hora de llegada</th><td>{{ delivery.arrival_time|time:"H:i"|default:"-" }}</td>
+          <th>Hora de entrega</th><td>{{ delivery.delivery_time|time:"H:i"|default:"-" }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table--compact table--bordered" style="margin-bottom:16px">
+      <thead>
+        <tr>
+          <th>Beneficiarios programados</th>
+          <th>Raciones programadas</th>
+          <th>Raciones recibidas</th>
+          <th>Raciones entregadas</th>
+          <th>Faltantes</th>
+          <th>No entregadas</th>
+          <th>Cumplimiento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="text-align:center">
+          <td>{{ delivery.scheduled_beneficiaries }}</td>
+          <td>{{ delivery.scheduled_rations }}</td>
+          <td>{{ delivery.received_rations }}</td>
+          <td>{{ delivery.delivered_rations }}</td>
+          <td>{{ delivery.missing_rations }}</td>
+          <td>{{ delivery.undelivered_rations }}</td>
+          <td><strong>{{ delivery.compliance }}%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="print-body">
+      <p style="font-size:11px;color:#555">
+        Calculo aplicado: faltantes = programadas &minus; recibidas &middot;
+        no entregadas = recibidas &minus; entregadas &middot;
+        cumplimiento = entregadas / programadas &times; 100.
+      </p>
+
+      {% if delivery.noncompliance_cause %}
+        <p><strong>Causa del incumplimiento:</strong> {{ delivery.noncompliance_cause.name }}</p>
+      {% endif %}
+      {% if delivery.justification %}
+        <p><strong>Justificacion:</strong> {{ delivery.justification|linebreaksbr }}</p>
+      {% endif %}
+      {% if delivery.observations %}
+        <p><strong>Observaciones:</strong> {{ delivery.observations|linebreaksbr }}</p>
+      {% endif %}
+    </div>
+
+    <div class="print-signatures">
+      <div class="print-signature">
+        <div class="print-signature__line">
+          <strong>{{ delivery.responsible.get_full_name|default:"____________________" }}</strong><br>
+          Responsable del registro
+        </div>
+      </div>
+      <div class="print-signature">
+        <div class="print-signature__line">
+          <strong>{{ delivery.operator.legal_representative|default:"____________________" }}</strong><br>
+          Operador
+        </div>
+      </div>
+    </div>
+
+    <div class="print-footer">
+      {% if delivery.plan.vigencia.normative %}
+        Norma aplicable: {{ delivery.plan.vigencia.normative.code }} &middot;
+      {% endif %}
+      Registro No. {{ delivery.id }} &middot; Impreso el {% now "d/m/Y H:i" %}
+    </div>
+  </div>
+</div>
+{% endblock %}
