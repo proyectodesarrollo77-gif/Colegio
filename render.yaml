@@ -1,0 +1,51 @@
+databases:
+  - name: pl-sge-db
+    plan: free
+    databaseName: pl_sge
+    user: pl_sge
+    ipAllowList: []
+
+services:
+  - type: web
+    name: pl-sge-kindora
+    runtime: python
+    plan: free
+    region: oregon
+    branch: main
+    repo: https://github.com/proyectodesarrollo77-gif/Colegio
+    healthCheckPath: /healthz
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn config.wsgi:application --log-level info --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "*.onrender.com"
+      - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+      - key: DB_NAME
+        fromDatabase:
+          name: pl-sge-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: pl-sge-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: pl-sge-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: pl-sge-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: pl-sge-db
+          property: port
